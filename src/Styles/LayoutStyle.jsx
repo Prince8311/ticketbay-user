@@ -5,6 +5,7 @@ const colors = colorNames();
 export const PageWrapper = styled('div')`
     position: relative;
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: ${colors.customColors.whiteColor};
@@ -17,12 +18,13 @@ export const PageWrapper = styled('div')`
     .body_section {
         position: relative;
         width: 100%;
+        margin-bottom: 15px;
     }
 
     .bottom_section {
         position: relative;
         width: 100%;
-        margin-top: 15px;
+        margin-top: auto;
     }
 `;
 
@@ -131,14 +133,17 @@ export const NavbarWrapper = styled('div')`
                     position: relative;
                     height: 100%;
 
-                    button {
+                    a {
                         position: relative;
                         width: 100px;
                         height: 100%;
                         cursor: pointer;
-                        border: none;
+                        text-decoration: none;
                         background: ${colors.themeColor};
                         border-radius: 6px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         font-size: 12px;
                         font-weight: 500;
                         color: ${colors.customColors.whiteColor};

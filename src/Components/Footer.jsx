@@ -31,6 +31,12 @@ const Footer = () => {
                                 <li>
                                     <a>
                                         <i className="fa-solid fa-angle-right"></i>
+                                        <span>Upcoming Movies</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i className="fa-solid fa-angle-right"></i>
                                         <span>Theaters</span>
                                     </a>
                                 </li>

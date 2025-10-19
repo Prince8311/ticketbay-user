@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const words = ["movie name ...", "theater name ..."];
@@ -51,17 +52,18 @@ const Navbar = () => {
                     </div>
                     <div className="auth_sec">
                         <div className="auth_btn">
-                            <button>Sign In/Up</button>
+                            <Link to="/auth">Sign In/Up</Link>
                         </div>
                     </div>
                 </div>
 
                 <div className="bottom_part">
                     <div className="nav_items">
-                        <li><a className="active">Home</a></li>
-                        <li><a>Movies</a></li>
-                        <li><a>Theaters</a></li>
-                        <li><a>Contact us</a></li>
+                        <li><NavLink to="/home">Home</NavLink></li>
+                        <li><NavLink to="/recommended-movies">Recommended Movies</NavLink></li>
+                        <li><NavLink to="/upcoming-movies">Upcoming Movies</NavLink></li>
+                        <li><NavLink to="/theaters">Theaters</NavLink></li>
+                        <li><NavLink to="/contact-us">Contact us</NavLink></li>
                     </div>
                 </div>
             </div>
