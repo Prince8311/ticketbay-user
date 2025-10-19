@@ -8,6 +8,8 @@ import RecommendedMoviesPage from "../Pages/Movies/Recommended";
 import UpcomingMoviesPage from "../Pages/Movies/Upcoming";
 import TheaterListPage from "../Pages/Theaters";
 import ContactUsPage from "../Pages/Contact";
+import TermsConditionsPage from "../Pages/TermsConditions";
+import PrivacyPolicyPage from "../Pages/PrivacyPolicy";
 
 const Routers = () => {
     return (
@@ -22,6 +24,8 @@ const Routers = () => {
                         <Route path="upcoming-movies" element={<UpcomingMoviesPage />} />
                         <Route path="theaters" element={<TheaterListPage />} />
                         <Route path="contact-us" element={<ContactUsPage />} />
+                        <Route path="terms-and-conditions" element={<TermsConditionsPage />} />
+                        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
