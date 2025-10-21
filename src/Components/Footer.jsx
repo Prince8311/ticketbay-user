@@ -53,19 +53,19 @@ const Footer = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link to="terms-and-conditions">
+                                    <Link to="/terms-and-conditions">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Terms & Conditions</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="privacy-policy">
+                                    <Link to="/privacy-policy">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Privacy Policy</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="return-policy">
+                                    <Link to="/return-policy">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Refund Policy</span>
                                     </Link>
