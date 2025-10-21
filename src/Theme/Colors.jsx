@@ -38,6 +38,7 @@ export const colorNames = () => {
             redColor: "rgb(255, 0, 0)",
             redColorLight: "rgba(255, 0, 0, 0.15)",
             orangeColor: "rgb(252, 103, 54)",
+            orangeColorLight: "rgb(255, 143, 106)",
             greenColor: "rgb(63, 228, 79)",
             greenColorLight: "rgba(63, 228, 79, 0.15)",
             yellowColor: "rgb(255, 199, 108)",
