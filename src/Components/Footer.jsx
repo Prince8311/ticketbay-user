@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FooterWrapper } from "../Styles/LayoutStyle";
 
 const Footer = () => {
@@ -52,16 +53,16 @@ const Footer = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
+                                    <Link to="terms-and-conditions">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Terms & Conditions</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a>
+                                    <Link to="privacy-policy">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Privacy Policy</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <a>
