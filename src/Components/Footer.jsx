@@ -65,10 +65,10 @@ const Footer = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <a>
+                                    <Link to="return-policy">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Refund Policy</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
