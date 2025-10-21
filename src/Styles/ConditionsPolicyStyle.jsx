@@ -196,7 +196,7 @@ export const PrivacyPolicyPageWrapper = styled('div')`
     }
 `;
 
-export const ReturnPolicyPageWrapper = styled('div')`
+export const RefundPolicyPageWrapper = styled('div')`
     position: relative;
     width: 100%;
     padding: 40px 0;

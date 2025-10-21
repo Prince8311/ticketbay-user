@@ -10,7 +10,7 @@ import TheaterListPage from "../Pages/Theaters";
 import ContactUsPage from "../Pages/Contact";
 import TermsConditionsPage from "../Pages/TermsConditions";
 import PrivacyPolicyPage from "../Pages/PrivacyPolicy";
-import ReturnPolicyPage from "../Pages/ReturnPolicy";
+import RefundPolicyPage from "../Pages/RefundPolicy";
 
 const Routers = () => {
     return (
@@ -27,7 +27,7 @@ const Routers = () => {
                         <Route path="contact-us" element={<ContactUsPage />} />
                         <Route path="terms-and-conditions" element={<TermsConditionsPage />} />
                         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-                        <Route path="return-policy" element={<ReturnPolicyPage />} />
+                        <Route path="refund-policy" element={<RefundPolicyPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

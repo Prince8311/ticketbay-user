@@ -65,7 +65,7 @@ const Footer = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/return-policy">
+                                    <Link to="/refund-policy">
                                         <i className="fa-solid fa-angle-right"></i>
                                         <span>Refund Policy</span>
                                     </Link>

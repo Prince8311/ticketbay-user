@@ -1,12 +1,12 @@
-import { ReturnPolicyPageWrapper } from "../Styles/ConditionsPolicyStyle";
+import { RefundPolicyPageWrapper } from "../Styles/ConditionsPolicyStyle";
 
-const ReturnPolicyPage = () => {
+const RefundPolicyPage = () => {
     return (
         <>
-            <ReturnPolicyPageWrapper>
+            <RefundPolicyPageWrapper>
                 <div className="page_content">
                     <div className="page_head">
-                        <h3>Return & <span><b>P</b>olicies</span></h3>
+                        <h3>Return <span><b>P</b>olicy</span></h3>
                     </div>
                     <div className="page_items">
                         <li>
@@ -47,9 +47,9 @@ const ReturnPolicyPage = () => {
                         </li>
                     </div>
                 </div>
-            </ReturnPolicyPageWrapper>
+            </RefundPolicyPageWrapper>
         </>
     )
 }
 
-export default ReturnPolicyPage;
+export default RefundPolicyPage;
