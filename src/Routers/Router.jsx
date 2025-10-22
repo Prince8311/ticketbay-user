@@ -13,6 +13,9 @@ import PrivacyPolicyPage from "../Pages/PrivacyPolicy";
 import RefundPolicyPage from "../Pages/RefundPolicy";
 import ProfilePage from "../Pages/Profile";
 import BookingListPage from "../Pages/BookingList";
+import UpcomingBookings from "../Pages/Bookings/Upcoming";
+import PreviousBookings from "../Pages/Bookings/Previous";
+import CancelledBookings from "../Pages/Bookings/Cancelled";
 
 const Routers = () => {
     return (
@@ -31,7 +34,12 @@ const Routers = () => {
                         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="refund-policy" element={<RefundPolicyPage />} />
                         <Route path="profile" element={<ProfilePage />} />
-                        <Route path="bookings" element={<BookingListPage />} ></Route>
+                        <Route path="bookings" element={<BookingListPage />} >
+                            <Route path="" element={<Navigate to="upcoming" />} />
+                            <Route path="upcoming" element={<UpcomingBookings />} />
+                            <Route path="previous" element={<PreviousBookings />} />
+                            <Route path="cancelled" element={<CancelledBookings />} />
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

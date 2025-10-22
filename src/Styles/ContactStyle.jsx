@@ -158,7 +158,7 @@ export const ContactUsPageWrapper = styled('div')`
 
                         span {
                             position: relative;
-                            margin-left: 6px;
+                            margin-right: 6px;
                             text-transform: uppercase;
                             font-size: 14px;
                             font-weight: 800;
