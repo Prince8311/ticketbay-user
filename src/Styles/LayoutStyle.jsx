@@ -34,6 +34,7 @@ export const NavbarWrapper = styled('div')`
     display: flex;
     justify-content: center;
     border-bottom: 1px solid ${colors.customColors.borderColor};
+    z-index: 999;
 
     .nav_inner {
         position: relative;
@@ -126,7 +127,7 @@ export const NavbarWrapper = styled('div')`
 
             .auth_sec {
                 position: relative;
-                margin-left: 25px;
+                margin-left: 30px;
                 height: 100%;
 
                 .auth_btn {
@@ -152,6 +153,111 @@ export const NavbarWrapper = styled('div')`
                         &:hover {
                             border-radius: 25px;
                             transition: all 0.5s ease;
+                        }
+                    }
+                }
+
+                .profile {
+                    position: relative;
+
+                    .profile_btn {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+
+                        img {
+                            position: relative;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+                        p {
+                            position: relative;
+                            margin-left: 8px;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor1};
+                            max-width: 100px;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+
+                        i {
+                            position: relative;
+                            color: ${colors.customColors.blackColor1};
+                            font-size: 12px;
+                            margin-left: 4px;
+                            transition: all 0.5s ease;
+                            
+                            &.active {
+                                transform: rotate(-180deg);
+                                transition: all 0.5s ease;
+                            }
+                        }
+                    }
+
+                    .profile_dropdown {
+                        position: absolute;
+                        top: 40px;
+                        left: 0;
+                        width: 100%;
+                        max-height: 0;
+                        border-radius: 6px;
+                        overflow: hidden;
+                        z-index: 99;
+                        background: ${colors.customColors.whiteColor};
+                        box-shadow: 5px 6px 10px ${colors.boxShadowColors.shadowColor1},
+                                    -2px -2px 4px ${colors.boxShadowColors.shadowColor2};
+                        transition: all 0.5s ease;
+                        
+                        &.active {
+                            max-height: 300px;
+                            transition: all 0.5s ease;
+                        }
+
+                        .dropdown_inner {
+                            position: relative;
+                            width: 100%;
+                            padding: 2px 10px;
+
+                            ul {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+
+                                a {
+                                    position: relative;
+                                    width: 100%;
+                                    padding: 10px 0;
+                                    text-decoration: none;
+                                    display: flex;
+                                    align-items: center;
+                                    font-size: 13px;
+                                    color: ${colors.customColors.blackColor2};
+                                    cursor: pointer;
+                                    border-bottom: 1px solid ${colors.customColors.borderColor};
+                                    transition: all 0.5s ease;
+
+                                    &:last-of-type {
+                                        border-bottom: none;
+                                    }
+                                    
+                                    i {
+                                        position: relative;
+                                        width: 25px;
+                                        font-size: 14px;
+                                    }
+                                    
+                                    &:hover {
+                                        color: ${colors.customColors.blackColor1};
+                                        transition: all 0.5s ease;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

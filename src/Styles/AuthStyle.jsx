@@ -30,7 +30,6 @@ export const AuthWrapper = styled('div')`
         justify-content: center;
         padding: 50px 60px;
         z-index: 1;
-        transition: all 1s 0.7s ease-in-out;
 
         &.sign_in {
             top: 0;
@@ -94,6 +93,13 @@ export const AuthWrapper = styled('div')`
                 margin-top: 15px;
                 font-size: 13px;
                 color: ${colors.customColors.blackColor2};
+
+                span {
+                    position: relative;
+                    margin-left: 2px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor1};
+                }
             }
         }
 
@@ -162,6 +168,32 @@ export const AuthWrapper = styled('div')`
                     font-size: 14px;
                     color: ${colors.customColors.blackColor3};
                     cursor: pointer;
+                }
+            }
+
+            .otp_input_box {
+                position: relative;
+                margin-top: 10px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+
+                input {
+                    position: relative;
+                    width: 40px !important;
+                    height: 40px;
+                    border: none;
+                    outline: none;
+                    border-radius: 8px;
+                    background: ${colors.customColors.lightBackground};
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor1};
+                    margin-right: 10px;
+
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
                 }
             }
 
@@ -309,18 +341,26 @@ export const AuthWrapper = styled('div')`
         }
 
         .auth_form {
-            transition: all 1s 0.7s ease-in-out;
+            transition: all 1s ease-in-out;
 
             &.sign_in {
                 left: 70px;
                 opacity: 1;
                 pointer-events: initial;
             }
-
+            
             &.sign_up {
                 right: 50%;
                 opacity: 0;
                 pointer-events: none;
+            }
+
+            &.otp_verify {
+                top: 50%;
+                left: 70px;
+                opacity: 0;
+                pointer-events: none;
+                transition-delay: 0;
             }
         }
 
@@ -357,7 +397,6 @@ export const AuthWrapper = styled('div')`
         &.forgotPassword {
             .auth_form {
                 transition: all 1s ease-in-out;
-                transition-delay: 0;
 
                 &.sign_in {
                     left: 50%;
@@ -369,6 +408,42 @@ export const AuthWrapper = styled('div')`
                     top: 0;
                     opacity: 1;
                     pointer-events: initial;
+                    transition-delay: 0;
+                }
+
+                &.otp_verify {
+                    top: 0;
+                    left: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition-delay: 0;
+                }
+            }
+        }
+
+        &.verifyOtp {
+            .auth_form {
+                transition: all 1s ease-in-out;
+
+                &.sign_in {
+                    left: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &.forgot_password {
+                    top: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition-delay: 0;
+                }
+
+                &.otp_verify {
+                    top: 0;
+                    left: 70px;
+                    opacity: 1;
+                    pointer-events: initial;
+                    transition-delay: 0;
                 }
             }
         }
@@ -382,7 +457,7 @@ export const AuthWrapper = styled('div')`
         }
 
         .auth_form {
-            transition: all 1s 0.7s ease-in-out;
+            transition: all 1s ease-in-out;
 
             &.sign_in {
                 left: 50%;
@@ -391,9 +466,17 @@ export const AuthWrapper = styled('div')`
             }
 
             &.sign_up {
-                right: 80px;
+                right: 70px;
                 opacity: 1;
                 pointer-events: initial;
+            }
+
+            &.otp_verify {
+                top: 50%;
+                right: 70px;
+                opacity: 0;
+                pointer-events: none;
+                transition-delay: 0;
             }
         }
 
@@ -423,6 +506,32 @@ export const AuthWrapper = styled('div')`
                 img {
                     transform: translateX(0);
                     transition: all 1.1s 0.4s ease-in-out;
+                }
+            }
+        }
+
+        &.verifyOtp {
+            .auth_form {
+                transition: all 1s ease-in-out;
+
+                &.sign_in {
+                    left: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &.sign_up {
+                    right: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &.otp_verify {
+                    top: 0;
+                    right: 70px;
+                    opacity: 1;
+                    pointer-events: initial;
+                    transition-delay: 0;
                 }
             }
         }

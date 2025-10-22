@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const words = ["movie name ...", "theater name ..."];
-
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
     const [deleting, setDeleting] = useState(false);
+    const [profileDropdown, setProfileDropdown] = useState(false);
 
     useEffect(() => {
         const typingSpeed = deleting ? 50 : 120;
@@ -28,6 +30,15 @@ const Navbar = () => {
 
         return () => clearTimeout(timeout);
     }, [subIndex, deleting, wordIndex]);
+
+    function openProfileDropdown() {
+        setProfileDropdown(!profileDropdown);
+    }
+
+    const pageRedirection = (link) => {
+        navigate(link);
+        setProfileDropdown(false);
+    }
 
     return (
         <NavbarWrapper>
@@ -51,8 +62,34 @@ const Navbar = () => {
                         <i className="fa-solid fa-angle-down"></i>
                     </div>
                     <div className="auth_sec">
-                        <div className="auth_btn">
+                        {/* <div className="auth_btn">
                             <Link to="/auth">Sign In/Up</Link>
+                        </div> */}
+
+                        <div className="profile">
+                            <div className="profile_btn" onClick={openProfileDropdown}>
+                                <img src="/images/profile-image.png" alt="" />
+                                <p>Sourish Mondal</p>
+                                <i className={`fa-solid fa-angle-down ${profileDropdown ? 'active' : ''}`}></i>
+                            </div>
+                            <div className={`profile_dropdown ${profileDropdown ? 'active' : ''}`}>
+                                <div className="dropdown_inner">
+                                    <ul>
+                                        <a onClick={() => pageRedirection("/profile")}>
+                                            <i className="fa-solid fa-circle-user"></i>
+                                            <span>My Profile</span>
+                                        </a>
+                                        <a onClick={() => pageRedirection("/bookings")}>
+                                            <i className="fa-solid fa-list-ol"></i>
+                                            <span>My Booking List</span>
+                                        </a>
+                                        <a>
+                                            <i className="fa-solid fa-right-from-bracket"></i>
+                                            <span>Sign Out</span>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

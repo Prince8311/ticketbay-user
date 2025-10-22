@@ -1,26 +1,49 @@
 import { useState } from "react";
 import { AuthWrapper } from "../Styles/AuthStyle";
+import OTPInput from "react-otp-input";
 
 const AuthenticationPage = () => {
     const [authStatus, setAuthStatus] = useState('signin');
     const [authSubStatus, setAuthSubStatus] = useState('');
+    const [transitionDelay, setTransitionDelay] = useState('0.7');
+    const [otp, setOtp] = useState('');
 
     function redirectToSignIn() {
         setAuthStatus('signin');
+        setAuthSubStatus('');
+        setTransitionDelay('0.7');
     }
-    
+
     function redirectToSignUp() {
         setAuthStatus('signup');
+        setAuthSubStatus('');
+        setTransitionDelay('0.7');
     }
 
     function redirectToForgotPassword() {
         setAuthSubStatus('forgotPassword');
+        setTransitionDelay('0');
     }
+
+    function redirectToOtpVerify() {
+        setAuthSubStatus('verifyOtp');
+        setTransitionDelay('0');
+    }
+
+    const maskEmail = (email) => {
+        const [user, domain] = email.split("@");
+        const maskedUser =
+            user.length <= 5
+                ? `${user.slice(0, 1)}****${user.slice(-1)}`
+                : `${user.slice(0, 3)}****${user.slice(-2)}`;
+        return `${maskedUser}@${domain}`;
+    };
+    const maskedEmail = maskEmail('sourishmondal.vizac@gmail.com');
 
     return (
         <>
             <AuthWrapper className={`${authStatus} ${authSubStatus}`}>
-                <div className="auth_form sign_in">
+                <div className="auth_form sign_in" style={{transitionDelay: `${transitionDelay}s`}}>
                     <div className="form_head">
                         <h4>Sign <span><b>I</b>n</span></h4>
                     </div>
@@ -44,7 +67,7 @@ const AuthenticationPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="auth_form sign_up">
+                <div className="auth_form sign_up" style={{ transitionDelay: `${transitionDelay}s` }}>
                     <div className="form_head">
                         <h4>Sign <span><b>U</b>p</span></h4>
                     </div>
@@ -71,7 +94,7 @@ const AuthenticationPage = () => {
                             <a><i className="fa-solid fa-eye-slash"></i></a>
                         </div>
                         <div className="form_btn">
-                            <button>Sign Up</button>
+                            <button onClick={redirectToOtpVerify}>Sign Up</button>
                         </div>
                     </div>
                 </div>
@@ -87,8 +110,31 @@ const AuthenticationPage = () => {
                             <span>Email</span>
                         </div>
                         <div className="form_btn">
-                            <button>Send OTP</button>
-                            <a onClick={() => setAuthSubStatus('')}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
+                            <button onClick={redirectToOtpVerify}>Send OTP</button>
+                            <a onClick={() => {
+                                setAuthSubStatus('');
+                                setTransitionDelay('0');
+                            }}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
+                        </div>
+                    </div>
+                </div>
+                <div className="auth_form otp_verify">
+                    <div className="form_head">
+                        <h4>Verify <span><b>O</b>tp</span></h4>
+                        <p>We have send a 6 digit otp to <span>{maskedEmail}</span></p>
+                    </div>
+                    <div className="form_sec">
+                        <div className="otp_input_box">
+                            <OTPInput
+                                value={otp}
+                                onChange={setOtp}
+                                numInputs={6}
+                                renderInput={(props) => <input {...props} inputMode="numeric" pattern="[0-9]*" required />}
+                            />
+                        </div>
+                        <div className="form_btn">
+                            <button>Verify</button>
+                            <a onClick={() => setAuthSubStatus(authStatus === 'signin' ? 'forgotPassword' : '')}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
                         </div>
                     </div>
                 </div>
