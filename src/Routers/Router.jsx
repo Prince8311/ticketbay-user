@@ -16,6 +16,7 @@ import BookingListPage from "../Pages/BookingList";
 import UpcomingBookings from "../Pages/Bookings/Upcoming";
 import PreviousBookings from "../Pages/Bookings/Previous";
 import CancelledBookings from "../Pages/Bookings/Cancelled";
+import MovieDetailsPage from "../Pages/Movies/Details";
 
 const Routers = () => {
     return (
@@ -32,6 +33,7 @@ const Routers = () => {
                         <Route path="contact-us" element={<ContactUsPage />} />
                         <Route path="terms-and-conditions" element={<TermsConditionsPage />} />
                         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+                        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="refund-policy" element={<RefundPolicyPage />} />
                         <Route path="profile" element={<ProfilePage />} />
                         <Route path="bookings" element={<BookingListPage />} >
@@ -40,6 +42,7 @@ const Routers = () => {
                             <Route path="previous" element={<PreviousBookings />} />
                             <Route path="cancelled" element={<CancelledBookings />} />
                         </Route>
+                        <Route path="movie-details" element={<MovieDetailsPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

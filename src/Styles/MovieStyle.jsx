@@ -150,3 +150,123 @@ export const MovieListWrapper = styled('div')`
         }
     }
 `;
+
+export const MovieDetailsPageWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .banner_sec {
+        position: relative;
+        width: 100%;
+        padding: 40px 0;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(to bottom, ${colors.customColors.whiteColor}, ${colors.customColors.lightBackground});
+
+        .sec_content {
+            position: relative;
+            width: 1320px;
+            display: flex;
+
+            .left_sec {
+                position: relative;
+                width: 200px;
+                height: 270px;
+
+                .movie_image {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+
+                    img {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 8px;
+                        box-shadow: rgba(25, 25, 25, 0.3) 7px 10px 15px, rgba(50, 50, 50, 0.3) -4px -4px 10px;
+                    }
+                }
+            }
+
+            .right_sec {
+                position: relative;
+                width: calc(100% - 245px);
+                padding: 0 40px;
+
+                .right_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    h2 {
+                        position: relative;
+                        font-size: 25px;
+                        font-style: italic;
+                        color: ${colors.authColors.textColor};
+                        font-family: "Russo One", sans-serif;
+                        letter-spacing: 0.3px;
+                    }
+
+                    li {
+                        position: relative;
+                        margin-top: 10px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        -moz-box-align: center;
+                        align-items: center;
+                        font-family: "Poppins", sans-serif;
+
+                        span {
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        i {
+                            position: relative;
+                            font-size: 5px;
+                            margin: 0px 10px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+                }
+            }
+
+            .share_sec {
+                position: relative;
+                width: 45px;
+                height: 100%;
+                /* padding: 35px 0px; */
+
+                .share_inner {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+
+                    .share_btn {
+                        position: relative;
+                        width: 100%;
+                        height: 45px;
+                        cursor: pointer;
+                        z-index: 10;
+                        transition: 0.9s;
+
+                        img {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            display: flex;
+                            box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 15px, rgba(25, 25, 25, 0.2) -4px -4px 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
