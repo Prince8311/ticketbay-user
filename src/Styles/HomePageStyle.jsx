@@ -279,6 +279,7 @@ export const HomePageWrapper = styled('div')`
                             height: 100%;
                             border-radius: 10px;
                             padding: 8px;
+                            background: ${colors.customColors.yellowColor};
 
                             .circle_sec {
                                 position: absolute;
@@ -356,8 +357,8 @@ export const HomePageWrapper = styled('div')`
                                         padding: 5px 8px;
                                         display: flex;
                                         flex-direction: column;
-                                        color: ${colors.customColors.whiteColor};
-                                        border: 1px solid ${colors.customColors.whiteColor};
+                                        color: ${colors.customColors.blackColor};
+                                        border: 1px solid ${colors.customColors.blackColor2};
 
                                         h5 {
                                             position: relative;
@@ -442,7 +443,7 @@ export const HomePageWrapper = styled('div')`
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
-                                    color: ${colors.customColors.whiteColor};
+                                    color: ${colors.customColors.blackColor};
 
                                     p {
                                         position: relative;
@@ -454,22 +455,6 @@ export const HomePageWrapper = styled('div')`
                                     }
                                 }
                             }
-                        }
-
-                        &:nth-of-type(1) .ticket_box {
-                            background: ${colors.customColors.blueColor};
-                        }
-
-                        &:nth-of-type(2) .ticket_box {
-                            background: ${colors.customColors.yellowColor};
-                        }
-
-                        &:nth-of-type(3) .ticket_box {
-                            background: ${colors.customColors.greenColor};
-                        }
-
-                        &:nth-of-type(4) .ticket_box {
-                            background: ${colors.customColors.pinkColor};
                         }
                     }
                 }

@@ -407,11 +407,7 @@ export const MovieDetailsPageWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                margin-top: 50px;
-
-                &:first-child {
-                    margin-top: 0;
-                }
+                margin-top: 35px;
 
                 .box_head {
                     position: relative;
@@ -470,24 +466,24 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                     .item_box {
                         position: relative;
-                        width: 150px;
+                        width: 100px;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                         text-align: center;
                         margin-right: 20px;
 
-                        &:last-child {
+                        &:last-of-type {
                             margin-right: 0;
                         }
 
                         .box_img {
                             position: relative;
                             width: 100%;
-                            height: 150px;
+                            height: 100px;
                             border: 1px solid ${colors.customColors.borderColor};
                             border-radius: 50%;
-                            padding: 5px;
+                            padding: 3px;
                             box-shadow: ${colors.boxShadowColors.shadowColor1} 6px 7px 15px, ${colors.boxShadowColors.shadowColor3} -3px -3px 7px;
 
                             img {
@@ -501,12 +497,19 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                         p {
                             position: relative;
-                            font-size: 12px;
+                            font-size: 10px;
                             color: ${colors.customColors.blackColor1};
                             position: relative;
                             margin-top: 10px;
-                            font-family: "Lemonada", cursive;
                         }
+                    }
+                }
+
+                &:first-of-type {
+                    margin-top: 0;
+
+                    .box_items {
+                        margin-top: 25px;
                     }
                 }
             }
@@ -727,7 +730,6 @@ export const MovieDetailsPageWrapper = styled('div')`
                                     position: relative;
                                     display: flex;
                                     align-items: center;
-                                    font-family: 'Poppins', sans-serif;
 
                                     h4 {
                                         position: relative;
