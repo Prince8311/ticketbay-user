@@ -155,6 +155,7 @@ export const MovieDetailsPageWrapper = styled('div')`
     position: relative;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 
     .banner_sec {
@@ -233,6 +234,124 @@ export const MovieDetailsPageWrapper = styled('div')`
                             margin: 0px 10px;
                             color: ${colors.customColors.blackColor1};
                         }
+
+                        p {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            margin-top: 5px;
+
+                            a {
+                                position: relative;
+                                margin-right: 20px;
+                                margin-bottom: 20px;
+                                padding: 8px 25px;
+                                background: ${colors.customColors.blackColor1};
+                                font-size: 11px;
+                                line-height: 1;
+                                color: ${colors.customColors.whiteColor};
+                                border-radius: 4px;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+
+                    .rating_sec {
+                        position: relative;
+                        margin-top: 10px;
+                        display: flex;
+                        -moz-box-align: center;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        font-family: "Poppins", sans-serif;
+
+                        h5 {
+                            position: relative;
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: ${colors.customColors.blackColor};
+                        }
+
+                        .stars {
+                            position: relative;
+                            margin-left: 10px;
+                            display: flex;
+                            -moz-box-align: center;
+                            align-items: center;
+
+                            i {
+                                position: relative;
+                                font-size: 11px;
+                                color: ${colors.authBackground.gradientMid1};
+                                margin-right: 2px;
+                            }
+                        }
+
+                        span {
+                            position: relative;
+                            margin-left: 3px;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            font-weight: 500;
+
+                            &.dot {
+                                font-size: 5px;
+                                margin: 0px 8px;
+                            }
+                        }
+
+
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                        }
+                    }
+
+                    ul {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+
+                        button {
+                            position: relative;
+                            width: 150px;
+                            height: 40px;
+                            font-family: "Ubuntu", sans-serif;
+                            font-size: 12px;
+                            font-weight: 500;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            overflow: hidden;
+                            background: none;
+                            outline: none;
+                            border: none;
+
+                            &.trailer_btn {
+                                margin-right: 20px;
+                                background: ${colors.customColors.orangeColor};
+                            }
+
+                            &.booking_btn {
+                                background: ${colors.customColors.blueColor};
+                            }
+
+
+                            span {
+                                position: relative;
+                                color: ${colors.customColors.whiteColor};
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                i {
+                                    font-size: 14px;
+                                    margin-right: 8px;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -263,6 +382,389 @@ export const MovieDetailsPageWrapper = styled('div')`
                             border-radius: 50%;
                             display: flex;
                             box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 15px, rgba(25, 25, 25, 0.2) -4px -4px 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .movie_info_section {
+        position: relative;
+        width: 100%;
+        padding: 35px 0;
+        display: flex;
+        justify-content: center;
+
+        .sec_content {
+            position: relative;
+            width: 1320px;
+            display: flex;
+            flex-direction: column;
+
+            .movie_content_box {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin-top: 50px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                .box_head {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    h4 {
+                        position: relative;
+                        width: max-content;
+                        display: flex;
+                        font-family: "Oleo Script",system-ui;
+                        font-size: 24px;
+                        color: ${colors.customColors.orangeColor};
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            bottom: -3px;
+                            right: 0;
+                            width: 100%;
+                            height: 2px;
+                            background: linear-gradient(to right, transparent 15%, ${colors.customColors.orangeColor} 100%);
+                            border-radius: 30px;
+                        }
+
+                        span {
+                            position: relative;
+                            margin-left: 6px;
+                            text-transform: uppercase;
+                            font-size: 17px;
+                            font-weight: 800;
+                            font-style: italic;
+                            color: ${colors.customColors.blackColor1};
+
+                            b {
+                                font-weight: 600;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+                }
+
+                .box_items {
+                    position: relative;
+                    margin-top: 35px;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor1};
+                    }
+
+                    .item_box {
+                        position: relative;
+                        width: 150px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        margin-right: 20px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+
+                        .box_img {
+                            position: relative;
+                            width: 100%;
+                            height: 150px;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 50%;
+                            padding: 5px;
+                            box-shadow: ${colors.boxShadowColors.shadowColor1} 6px 7px 15px, ${colors.boxShadowColors.shadowColor3} -3px -3px 7px;
+
+                            img {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 50%;
+                            }
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 12px;
+                            color: ${colors.customColors.blackColor1};
+                            position: relative;
+                            margin-top: 10px;
+                            font-family: "Lemonada", cursive;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .user_review_section {
+        position: relative;
+        width: 100%;
+        padding: 35px 0;
+        display: flex;
+        justify-content: center;
+
+        .section_inner {
+            position: relative;
+            width: 1320px;
+            display: flex;
+            flex-direction: column;
+
+            .sec_head {
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                h4 {
+                    position: relative;
+                    width: max-content;
+                    display: flex;
+                    font-family: "Oleo Script",system-ui;
+                    font-size: 24px;
+                    color: ${colors.customColors.orangeColor};
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: -3px;
+                        right: 0;
+                        width: 100%;
+                        height: 2px;
+                        background: linear-gradient(to right, transparent 15%, ${colors.customColors.orangeColor} 100%);
+                        border-radius: 30px;
+                    }
+
+                    span {
+                        position: relative;
+                        margin-left: 6px;
+                        text-transform: uppercase;
+                        font-size: 17px;
+                        font-weight: 800;
+                        font-style: italic;
+                        color: ${colors.customColors.blackColor1};
+
+                        b {
+                            font-weight: 600;
+                            font-size: 24px;
+                        }
+                    }
+                }
+
+                a {
+                    position: relative;
+                    margin-left: auto;
+                    width: 150px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid ${colors.customColors.blackColor3};
+                    color: ${colors.customColors.blackColor2};
+                    font-size: 12px;
+                    font-weight: 500;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    overflow: hidden;
+                    transition: all 0.5s ease;
+                    
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        transform: scaleX(0);
+                        transform-origin: right;
+                        background: ${colors.customColors.blackColor};
+                        transition: transform 0.5s ease;
+                    }
+
+                    i {
+                        margin-left: 4px;
+                    }
+
+                    span {
+                        z-index: 5;
+                    }
+
+                    &:hover {
+                        color: ${colors.customColors.whiteColor};
+                        transition: all 0.5s ease;
+
+                        &::before {
+                            transform: scaleX(1);
+                            transform-origin: left;
+                            width: 100%;
+                            transition: transform 0.5s ease;
+                        }
+                    }
+                }
+            }
+
+            .review_sec {
+                position: relative;
+                margin-top: 35px;
+                width: 100%;
+                display: flex;
+
+                .swiper {
+                    position: relative;
+                    width: 100%;
+                    padding: 20px 0;
+
+                    .swiper-slide {
+                        position: relative;
+                        width: 27%;
+                        height: 200px;
+                        padding: 20px;
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 10px;
+
+                        .quote_icon {
+                            position: absolute;
+                            top: 5px;
+                            right: 20px;
+
+                            i {
+                                position: relative;
+                                font-size: 50px;
+                                color: ${colors.customColors.whiteColor2};
+                            }
+                        }
+
+                        .review_box {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+
+                            .review_top {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                .user_img {
+                                    position: relative;
+                                    width: 30px;
+                                    height: 30px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    background: ${colors.customColors.lightBackground};
+                                    border-radius: 50%;
+
+                                    img {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        border-radius: 50%;
+                                    }
+                                }
+
+                                h3 {
+                                    position: relative;
+                                    width: calc(100% - 30px);
+                                    padding-left: 15px;
+                                    font-style: italic;
+                                    font-size: 14px;
+                                    color: ${colors.customColors.blackColor};
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
+                            }
+
+                            .review_message {
+                                position: relative;
+                                margin-top: 20px;
+                                width: 100%;
+
+                                p {
+                                    position: relative;
+                                    width: 100%;
+                                    /* height: 75px; */
+                                    font-size: 13px;
+                                    line-height: 1.5;
+                                    color: ${colors.customColors.blackColor2};
+                                    display: -webkit-box;
+                                    overflow: hidden;
+                                    -webkit-line-clamp: 3;
+                                    -webkit-box-orient: vertical;
+                                    text-overflow: ellipsis;
+                                }
+                            }
+
+                            .review_bottom {
+                                position: relative;
+                                margin-top: auto;
+                                width: 100%;
+                                display: flex;
+                                align-items: flex-end;
+                                justify-content: space-between;
+
+                                .user_review {
+                                    position: relative;
+                                    display: flex;
+                                    align-items: center;
+                                    font-family: 'Poppins', sans-serif;
+
+                                    h4 {
+                                        position: relative;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        color: ${colors.customColors.blackColor};
+                                        margin-right: 10px;
+                                    }
+
+                                    span {
+                                        position: relative;
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+
+                                    i {
+                                        position: relative;
+                                        margin-left: 5px;
+                                        padding-bottom: 3px;
+                                        font-size: 13px;
+                                        color: ${colors.authBackground.gradientMid2};
+                                    }
+                                }
+
+                                .review_date {
+                                    position: relative;
+
+                                    p {
+                                        position: relative;
+                                        font-family: 'Ubuntu', sans-serif;
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+                                }
+                            }
                         }
                     }
                 }
