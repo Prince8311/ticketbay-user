@@ -215,15 +215,19 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                     li {
                         position: relative;
-                        margin-top: 10px;
                         display: flex;
                         flex-wrap: wrap;
                         -moz-box-align: center;
                         align-items: center;
                         font-family: "Poppins", sans-serif;
+                        margin-top: 4px;
+
+                        &.genres {
+                            margin-bottom: 4px;
+                        }
 
                         span {
-                            font-size: 14px;
+                            font-size: 12px;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor1};
                         }
@@ -235,24 +239,20 @@ export const MovieDetailsPageWrapper = styled('div')`
                             color: ${colors.customColors.blackColor1};
                         }
 
-                        p {
+                        a {
                             position: relative;
-                            display: flex;
-                            align-items: center;
-                            flex-wrap: wrap;
-                            margin-top: 5px;
+                            margin-right: 10px;
+                            margin-bottom: 10px;
+                            padding: 8px 22px;
+                            background: ${colors.customColors.borderColor};
+                            font-size: 11px;
+                            line-height: 1;
+                            color: ${colors.customColors.blackColor};
+                            border-radius: 4px;
+                            text-decoration: none;
 
-                            a {
-                                position: relative;
-                                margin-right: 20px;
-                                margin-bottom: 20px;
-                                padding: 8px 25px;
-                                background: ${colors.customColors.blackColor1};
-                                font-size: 11px;
-                                line-height: 1;
-                                color: ${colors.customColors.whiteColor};
-                                border-radius: 4px;
-                                text-decoration: none;
+                            &:last-of-type {
+                                margin-right: 0;
                             }
                         }
                     }
@@ -767,6 +767,180 @@ export const MovieDetailsPageWrapper = styled('div')`
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const MovieInfoPageWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .info_section {
+        position: relative;
+        width: 100%;
+        /* background: ${colors.customColors.lightBackground}; */
+        padding: 25px 0;
+        display: flex;
+        justify-content: center;
+
+        .section_inner {
+            position: relative;
+            width: 1320px;
+            display: flex;
+            flex-direction: column;
+
+            .page_head {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                h4 {
+                    position: relative;
+                    width: max-content;
+                    display: flex;
+                    font-family: "Oleo Script",system-ui;
+                    font-size: 24px;
+                    color: ${colors.themeColor};
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: -3px;
+                        right: 0;
+                        width: 100%;
+                        height: 2px;
+                        background: linear-gradient(to right, transparent 15%, ${colors.themeColor} 100%);
+                        border-radius: 30px;
+                    }
+
+                    span {
+                        position: relative;
+                        margin-left: 6px;
+                        text-transform: uppercase;
+                        font-size: 17px;
+                        font-weight: 800;
+                        font-style: italic;
+                        color: ${colors.customColors.blackColor1};
+
+                        b {
+                            font-weight: 600;
+                            font-size: 24px;
+                        }
+                    }
+                }
+
+                li {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    list-style: none;
+                    margin-top: 10px;
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor1};
+                        margin-right: 5px;
+
+                        &:last-of-type {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+
+            .date_sec {
+                position: relative;
+                width: 100%;
+                display: flex;
+                padding: 10px 0;
+                margin-top: 20px;
+                justify-content: center;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(to right, #fff, #b1b1b1, #fff);
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(to right, #fff, #b1b1b1, #fff);
+                }
+
+                .date_box {
+                    position: relative;
+                    width: 90px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    background: ${colors.customColors.lightBackground};
+                    padding: 10px;
+                    margin-right: 7px;
+                    border-radius: 6px;
+                    cursor: pointer;
+
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor1};
+                        font-weight: 500;
+                        text-transform: uppercase;
+                    }
+
+                    h6 {
+                        position: relative;
+                        font-size: 15px;
+                        color: ${colors.customColors.blackColor};
+                        font-weight: 600;
+                        margin: 3px 0;
+                    }
+
+                    span {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor2};
+                        font-weight: 500;
+                        text-transform: capitalize;
+                    }
+
+                    &.active {
+                        background: ${colors.customColors.orangeColor};
+
+                        p {
+                            color: ${colors.customColors.whiteColor};
+                        }
+
+                        h6 {
+                            color: ${colors.customColors.whiteColor};
+                        }
+
+                        span {
+                            color: ${colors.customColors.whiteColor};
                         }
                     }
                 }

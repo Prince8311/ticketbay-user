@@ -20,8 +20,6 @@ const MovieDetailsPage = () => {
                                     <span>25 Oct, 2025</span>
                                     <i className="fa-solid fa-circle"></i>
                                     <span>2hr 20min</span>
-                                    <i className="fa-solid fa-circle"></i>
-                                    <span>Comedy / Horror</span>
                                 </li>
                                 <div className="rating_sec">
                                     <h5>Rating: </h5>
@@ -38,11 +36,20 @@ const MovieDetailsPage = () => {
                                     </span>
                                     <p>[ 12,255 users ]</p>
                                 </div>
+                                <li className="genres">
+                                    <span>Comedy</span>
+                                    <i className="fa-solid fa-circle"></i>
+                                    <span>Horror</span>
+                                </li>
                                 <li>
-                                    <p>
-                                        <a href="">Kanada</a>
-                                        <a href="">English</a>
-                                    </p>
+                                    <a href="">2D</a>
+                                    <a href="">3D</a>
+                                    <a href="">IMAX</a>
+                                    <a href="">4DX</a>
+                                </li>
+                                <li>
+                                    <a href="">Kanada</a>
+                                    <a href="">English</a>
                                 </li>
                                 <ul>
                                     <button className="trailer_btn"><span> <i className="fa-regular fa-circle-play"></i> See Trailer</span></button>
