@@ -804,37 +804,10 @@ export const MovieInfoPageWrapper = styled('div')`
 
                 h4 {
                     position: relative;
-                    width: max-content;
-                    display: flex;
-                    font-family: "Oleo Script",system-ui;
-                    font-size: 24px;
-                    color: ${colors.themeColor};
-
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        bottom: -3px;
-                        right: 0;
-                        width: 100%;
-                        height: 2px;
-                        background: linear-gradient(to right, transparent 15%, ${colors.themeColor} 100%);
-                        border-radius: 30px;
-                    }
-
-                    span {
-                        position: relative;
-                        margin-left: 6px;
-                        text-transform: uppercase;
-                        font-size: 17px;
-                        font-weight: 800;
-                        font-style: italic;
-                        color: ${colors.customColors.blackColor1};
-
-                        b {
-                            font-weight: 600;
-                            font-size: 24px;
-                        }
-                    }
+                    font-size: 17px;
+                    font-weight: 600;
+                    font-style: italic;
+                    color: ${colors.customColors.blackColor};
                 }
 
                 li {
@@ -844,7 +817,7 @@ export const MovieInfoPageWrapper = styled('div')`
                     flex-wrap: wrap;
                     align-items: center;
                     list-style: none;
-                    margin-top: 10px;
+                    margin-top: 5px;
 
                     p {
                         position: relative;
@@ -941,6 +914,92 @@ export const MovieInfoPageWrapper = styled('div')`
 
                         span {
                             color: ${colors.customColors.whiteColor};
+                        }
+                    }
+                }
+            }
+
+            .move_info_sec {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin-top: 50px;
+
+                .movie_box {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    margin-bottom: 25px;
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+
+                    .left_info {
+                        position: relative;
+                        width: 370px;
+                        display: flex;
+
+                        .img_sec {
+                            position: relative;
+                            width: 40px;
+                            height: 45px;
+                            display: flex;
+
+                            img {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 3px;
+                            }
+                        }
+
+                        .left_item {
+                            position: relative;
+                            width: calc(100% - 40px);
+                            padding-left: 15px;
+
+                            h5 {
+                                position: relative;
+                                font-size: 13px;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
+                            }
+                        }
+                    }
+
+                    .right_info {
+                        position: relative;
+                        width: calc(100% - 370px);
+                        display: flex;
+                        padding-left: 70px;
+
+                        .right_info_inner {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-items: center;
+
+                            .inner_box {
+                                position: relative;
+                                display: flex;
+                                margin-right: 10px;
+                                margin-bottom: 10px;
+
+                                a {
+                                    position: relative;
+                                    padding: 5px 15px;
+                                    color: ${colors.customColors.blackColor1};
+                                    font-weight: 400;
+                                    border: 1px solid ${colors.customColors.blueColor};
+                                    border-radius: 4px;
+                                    font-size: 12px;
+                                    cursor: pointer;
+                                }
+                            }
                         }
                     }
                 }
