@@ -967,6 +967,18 @@ export const MovieInfoPageWrapper = styled('div')`
                                 font-weight: 500;
                                 color: ${colors.customColors.blackColor};
                             }
+
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor1};
+
+                                b {
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+                            }
                         }
                     }
 

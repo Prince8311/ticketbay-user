@@ -74,6 +74,7 @@ const MovieInfoPage = () => {
                                     </div>
                                     <div className="left_item">
                                         <h5>Kantara: A Legend Chapter-1</h5>
+                                        <p><b>Release Date :</b> 13 Dec, 2025</p>
                                     </div>
                                 </div>
                                 <div className="right_info">
@@ -100,6 +101,7 @@ const MovieInfoPage = () => {
                                     </div>
                                     <div className="left_item">
                                         <h5>Kantara: A Legend Chapter-1</h5>
+                                        <p><b>Release Date :</b> 13 Dec, 2025</p>
                                     </div>
                                 </div>
                                 <div className="right_info">
@@ -126,58 +128,7 @@ const MovieInfoPage = () => {
                                     </div>
                                     <div className="left_item">
                                         <h5>Kantara: A Legend Chapter-1</h5>
-                                    </div>
-                                </div>
-                                <div className="right_info">
-                                    <div className="right_info_inner">
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="movie_box">
-                                <div className="left_info">
-                                    <div className="img_sec">
-                                        <img src="images/add1.jpeg" alt="" />
-                                    </div>
-                                    <div className="left_item">
-                                        <h5>Kantara: A Legend Chapter-1</h5>
-                                    </div>
-                                </div>
-                                <div className="right_info">
-                                    <div className="right_info_inner">
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                        <div className="inner_box">
-                                            <a>2.30 pm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="movie_box">
-                                <div className="left_info">
-                                    <div className="img_sec">
-                                        <img src="images/add1.jpeg" alt="" />
-                                    </div>
-                                    <div className="left_item">
-                                        <h5>Kantara: A Legend Chapter-1</h5>
+                                        <p><b>Release Date :</b> 13 Dec, 2025</p>
                                     </div>
                                 </div>
                                 <div className="right_info">
