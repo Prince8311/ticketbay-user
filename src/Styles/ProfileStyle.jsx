@@ -20,15 +20,21 @@ export const ProfilePageWrapper = styled('div')`
             position: relative;
             width: 100%;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            background: ${colors.customColors.whiteColor};
+            border: 1px solid ${colors.customColors.borderColor1};
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 5px 8px 10px ${colors.boxShadowColors.shadowColor2};
+            margin-bottom: 10px;
 
             .image_box {
                 position: relative;
-                width: 150px;
-                height: 150px;
-                border: 1px solid ${colors.customColors.borderColor};
+                width: 100px;
+                height: 100px;
+                border: 2px solid ${colors.customColors.borderColor};
                 border-radius: 50%;
-                padding: 6px;
+                padding: 5px;
 
                 .box_inner {
                     position: relative;
@@ -45,242 +51,133 @@ export const ProfilePageWrapper = styled('div')`
                         object-fit: cover;
                     }
                 }
+            }
+
+            .profile_content {
+                position: relative;
+                width: calc(100% - 100px);
+                padding-left: 20px;
+                display: flex;
+                flex-direction: column;
+
+                h6 {
+                    position: relative;
+                    font-size: 14px;
+                    color: ${colors.customColors.blackColor};
+                    font-weight: 500;
+                }
+
+                p {
+                    position: relative;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor2};
+                    font-weight: 500;
+                    margin-top: 7px;
+                }
+
+                span {
+                    position: relative;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor2};
+                    font-weight: 500;
+                }
+            }
+
+            .edit_btn_sec {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                display: flex;
 
                 a {
-                    position: absolute;
-                    right: 4px;
-                    bottom: 4px;
-                    width: 32px;
-                    height: 32px;
-                    font-size: 13px;
-                    background: ${colors.customColors.blueColor};
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    font-size: 14px;
+                    color: ${colors.customColors.blueColor};
+                    text-decoration: none;
                     cursor: pointer;
-                    color: ${colors.customColors.whiteColor};
-                    border-radius: 10px;
                 }
             }
         }
 
-        .form_sec {
+        .profile_item_sec {
             position: relative;
-            margin-top: 35px;
             width: 100%;
             display: flex;
             flex-direction: column;
 
-            .sec_head {
+            .item_box {
                 position: relative;
                 width: 100%;
-                padding-bottom: 2px;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: -2px;
-                    right: 0;
-                    width: 100%;
-                    height: 1px;
-                    background: linear-gradient(to right, ${colors.customColors.blackColor2}, transparent);
-                    border-radius: 30px;
-                }
-
-                h4 {
-                    span {
-                        position: relative;
-                        margin-right: 6px;
-                        text-transform: uppercase;
-                        font-size: 14px;
-                        font-weight: 800;
-                        font-style: italic;
-                        color: ${colors.customColors.blackColor1};
-
-                        b {
-                            font-weight: 600;
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
-
-            .form_inner {
-                position: relative;
-                width: 100%;
-                margin-top: 25px;
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
+                flex-direction: column;
+                margin-top: 25px;
 
-                .input_box {
+                .item_head {
                     position: relative;
-                    width: 49%;
-                    margin-bottom: 20px;
-
-                    input {
-                        position: relative;
-                        width: 100%;
-                        height: 40px;
-                        border: 1px solid ${colors.customColors.borderColor};
-                        font-size: 12px;
-                        border-radius: 5px;
-                        padding: 5px 20px;
-                        padding-right: 60px;
-                        outline: none;
-                        transition: all 0.5s ease;
-
-                        &:focus,
-                        &:valid {
-                            border: 1px solid ${colors.customColors.blueColor};
-                            transition: all 0.5s ease;
-                        }
-                    }
-
-                    span {
-                        position: absolute;
-                        top: 50%;
-                        left: 15px;
-                        padding: 0 5px;
-                        font-size: 12px;
-                        background: ${colors.customColors.whiteColor};
-                        line-height: 1;
-                        color: ${colors.customColors.blackColor2};
-                        pointer-events: none;
-                        transform: translateY(-50%);
-                        transition: all 0.5s ease;
-                    }
-
-                    input:focus ~ span,
-                    input:valid ~ span {
-                        transform: translateY(-25px);
-                        font-size: 10px;
-                        color: ${colors.themeColor};
-                        font-weight: 500;
-                        transition: all 0.5s ease;
-                    }
-
-                    .not_editable {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    a {
-                        position: absolute;
-                        right: 20px;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        font-size: 12px;
-                        font-weight: 500;
-                        color: ${colors.customColors.blueColor};
-                        cursor: pointer;
-                    }
-                }
-
-                .password_input_box {
-                    position: relative;
-                    width: 49%;
-                    margin-bottom: 20px;
-
-                    input {
-                        position: relative;
-                        width: 100%;
-                        height: 40px;
-                        border: 1px solid ${colors.customColors.borderColor};
-                        font-size: 12px;
-                        border-radius: 5px;
-                        padding: 5px 20px;
-                        padding-right: 60px;
-                        outline: none;
-                        transition: all 0.5s ease;
-
-                        &:focus,
-                        &:valid {
-                            border: 1px solid ${colors.customColors.blueColor};
-                            transition: all 0.5s ease;
-                        }
-                    }
-
-                    span {
-                        position: absolute;
-                        top: 50%;
-                        left: 15px;
-                        padding: 0 5px;
-                        font-size: 12px;
-                        background: ${colors.customColors.whiteColor};
-                        line-height: 1;
-                        color: ${colors.customColors.blackColor2};
-                        pointer-events: none;
-                        transform: translateY(-50%);
-                        transition: all 0.5s ease;
-                    }
-
-                    input:focus ~ span,
-                    input:valid ~ span {
-                        transform: translateY(-25px);
-                        font-size: 10px;
-                        color: ${colors.themeColor};
-                        font-weight: 500;
-                        transition: all 0.5s ease;
-                    }
-
-                    a {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        height: 100%;
-                        width: 50px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-decoration: none;
-                        cursor: pointer;
-                        font-size: 14px;
-                        color: ${colors.customColors.blackColor2};
-                        transition: all 0.5s ease;
-                    }
-
-                    input:focus ~ a,
-                    input:valid ~ a {
-                        color: ${colors.customColors.blueColor};
-                        transition: all 0.5s ease;
-                    }
-                }
-
-                .form_btn {
-                    position: relative;
-                    margin-top: 5px;
                     width: 100%;
                     display: flex;
+                    padding-bottom: 7px;
+                    padding-left: 7px;
 
-                    button {
+                    h4 {
                         position: relative;
-                        width: 150px;
-                        height: 40px;
-                        background: ${colors.customColors.greenColor};
-                        border: none;
-                        font-size: 13px;
-                        font-weight: 500;
-                        color: ${colors.customColors.whiteColor};
-                        cursor: pointer;
-                        border-radius: 5px;
-                        pointer-events: initial;
-                        transition: all 0.5s ease;
+                        font-size: 16px;
+                        color: ${colors.customColors.orangeColor};
+                        font-weight: 600;
+                        font-style: italic;
+                    }
+                }
 
-                        &:hover {
-                            border-radius: 30px;
-                            letter-spacing: 1px;
-                            transition: all 0.5s ease;
+                .item_content_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid ${colors.customColors.borderColor1};
+                    border-radius: 6px;
+                    overflow: hidden;
+
+                    .content_box {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        padding: 12px 15px;
+                        background: ${colors.customColors.whiteColor};
+                        cursor: pointer;
+                        border-bottom: 1px solid ${colors.customColors.borderColor1};
+
+                        &:last-of-type {
+                            border-bottom: none;
                         }
 
-                        &.disabled {
-                            opacity: 0.5;
-                            cursor: not-allowed;
-                            pointer-events: none;
-                            transition: all 0.5s ease;
+                        i {
+                            position: relative;
+                            font-size: 14px;
+                            color: ${colors.customColors.blackColor1};
+                            text-decoration: none;
+                            
+                            &:first-of-type {
+                                width: 25px;
+                            }
+                            &:last-of-type {
+                                margin-left: auto;
+                            }
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 13px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+                            margin-right: 8px;
                         }
                     }
                 }

@@ -16,6 +16,8 @@ import BookingListPage from "../Pages/BookingList";
 import UpcomingBookings from "../Pages/Bookings/Upcoming";
 import PreviousBookings from "../Pages/Bookings/Previous";
 import CancelledBookings from "../Pages/Bookings/Cancelled";
+import MovieDetailsPage from "../Pages/Movies/Details";
+import MovieInfoPage from "../Pages/Movies/MovieInfo";
 
 const Routers = () => {
     return (
@@ -28,9 +30,12 @@ const Routers = () => {
                         <Route path="home" element={<HomePage />} />
                         <Route path="recommended-movies" element={<RecommendedMoviesPage />} />
                         <Route path="upcoming-movies" element={<UpcomingMoviesPage />} />
+                        <Route path="movie-details" element={<MovieDetailsPage />} />
+                        <Route path="movie-info" element={<MovieInfoPage />} />
                         <Route path="theaters" element={<TheaterListPage />} />
                         <Route path="contact-us" element={<ContactUsPage />} />
                         <Route path="terms-and-conditions" element={<TermsConditionsPage />} />
+                        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="refund-policy" element={<RefundPolicyPage />} />
                         <Route path="profile" element={<ProfilePage />} />

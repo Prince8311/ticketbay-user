@@ -10,56 +10,115 @@ const ProfilePage = () => {
                             <div className="box_inner">
                                 <img src="/images/profile-image.png" alt="" />
                             </div>
-                            <a><i className="fa-solid fa-camera"></i></a>
+                        </div>
+                        <div className="profile_content">
+                            <h6>Sourish Mondal</h6>
+                            <p>8637361996</p>
+                            <span>demo123@gmail.com</span>
+                        </div>
+                        <div className="edit_btn_sec">
+                            <a><i className="fa-solid fa-pen-to-square"></i></a>
                         </div>
                     </div>
-                    <div className="form_sec">
-                        <div className="sec_head">
-                            <h4><span><b>B</b>asic</span> <span><b>D</b>etails</span></h4>
+                    <div className="profile_item_sec">
+                        <div className="item_box">
+                            <div className="item_head">
+                                <h4>My Profile</h4>
+                            </div>
+                            <div className="item_content_sec">
+                                <div className="content_box">
+                                    <i className="fa-solid fa-lock"></i>
+                                    <p>Change Password</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-note-sticky"></i>
+                                    <p>My Reviews</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-city"></i>
+                                    <p>List Theater</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div className="form_inner">
-                            <div className="input_box">
-                                <input type="text" required />
-                                <span>Name</span>
-                                <div className="not_editable"></div>
-                                <a>Edit</a>
+                        <div className="item_box">
+                            <div className="item_head">
+                                <h4>My Booking List</h4>
                             </div>
-                            <div className="input_box">
-                                <input type="text" required />
-                                <span>Email</span>
-                                <div className="not_editable"></div>
-                                <a>Edit</a>
-                            </div>
-                            <div className="input_box">
-                                <input type="text" required />
-                                <span>Contact No.</span>
-                                <div className="not_editable"></div>
-                                <a>Edit</a>
+                            <div className="item_content_sec">
+                                <div className="content_box">
+                                    <i className="fa-solid fa-ticket"></i>
+                                    <p>Upcoming Bookings</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-ticket-simple"></i>
+                                    <p>Previous Bookings</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-ban"></i>
+                                    <p>Cancelled Bookings</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="form_sec">
-                        <div className="sec_head">
-                            <h4><span><b>C</b>hange</span> <span><b>P</b>assword</span></h4>
+                        <div className="item_box">
+                            <div className="item_head">
+                                <h4>Help Center</h4>
+                            </div>
+                            <div className="item_content_sec">
+                                <div className="content_box">
+                                    <i className="fa-solid fa-circle-question"></i>
+                                    <p>FAQ's</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-headphones"></i>
+                                    <p>Contact Us</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div className="form_inner">
-                            <div className="password_input_box">
-                                <input type="text" required />
-                                <span>Current Password</span>
-                                <a><i className="fa-solid fa-eye-slash"></i></a>
+                        <div className="item_box">
+                            <div className="item_head">
+                                <h4>Rules & Regulations</h4>
                             </div>
-                            <div className="password_input_box">
-                                <input type="text" required />
-                                <span>New Password</span>
-                                <a><i className="fa-solid fa-eye-slash"></i></a>
+                            <div className="item_content_sec">
+                                <div className="content_box">
+                                    <i className="fa-solid fa-file"></i>
+                                    <p>Terms & Conditions</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-shield-halved"></i>
+                                    <p>Privacy Policy</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-comment-dollar"></i>
+                                    <p>Cancellation & Refund Policy</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
                             </div>
-                            <div className="password_input_box">
-                                <input type="text" required />
-                                <span>Confirm Password</span>
-                                <a><i className="fa-solid fa-eye-slash"></i></a>
+                        </div>
+                        <div className="item_box">
+                            <div className="item_head">
+                                <h4>Account</h4>
                             </div>
-                            <div className="form_btn">
-                                <button>Update</button>
+                            <div className="item_content_sec">
+                                <div className="content_box">
+                                    <i className="fa-solid fa-trash" style={{ color: "#f00" }}></i>
+                                    <p>Delete My Account</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
+                                <div className="content_box">
+                                    <i className="fa-solid fa-arrow-right-from-bracket" style={{ color: "#f00" }}></i>
+                                    <p>Sign Out</p>
+                                    <i className="fa-solid fa-angle-right"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
