@@ -179,6 +179,10 @@ export const TicketBoxWrapper = styled('div')`
         &.upcoming {
             background: ${colors.customColors.yellowColor};
         }
+        &.previous,
+        &.cancelled {
+            background: ${colors.customColors.lightBackground2};
+        }
 
         .circle_sec {
             position: absolute;
@@ -330,6 +334,20 @@ export const TicketBoxWrapper = styled('div')`
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }
+                    }
+                }
+
+                .cancelled_tag {
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                    display: flex;
+
+                    img {
+                        position: relative;
+                        width: 80px;
+                        height: auto;
+                        transform: rotate(-20deg);
                     }
                 }
             }

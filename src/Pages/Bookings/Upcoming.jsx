@@ -1,5 +1,5 @@
 import TicketBox from "../../Components/TicketBox";
-import { BookedTicketListWrapper, TicketBoxWrapper } from "../../Styles/BookingStyle";
+import { BookedTicketListWrapper } from "../../Styles/BookingStyle";
 
 const UpcomingBookings = () => {
     return(

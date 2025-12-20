@@ -26,6 +26,12 @@ const TicketBox = ({ type }) => {
                                     <p>A-1, A-2, A-3</p>
                                 </div>
                             </div>
+                            {
+                                type === 'cancelled' &&
+                                <div className="cancelled_tag">
+                                    <img src="/images/cancel-tag.png" alt="" />
+                                </div>
+                            }
                         </div>
                         <div className="id_sec">
                             <p>TKB894571</p>

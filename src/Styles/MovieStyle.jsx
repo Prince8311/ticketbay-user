@@ -15,134 +15,166 @@ export const MovieListWrapper = styled('div')`
         display: flex;
         flex-direction: column;
 
-        .page_head {
+        .page_items {
             position: relative;
             width: 100%;
-            padding: 0 15px;
+            display: flex;
 
-            h3 {
-                position: relative;
-                width: max-content;
-                display: flex;
-                font-family: "Oleo Script",system-ui;
-                font-size: 24px;
-                color: ${colors.themeColor};
+            .filter_sec {
+                position: sticky;
+                top: 50px;
+                width: 300px;
+                height: calc(100vh - 100px);
+                padding: 0 15px;
 
                 &::before {
                     content: '';
                     position: absolute;
-                    bottom: -2px;
+                    top: 0;
                     right: 0;
-                    width: 100%;
-                    height: 2px;
-                    background: linear-gradient(to right, transparent 15%, ${colors.themeColor} 100%);
-                    border-radius: 30px;
-                }
-
-                span {
-                    position: relative;
-                    margin-left: 6px;
-                    text-transform: uppercase;
-                    font-size: 17px;
-                    font-weight: 800;
-                    font-style: italic;
-                    color: ${colors.customColors.blackColor1};
-
-                    b {
-                        font-weight: 600;
-                        font-size: 24px;
-                    }
+                    width: 1px;
+                    height: 100%;
+                    background: linear-gradient(to bottom, ${colors.customColors.blackColor3}, transparent);
                 }
             }
-        }
 
-        .page_items {
-            position: relative;
-            margin-top: 35px;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-
-            .movie_box {
+            .movie_box_sec {
                 position: relative;
-                width: 12.5%;
-                padding: 0 15px;
-                margin-bottom: 30px;
+                width: calc(100% - 300px);
+                display: flex;
+                flex-direction: column;
 
-                .box_inner {
+                .page_head {
                     position: relative;
                     width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    cursor: pointer;
+                    padding: 0 15px;
 
-                    .image_box {
+                    h3 {
                         position: relative;
-                        width: 100%;
-                        height: 200px;
+                        width: max-content;
                         display: flex;
-                        overflow: hidden;
-                        border-radius: 8px;
+                        font-family: "Oleo Script",system-ui;
+                        font-size: 24px;
+                        color: ${colors.themeColor};
 
-                        img {
-                            position: relative;
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            bottom: -2px;
+                            right: 0;
                             width: 100%;
-                            height: 100%;
-                            object-fit: cover;
+                            height: 2px;
+                            background: linear-gradient(to right, transparent 15%, ${colors.themeColor} 100%);
+                            border-radius: 30px;
+                        }
+
+                        span {
+                            position: relative;
+                            margin-left: 6px;
+                            text-transform: uppercase;
+                            font-size: 17px;
+                            font-weight: 800;
+                            font-style: italic;
+                            color: ${colors.customColors.blackColor1};
+
+                            b {
+                                font-weight: 600;
+                                font-size: 24px;
+                            }
                         }
                     }
+                }
 
-                    .movie_brief {
+                .sec_items {
+                    position: relative;
+                    margin-top: 35px;
+                    width: 100%;
+                    padding: 0 7px;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .movie_box {
                         position: relative;
-                        width: 100%;
-                        margin-top: 10px;
-                        display: flex;
-                        flex-direction: column;
+                        width: 16.66%;
+                        padding: 0 8px;
+                        margin-bottom: 30px;
 
-                        li {
+                        .box_inner {
                             position: relative;
-                            list-style: none;
+                            width: 100%;
                             display: flex;
                             flex-direction: column;
+                            cursor: pointer;
 
-                            span {
+                            .image_box {
                                 position: relative;
-                                font-size: 13px;
-                                font-weight: 500;
+                                width: 100%;
+                                height: 220px;
                                 display: flex;
-                                align-items: center;
-                                color: ${colors.customColors.blackColor1};
+                                overflow: hidden;
+                                border-radius: 8px;
 
-                                i {
+                                img {
                                     position: relative;
-                                    margin-right: 2px;
-                                    font-size: 11px;
-                                    padding-bottom: 3px;
-                                    color: ${colors.customColors.yellowColor};
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
                                 }
                             }
 
-                            p {
+                            .movie_brief {
                                 position: relative;
-                                margin-top: 1px;
                                 width: 100%;
-                                font-size: 10px;
-                                color: ${colors.customColors.blackColor2};
-                            }
-                        }
+                                margin-top: 10px;
+                                display: flex;
+                                flex-direction: column;
 
-                        h5 {
-                            position: relative;
-                            margin-top: 5px;
-                            width: 100%;
-                            font-size: 12px;
-                            font-weight: 600;
-                            line-height: 1.4;
-                            color: ${colors.customColors.blackColor};
-                            display: -webkit-box;
-                            -webkit-line-clamp: 2;
-                            -webkit-box-orient: vertical;
-                            text-overflow: ellipsis;
+                                li {
+                                    position: relative;
+                                    list-style: none;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    span {
+                                        position: relative;
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        display: flex;
+                                        align-items: center;
+                                        color: ${colors.customColors.blackColor1};
+
+                                        i {
+                                            position: relative;
+                                            margin-right: 2px;
+                                            font-size: 11px;
+                                            padding-bottom: 3px;
+                                            color: ${colors.customColors.yellowColor};
+                                        }
+                                    }
+
+                                    p {
+                                        position: relative;
+                                        margin-top: 1px;
+                                        width: 100%;
+                                        font-size: 10px;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+                                }
+
+                                h5 {
+                                    position: relative;
+                                    margin-top: 5px;
+                                    width: 100%;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    line-height: 1.4;
+                                    color: ${colors.customColors.blackColor};
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 2;
+                                    -webkit-box-orient: vertical;
+                                    text-overflow: ellipsis;
+                                }
+                            }
                         }
                     }
                 }

@@ -1,9 +1,14 @@
+import TicketBox from "../../Components/TicketBox";
 import { BookedTicketListWrapper } from "../../Styles/BookingStyle";
 
 const CancelledBookings = () => {
-    return(
+    return (
         <>
-            <BookedTicketListWrapper></BookedTicketListWrapper>
+            <BookedTicketListWrapper>
+                <TicketBox type="cancelled" />
+                <TicketBox type="cancelled" />
+                <TicketBox type="cancelled" />
+            </BookedTicketListWrapper>
         </>
     );
 }
