@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { PageWrapper } from "../Styles/LayoutStyle";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import LocationModal from "../Modals/Location";
 
 const PageLayout = () => {
     return (
@@ -16,6 +17,7 @@ const PageLayout = () => {
                 <div className="bottom_section">
                     <Footer />
                 </div>
+                <LocationModal />
             </PageWrapper>
         </>
     );
