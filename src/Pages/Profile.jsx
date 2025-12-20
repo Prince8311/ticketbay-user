@@ -1,6 +1,15 @@
+import { useState } from "react";
+import EditProfileModal from "../Modals/EditProfile";
 import { ProfilePageWrapper } from "../Styles/ProfileStyle";
 
 const ProfilePage = () => {
+
+    const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+
+    const handleOpenEditProfileModal = () => {
+        setShowEditProfileModal(true);
+    }
+
     return (
         <>
             <ProfilePageWrapper>
@@ -10,6 +19,7 @@ const ProfilePage = () => {
                             <div className="box_inner">
                                 <img src="/images/profile-image.png" alt="" />
                             </div>
+                            <a><i className="fa-solid fa-camera"></i></a>
                         </div>
                         <div className="profile_content">
                             <h6>Sourish Mondal</h6>
@@ -17,7 +27,7 @@ const ProfilePage = () => {
                             <span>demo123@gmail.com</span>
                         </div>
                         <div className="edit_btn_sec">
-                            <a><i className="fa-solid fa-pen-to-square"></i></a>
+                            <a onClick={handleOpenEditProfileModal}><i className="fa-solid fa-pen-to-square"></i></a>
                         </div>
                     </div>
                     <div className="profile_item_sec">
@@ -123,6 +133,10 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </div>
+                <EditProfileModal
+                    showEditProfileModal={showEditProfileModal}
+                    setShowEditProfileModal={setShowEditProfileModal}
+                />
             </ProfilePageWrapper>
         </>
     );

@@ -98,7 +98,6 @@ const Navbar = () => {
                     <div className="nav_items">
                         <li><NavLink to="/home">Home</NavLink></li>
                         <li><NavLink to="/recommended-movies">Recommended Movies</NavLink></li>
-                        <li><NavLink to="/upcoming-movies">Upcoming Movies</NavLink></li>
                         <li><NavLink to="/theaters">Theaters</NavLink></li>
                         <li><NavLink to="/contact-us">Contact us</NavLink></li>
                     </div>
