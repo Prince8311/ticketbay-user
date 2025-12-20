@@ -50,6 +50,24 @@ export const ProfilePageWrapper = styled('div')`
                         height: 100%;
                         object-fit: cover;
                     }
+
+                }
+
+                a {
+                    position: absolute;
+                    bottom: 1px;
+                    right: 5px;
+                    width: 25px;
+                    height: 25px;
+                    background: ${colors.customColors.blueColor};
+                    color: ${colors.customColors.whiteColor};
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 6px;
+                    text-decoration: none;
+                    font-size: 13px;
                 }
             }
 
@@ -62,14 +80,14 @@ export const ProfilePageWrapper = styled('div')`
 
                 h6 {
                     position: relative;
-                    font-size: 14px;
+                    font-size: 16px;
                     color: ${colors.customColors.blackColor};
-                    font-weight: 500;
+                    font-weight: 600;
                 }
 
                 p {
                     position: relative;
-                    font-size: 13px;
+                    font-size: 12px;
                     color: ${colors.customColors.blackColor2};
                     font-weight: 500;
                     margin-top: 7px;
@@ -77,7 +95,7 @@ export const ProfilePageWrapper = styled('div')`
 
                 span {
                     position: relative;
-                    font-size: 13px;
+                    font-size: 12px;
                     color: ${colors.customColors.blackColor2};
                     font-weight: 500;
                 }
