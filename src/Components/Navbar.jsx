@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import { UserData } from "../Context/PageContext";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const { setShowLocaltionModal } = UserData();
     const words = ["movie name ...", "theater name ..."];
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
@@ -40,6 +41,10 @@ const Navbar = () => {
         setProfileDropdown(false);
     }
 
+    function openLocationModal() { 
+        setShowLocaltionModal(true);
+    }
+
     return (
         <NavbarWrapper>
             <div className="nav_inner">
@@ -56,7 +61,7 @@ const Navbar = () => {
                         />
                     </div>
 
-                    <div className="location_sec">
+                    <div className="location_sec" onClick={openLocationModal}>
                         <i className="fa-solid fa-location-dot"></i>
                         <p>Select your location</p>
                         <i className="fa-solid fa-angle-down"></i>

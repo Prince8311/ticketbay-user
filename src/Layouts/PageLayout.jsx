@@ -3,22 +3,25 @@ import { PageWrapper } from "../Styles/LayoutStyle";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import LocationModal from "../Modals/Location";
+import { UserProvider } from "../Context/PageContext";
 
 const PageLayout = () => {
     return (
         <>
-            <PageWrapper>
-                <div className="top_section">
-                    <Navbar />
-                </div>
-                <div className="body_section">
-                    <Outlet />
-                </div>
-                <div className="bottom_section">
-                    <Footer />
-                </div>
-                <LocationModal />
-            </PageWrapper>
+            <UserProvider>
+                <PageWrapper>
+                    <div className="top_section">
+                        <Navbar />
+                    </div>
+                    <div className="body_section">
+                        <Outlet />
+                    </div>
+                    <div className="bottom_section">
+                        <Footer />
+                    </div>
+                    <LocationModal />
+                </PageWrapper>
+            </UserProvider>
         </>
     );
 }

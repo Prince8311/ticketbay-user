@@ -181,9 +181,9 @@ export const LocationWrapper = styled('div')`
     justify-content: center;
     padding: 40px 0;
     z-index: 1000;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: initial;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     transition: all 0.3s ease;
     
     &.active {
@@ -202,7 +202,7 @@ export const LocationWrapper = styled('div')`
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        transform: translateY(0);
+        transform: translateY(-100px);
         transition: transform 0.8s ease;
 
         &.active {
@@ -342,6 +342,126 @@ export const LocationWrapper = styled('div')`
                             box-shadow: 0 4px 8px ${colors.boxShadowColors.shadowColor3};
                             transition: all 0.3s ease;
                         }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const MovieFilterWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .sec_head {
+        position: relative;
+        width: 100%;
+        padding: 0 15px;
+
+        h5 {
+            position: relative;
+            width: 100%;
+            font-family: "Oleo Script",system-ui;
+            font-size: 18px;
+            font-weight: 600;
+            color: ${colors.themeColor};
+            padding-bottom: 4px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+        }
+    }
+
+    .filter_items_sec {
+        position: relative;
+        margin-top: 10px;
+        width: 100%;
+        height: calc(100% - 40px);
+        display: flex;
+        flex-direction: column;
+        padding: 0 15px;
+        padding-top: 10px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter_item_box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background: ${colors.customColors.whiteColor};
+            border: 1px solid ${colors.customColors.whiteColor2};
+            border-radius: 6px;
+            box-shadow: 5px 5px 8px ${colors.boxShadowColors.shadowColor2},
+                        -3px -3px 5px ${colors.boxShadowColors.shadowColor2};
+            margin-bottom: 15px;
+
+            .box_head {
+                position: relative;
+                width: 100%;
+                height: 40px;
+                padding: 0 16px;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                p {
+                    position: relative;
+                    font-size: 13px;
+                    font-weight: 500;
+                    font-style: italic;
+                    color: ${colors.customColors.blackColor1};
+                }
+
+                a {
+                    position: relative;
+                    margin-left: auto;
+                    font-size: 12px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    color: ${colors.customColors.blueColor};
+                    text-decoration: underline;
+                }
+
+                i {
+                    position: relative;
+                    margin-left: 15px;
+                    font-size: 13px;
+                    color: ${colors.customColors.blackColor2};
+                }
+            }
+
+            .box_content {
+                position: relative;
+                width: 100%;
+                padding: 11px;
+                display: flex;
+                flex-wrap: wrap;
+
+                li {
+                    position: relative;
+                    list-style: none;
+                    padding: 3px;
+
+                    input[type="checkbox"] {
+                        display: none;
+                    }
+
+                    label {
+                        position: relative;
+                        padding: 5px 20px;
+                        cursor: pointer;
+                        font-size: 12px;
+                        display: flex;
+                        color: ${colors.customColors.blackColor2};
+                        border: 1px solid ${colors.customColors.borderColor};
+                        border-radius: 4px;
                     }
                 }
             }

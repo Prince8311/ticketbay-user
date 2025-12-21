@@ -25,7 +25,6 @@ export const MovieListWrapper = styled('div')`
                 top: 50px;
                 width: 300px;
                 height: calc(100vh - 100px);
-                padding: 0 15px;
 
                 &::before {
                     content: '';
@@ -87,7 +86,7 @@ export const MovieListWrapper = styled('div')`
 
                 .sec_items {
                     position: relative;
-                    margin-top: 35px;
+                    margin-top: 25px;
                     width: 100%;
                     padding: 0 7px;
                     display: flex;

@@ -1,13 +1,20 @@
+import { UserData } from "../Context/PageContext";
 import { LocationWrapper } from "../Styles/ModalStyle";
 
 const LocationModal = () => {
+    const { showLocaltionModal, setShowLocaltionModal } = UserData();
+
+    function closeModal() { 
+        setShowLocaltionModal(false);
+    }
+
     return (
         <>
-            <LocationWrapper>
-                <div className="modal_box">
+            <LocationWrapper className={showLocaltionModal ? 'active' : ''}>
+                <div className={`modal_box ${showLocaltionModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Current Location</h4>
-                        <a><i className="fa-solid fa-xmark"></i></a>
+                        <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                     </div>
                     <div className="modal_form">
                         <div className="search_sec">

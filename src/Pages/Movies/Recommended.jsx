@@ -1,3 +1,4 @@
+import MovieFilters from "../../Components/FilterBox";
 import { MovieListWrapper } from "../../Styles/MovieStyle";
 
 const RecommendedMoviesPage = () => {
@@ -7,9 +8,7 @@ const RecommendedMoviesPage = () => {
                 <div className="page_content">
                     <div className="page_items">
                         <div className="filter_sec">
-                            <div className="sec_head">
-                                <h5>Filters</h5>
-                            </div>
+                            <MovieFilters />
                         </div>
                         <div className="movie_box_sec">
                             <div className="page_head">
