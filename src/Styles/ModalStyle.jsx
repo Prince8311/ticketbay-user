@@ -343,7 +343,7 @@ export const LocationWrapper = styled('div')`
                             transition: all 0.3s ease;
 
                             i {
-                                color: ${colors.themeColor};
+                                color: ${colors.customColors.blueColor};
                             }
 
                             p {

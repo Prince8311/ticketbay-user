@@ -13,7 +13,7 @@ const RecommendedMoviesPage = () => {
                         <div className="movie_box_sec">
                             <div className="upcoming_sec">
                                 <button>
-                                    <h5>UpComings...</h5>
+                                    <h5>Upcomings...</h5>
                                     <a>Explore all Upcomings Movies<i className="fa-solid fa-angles-right"></i></a>
                                 </button>
                             </div>
