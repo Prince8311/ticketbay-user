@@ -994,16 +994,30 @@ export const MovieInfoPageWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                margin-top: 50px;
+                margin-top: 20px;
 
-                .movie_box {
+                .movie_info_box {
                     position: relative;
                     width: 100%;
                     display: flex;
-                    margin-bottom: 25px;
+                    padding: 15px 0;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        background: linear-gradient(to right, ${colors.customColors.borderColor}, transparent);
+                    }
 
                     &:last-of-type {
                         margin-bottom: 0;
+
+                        &::before {
+                            display: none;
+                        }
                     }
 
                     .left_info {
@@ -1040,12 +1054,16 @@ export const MovieInfoPageWrapper = styled('div')`
 
                             p {
                                 position: relative;
-                                font-size: 12px;
+                                margin-top: 3px;
+                                font-size: 11px;
                                 font-weight: 500;
-                                color: ${colors.customColors.blackColor1};
+                                color: ${colors.customColors.blackColor2};
 
                                 b {
+                                    margin-right: 4px;
+                                    font-size: 12px;
                                     font-weight: 500;
+                                    font-style: italic;
                                     color: ${colors.customColors.blackColor1};
                                 }
                             }
@@ -1080,6 +1098,76 @@ export const MovieInfoPageWrapper = styled('div')`
                                     border-radius: 4px;
                                     font-size: 12px;
                                     cursor: pointer;
+                                }
+
+                                .info_desc {
+                                    position: absolute;
+                                    bottom: calc(100% + 10px);
+                                    left: 50%;
+                                    width: max-content;
+                                    background: ${colors.customColors.whiteColor};
+                                    border-radius: 6px;
+                                    transform: translateX(-50%);
+                                    box-shadow: 4px 4px 7px ${colors.boxShadowColors.shadowColor1},
+                                                -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    transition: all 0.5s ease;
+
+                                    &::before {
+                                        content: '';
+                                        position: absolute;
+                                        left: 50%;
+                                        bottom: -5px;
+                                        width: 10px;
+                                        height: 10px;
+                                        background: ${colors.customColors.whiteColor};
+                                        transform: translateX(-50%) rotate(45deg);
+                                        box-shadow: 2px 2px 5px ${colors.boxShadowColors.shadowColor1};
+                                    }
+
+                                    ul {
+                                        position: relative;
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding: 10px 15px;
+                                        border-radius: 6px;
+                                        background: ${colors.customColors.whiteColor};
+
+                                        li {
+                                            position: relative;
+                                            list-style: none;
+                                            display: flex;
+                                            align-items: center;
+                                            margin-bottom: 4px;
+
+                                            &:last-of-type {
+                                                margin-bottom: 0;
+                                            }
+
+                                            span {
+                                                position: relative;
+                                                font-size: 10px;
+                                                font-style: italic;
+                                                color: ${colors.customColors.blackColor};
+                                            }
+
+                                            p {
+                                                position: relative;
+                                                margin-left: 4px;
+                                                font-size: 10px;
+                                                color: ${colors.customColors.blackColor2};
+                                            }
+                                        }
+                                    }
+                                }
+
+                                &:hover {
+                                    .info_desc {
+                                        opacity: 1;
+                                        visibility: visible;
+                                        transition: all 0.5s ease;
+                                    }
                                 }
                             }
                         }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserData } from "../Context/PageContext";
 
 const Navbar = () => {
@@ -67,11 +67,11 @@ const Navbar = () => {
                         <i className="fa-solid fa-angle-down"></i>
                     </div>
                     <div className="auth_sec">
-                        {/* <div className="auth_btn">
+                        <div className="auth_btn">
                             <Link to="/auth">Sign In/Up</Link>
-                        </div> */}
+                        </div>
 
-                        <div className="profile">
+                        {/* <div className="profile">
                             <div className="profile_btn" onClick={openProfileDropdown}>
                                 <img src="/images/profile-image.png" alt="" />
                                 <p>Sourish Mondal</p>
@@ -95,7 +95,7 @@ const Navbar = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

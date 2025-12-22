@@ -67,7 +67,7 @@ const MovieInfoPage = () => {
                             </div>
                         </div>
                         <div className="move_info_sec">
-                            <div className="movie_box">
+                            <div className="movie_info_box">
                                 <div className="left_info">
                                     <div className="img_sec">
                                         <img src="images/add1.jpeg" alt="" />
@@ -81,20 +81,84 @@ const MovieInfoPage = () => {
                                     <div className="right_info_inner">
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="movie_box">
+                            <div className="movie_info_box">
                                 <div className="left_info">
                                     <div className="img_sec">
                                         <img src="images/add1.jpeg" alt="" />
@@ -108,20 +172,84 @@ const MovieInfoPage = () => {
                                     <div className="right_info_inner">
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="movie_box">
+                            <div className="movie_info_box">
                                 <div className="left_info">
                                     <div className="img_sec">
                                         <img src="images/add1.jpeg" alt="" />
@@ -135,15 +263,79 @@ const MovieInfoPage = () => {
                                     <div className="right_info_inner">
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div className="inner_box">
                                             <a>2.30 pm</a>
+                                            <div className="info_desc">
+                                                <ul>
+                                                    <li>
+                                                        <span>Screen :</span>
+                                                        <p>1</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Language :</span>
+                                                        <p>Hindi</p>
+                                                    </li>
+                                                    <li>
+                                                        <span>Format :</span>
+                                                        <p>2D</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
