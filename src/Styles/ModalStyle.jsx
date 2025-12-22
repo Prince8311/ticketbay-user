@@ -324,30 +324,35 @@ export const LocationWrapper = styled('div')`
                         padding: 15px;
                         padding-bottom: 10px;
                         cursor: pointer;
-                        transition: all 0.3s ease;
+                        transition: all 0.5s ease;
 
                         i {
                             font-size: 22px;
                             color: ${colors.customColors.blackColor1};
+                            transition: all 0.5s ease;
                         }
                         
                         p {
                             margin-top: 10px;
                             font-size: 11px;
                             color: ${colors.customColors.blackColor1};
+                            transition: all 0.5s ease;
                         }
 
                         &:hover {
                             border-color: transparent;
-                            box-shadow: 0 4px 8px ${colors.boxShadowColors.shadowColor3};
-                            transition: all 0.3s ease;
+                            box-shadow: 4px 4px 8px ${colors.boxShadowColors.shadowColor1},
+                                        -2px -2px 5px ${colors.boxShadowColors.shadowColor1};
+                            transition: all 0.5s ease;
 
                             i {
                                 color: ${colors.customColors.blueColor};
+                                transition: all 0.5s ease;
                             }
 
                             p {
                                 color: ${colors.customColors.blueColor};
+                                transition: all 0.5s ease;
                             }
                         }
                     }
