@@ -1,7 +1,7 @@
 import MovieFilters from "../../Components/FilterBox";
 import { MovieListWrapper } from "../../Styles/MovieStyle";
 
-const RecommendedMoviesPage = () => {
+const ComingSoonMoviesPage = () => {
     return (
         <>
             <MovieListWrapper>
@@ -11,12 +11,6 @@ const RecommendedMoviesPage = () => {
                             <MovieFilters />
                         </div>
                         <div className="movie_box_sec">
-                            <div className="upcoming_sec">
-                                <button>
-                                    <h5>UpComings...</h5>
-                                    <a>Explore all Upcomings Movies<i className="fa-solid fa-angles-right"></i></a>
-                                </button>
-                            </div>
                             <div className="page_head">
                                 <h3>Recommended <span><b>M</b>ovies</span></h3>
                             </div>
@@ -114,4 +108,4 @@ const RecommendedMoviesPage = () => {
     );
 }
 
-export default RecommendedMoviesPage;
+export default ComingSoonMoviesPage;

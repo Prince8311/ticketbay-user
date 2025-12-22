@@ -341,6 +341,14 @@ export const LocationWrapper = styled('div')`
                             border-color: transparent;
                             box-shadow: 0 4px 8px ${colors.boxShadowColors.shadowColor3};
                             transition: all 0.3s ease;
+
+                            i {
+                                color: ${colors.themeColor};
+                            }
+
+                            p {
+                                color: ${colors.customColors.blueColor};
+                            }
                         }
                     }
                 }

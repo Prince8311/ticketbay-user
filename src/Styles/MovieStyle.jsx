@@ -43,6 +43,45 @@ export const MovieListWrapper = styled('div')`
                 display: flex;
                 flex-direction: column;
 
+                .upcoming_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    padding: 0 15px;
+                    margin-bottom: 20px;
+
+                    button {
+                        position: relative;
+                        width: 100%;
+                        border: none;
+                        border-radius: 6px;
+                        padding: 12px 20px;
+                        background: ${colors.customColors.redColor};
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        cursor: pointer;
+
+                        h5 {
+                            font-size: 15px;
+                            color: ${colors.customColors.whiteColor};
+                            font-weight: 600;
+                            font-style: italic;
+                        }
+
+                        a {
+                            font-size: 12px;
+                            color: ${colors.customColors.whiteColor};
+                            text-decoration: none;
+                            font-weight: 500;
+
+                            i {
+                                margin-left: 6px;
+                            }
+                        }
+                    }
+                }
+
                 .page_head {
                     position: relative;
                     width: 100%;

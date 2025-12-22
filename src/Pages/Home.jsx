@@ -334,7 +334,7 @@ const HomePage = () => {
             <div className="movie_sec upcoming_movies">
                 <div className="sec_content">
                     <div className="sec_head">
-                        <h4>Upcoming <span><b>M</b>ovies</span></h4>
+                        <h4>Coming <span><b>S</b>oons</span></h4>
                         <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
                     </div>
                     <div className="sec_items">

@@ -18,6 +18,7 @@ import PreviousBookings from "../Pages/Bookings/Previous";
 import CancelledBookings from "../Pages/Bookings/Cancelled";
 import MovieDetailsPage from "../Pages/Movies/Details";
 import MovieInfoPage from "../Pages/Movies/MovieInfo";
+import ComingSoonMoviesPage from "../Pages/Movies/ComingSoon";
 
 const Routers = () => {
     return (
@@ -30,6 +31,7 @@ const Routers = () => {
                         <Route path="home" element={<HomePage />} />
                         <Route path="recommended-movies" element={<RecommendedMoviesPage />} />
                         <Route path="upcoming-movies" element={<UpcomingMoviesPage />} />
+                        <Route path="coming-soon-movies" element={<ComingSoonMoviesPage />} />
                         <Route path="movie-details" element={<MovieDetailsPage />} />
                         <Route path="movie-info" element={<MovieInfoPage />} />
                         <Route path="theaters" element={<TheaterListPage />} />
