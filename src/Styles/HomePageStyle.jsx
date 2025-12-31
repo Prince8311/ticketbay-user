@@ -17,7 +17,7 @@ export const HomePageWrapper = styled('div')`
 
         .sec_content {
             position: relative;
-            width: 1330px;
+            width: 1340px;
             display: flex;
 
             .banner_box {
@@ -26,6 +26,10 @@ export const HomePageWrapper = styled('div')`
                 height: 400px;
                 padding: 0 10px;
                 transition: width 0.8s ease;
+
+                &.singleGrid {
+                    width: 100%;
+                }
                 
                 .banner_inner {
                     position: relative;
@@ -113,8 +117,19 @@ export const HomePageWrapper = styled('div')`
                 }
 
                 &.active {
-                    width: calc(100% - 270px);
                     transition: width 0.8s ease;
+
+                    &.fourGrid {
+                        width: calc(100% - 270px);
+                    }
+
+                    &.threeGrid {
+                        width: calc(100% - 180px);
+                    }
+
+                    &.twoGrid {
+                        width: calc(100% - 90px);
+                    }
                     
                     .banner_inner {
                         background-size: cover;

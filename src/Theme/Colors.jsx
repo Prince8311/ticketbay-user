@@ -34,6 +34,7 @@ export const colorNames = () => {
             lightBackground: "rgb(243, 243, 243)",
             lightBackground1: "rgba(255, 255, 255, 0.2)",
             lightBackground2: "rgb(218, 218, 218)",
+            lightBackground3: "rgb(224, 224, 224)",
             borderColor: "rgb(225, 224, 234)",
             borderColor1: "rgb(201, 201, 201)",
             redColor: "rgb(255, 0, 0)",

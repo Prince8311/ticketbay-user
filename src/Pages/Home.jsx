@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { HomePageWrapper } from "../Styles/HomePageStyle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getApiEndpoints } from "../Services/Api/ApiConfig";
 
 const banners = [
     { id: 1, image: "/images/add1.jpeg" },
@@ -11,13 +14,40 @@ const banners = [
 ];
 
 const HomePage = () => {
+    const api = getApiEndpoints();
     const [activeIndex, setActiveIndex] = useState(0);
+    const [movies, setMovies] = useState([]);
+    const [isRecommendedMoviesLoading, setIsRecommendedMoviesLoading] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % banners.length);
         }, 10000);
         return () => clearInterval(interval);
+    }, []);
+
+    const fetchRecommendedMovies = async () => {
+        setIsRecommendedMoviesLoading(true);
+        try {
+            const response = await axios.get(api.recommendedMovies, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) { 
+                console.log(response);
+            }
+        } catch (error) {
+            console.log(error.response?.data.message || error.message);
+        } finally {
+            setIsRecommendedMoviesLoading(false);
+        }
+    }
+
+    useEffect(() => { 
+        fetchRecommendedMovies();
     }, []);
 
     return (
@@ -27,8 +57,7 @@ const HomePage = () => {
                     {banners.map((banner, index) => (
                         <div
                             key={banner.id}
-                            className={`banner_box ${index === activeIndex ? "active" : ""}`}
-                            onClick={() => setActiveIndex(index)}
+                            className={`banner_box ${banners.length === 4 ? "fourGrid" : banners.length === 3 ? "threeGrid" : banners.length === 2 ? "twoGrid" : "singleGrid"} ${(index === activeIndex && banners.length > 1) ? "active" : ""}`} onClick={() => setActiveIndex(index)}
                         >
                             <div
                                 className="banner_inner"

@@ -2,6 +2,19 @@ import { styled } from "@mui/material";
 import { colorNames } from "../Theme/Colors";
 const colors = colorNames();
 
+export const SkeletonBoxWrapper = styled('div')`
+    position: relative;
+    border-radius: 4px;
+    background: ${colors.customColors.lightBackground3};
+    animation: pulse 1.4s infinite ease-in-out;
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.4; }
+        100% { opacity: 1; }
+    }
+`;
+
 export const EditProfileWrapper = styled('div')`
     position: fixed;
     top: 0;
@@ -213,7 +226,7 @@ export const LocationWrapper = styled('div')`
         .modal_head {
             position: relative;
             width: 100%;
-            padding: 13px 25px;
+            padding: 12px 20px;
             border-bottom: 1px solid ${colors.customColors.borderColor};
             display: flex;
             align-items: center;
@@ -252,7 +265,7 @@ export const LocationWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
-                padding: 20px;
+                padding: 15px 20px;
 
                 .search_inner {
                     position: relative;
@@ -305,7 +318,7 @@ export const LocationWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                padding: 10px;
+                padding: 10px 15px;
 
                 .city_box {
                     position: relative;
@@ -355,6 +368,21 @@ export const LocationWrapper = styled('div')`
                                 transition: all 0.5s ease;
                             }
                         }
+                    }
+                }
+
+                .empty_city {
+                    position: relative;
+                    width: 100%;
+                    padding: 20px 0;
+                    display: flex;
+                    justify-content: center;
+
+                    p {
+                        position: relative;
+                        font-size: 14px;
+                        font-style: oblique;
+                        color: ${colors.customColors.whiteColor2};
                     }
                 }
             }
