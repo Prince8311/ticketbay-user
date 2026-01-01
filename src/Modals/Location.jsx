@@ -59,14 +59,20 @@ const LocationModal = () => {
         setSearch(value);
     };
 
+    const handleLocationSelect = (city) => {
+        setSelectedLocation(city);
+        localStorage.setItem("Location", city);
+        setShowLocaltionModal(false);
+    }
+
     return (
         <>
-            <LocationWrapper className={showLocaltionModal ? 'active' : ''}>
+            <LocationWrapper className={`${showLocaltionModal ? 'active' : ''} ${selectedLocation ? '' : 'no_location_selected'}`}>
                 <div className={`modal_box ${showLocaltionModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Current Location</h4>
                         {
-                            !showLocaltionModal &&
+                            selectedLocation &&
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         }
                     </div>
@@ -85,7 +91,7 @@ const LocationModal = () => {
                         <div className="city_section">
                             {
                                 isCitiesLoading ? (
-                                    Array.from({ length: 8 }).map((_, i) => (
+                                    Array.from({ length: 4 }).map((_, i) => (
                                         <div className="city_box" key={i}>
                                             <div className="box_inner" style={{ pointerEvents: "none" }}>
                                                 <SkeletonLoader width="27px" height="22px" />
@@ -96,7 +102,7 @@ const LocationModal = () => {
                                     ))
                                 ) : cities.length > 0 ? (
                                     cities.slice(0, 8).map((city, i) =>
-                                        <div className="city_box" key={i} onClick={() => setSelectedLocation(city.city)}>
+                                        <div className="city_box" key={i} onClick={() => handleLocationSelect(city.city)}>
                                             <div className="box_inner">
                                                 <i className="fa-solid fa-city"></i>
                                                 <p>{city.city}</p>

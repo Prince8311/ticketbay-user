@@ -10,6 +10,11 @@ export const PageWrapper = styled('div')`
     flex-direction: column;
     background: ${colors.customColors.whiteColor};
 
+    &.no_scroll {
+        height: 100vh;
+        overflow-y: hidden;
+    }
+
     .top_section {
         position: relative;
         width: 100%;

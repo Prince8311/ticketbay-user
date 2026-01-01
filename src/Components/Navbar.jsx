@@ -5,7 +5,7 @@ import { UserData } from "../Context/PageContext";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { setShowLocaltionModal } = UserData();
+    const { setShowLocaltionModal, selectedLocation } = UserData();
     const words = ["movie name ...", "theater name ..."];
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
@@ -41,7 +41,7 @@ const Navbar = () => {
         setProfileDropdown(false);
     }
 
-    function openLocationModal() { 
+    function openLocationModal() {
         setShowLocaltionModal(true);
     }
 
@@ -63,7 +63,9 @@ const Navbar = () => {
 
                     <div className="location_sec" onClick={openLocationModal}>
                         <i className="fa-solid fa-location-dot"></i>
-                        <p>Select your location</p>
+                        <p>
+                            {selectedLocation ? `${selectedLocation}` : 'Select your location'}
+                        </p>
                         <i className="fa-solid fa-angle-down"></i>
                     </div>
                     <div className="auth_sec">

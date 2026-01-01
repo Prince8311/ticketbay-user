@@ -204,6 +204,11 @@ export const LocationWrapper = styled('div')`
         visibility: visible;
         pointer-events: initial;
         transition: all 0.3s ease;
+
+        &.no_location_selected {
+            background: ${colors.customColors.lightBackground1};
+            backdrop-filter: blur(15px);
+        }
     }
 
     .modal_box {
@@ -318,7 +323,7 @@ export const LocationWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                padding: 10px 15px;
+                padding: 10px 15px 15px;
 
                 .city_box {
                     position: relative;
@@ -348,6 +353,9 @@ export const LocationWrapper = styled('div')`
                         p {
                             margin-top: 10px;
                             font-size: 11px;
+                            word-break: break-all;
+                            text-align: center;
+                            line-height: 1.2;
                             color: ${colors.customColors.blackColor1};
                             transition: all 0.5s ease;
                         }

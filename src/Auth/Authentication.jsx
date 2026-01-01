@@ -141,7 +141,7 @@ const AuthenticationPage = () => {
                 <div className="panel_content right">
                     <div className="panel_items">
                         <h4>New here ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis corporis, sit beatae deleniti illo temporibus?</p>
+                        <p>Join now and experience seamless booking.</p>
                         <button onClick={redirectToSignUp}>Sign Up</button>
                     </div>
                     <img src="/images/login-icon.svg" alt="" />
@@ -149,7 +149,7 @@ const AuthenticationPage = () => {
                 <div className="panel_content left">
                     <div className="panel_items">
                         <h4>One of us ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis corporis, sit beatae deleniti illo temporibus?</p>
+                        <p>Continue to your account and start exploring.</p>
                         <button onClick={redirectToSignIn}>Sign In</button>
                     </div>
                     <img src="/images/register-icon.svg" alt="" />

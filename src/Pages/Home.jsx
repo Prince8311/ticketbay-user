@@ -3,8 +3,8 @@ import { HomePageWrapper } from "../Styles/HomePageStyle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import axios from "axios";
-import { toast } from "react-toastify";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import { UserData } from "../Context/PageContext";
 
 const banners = [
     { id: 1, image: "/images/add1.jpeg" },
@@ -15,9 +15,14 @@ const banners = [
 
 const HomePage = () => {
     const api = getApiEndpoints();
+    const {selectedLocation} = UserData();
     const [activeIndex, setActiveIndex] = useState(0);
     const [movies, setMovies] = useState([]);
     const [isRecommendedMoviesLoading, setIsRecommendedMoviesLoading] = useState(false);
+
+    useEffect(() => {
+        console.log("Selected Location", selectedLocation);
+    }, [selectedLocation]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -51,7 +56,7 @@ const HomePage = () => {
     }, []);
 
     return (
-        <HomePageWrapper>
+        <HomePageWrapper className={!selectedLocation ? 'no_scroll' : ''}>
             <div className="banner_sec">
                 <div className="sec_content">
                     {banners.map((banner, index) => (

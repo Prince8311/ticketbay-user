@@ -4,7 +4,9 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [showLocaltionModal, setShowLocaltionModal] = useState(false);
-    const [selectedLocation, setSelectedLocation] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState(() => {
+        return localStorage.getItem("Location") || '';
+    });
 
     return (
         <UserContext.Provider value={{ showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation }}>
