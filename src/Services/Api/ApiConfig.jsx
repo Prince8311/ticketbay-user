@@ -20,5 +20,8 @@ export const getApiEndpoints = () => {
         recommendedMovies: `${apiURL}/api/movies/recommended-movies.php`,
         comingSoonMovies: `${apiURL}/api/movies/coming-soon-movies.php`,
         upcomingMovies: `${apiURL}/api/movies/upcoming-movies.php`,
+
+        // Theaters 
+        fetchTheaters: `${apiURL}/api/theaters/theaters.php`,
     };
 }
