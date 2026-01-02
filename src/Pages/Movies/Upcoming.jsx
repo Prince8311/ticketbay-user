@@ -1,9 +1,9 @@
-import { MovieListWrapper } from "../../Styles/MovieStyle";
+import { UpcomingMovieListWrapper } from "../../Styles/MovieStyle";
 
 const UpcomingMoviesPage = () => {
     return (
         <>
-            <MovieListWrapper>
+            <UpcomingMovieListWrapper>
                 <div className="page_content">
                     <div className="page_head">
                         <h3>Upcoming <span><b>M</b>ovies</span></h3>
@@ -291,7 +291,7 @@ const UpcomingMoviesPage = () => {
                         </div>
                     </div>
                 </div>
-            </MovieListWrapper>
+            </UpcomingMovieListWrapper>
         </>
     );
 }
