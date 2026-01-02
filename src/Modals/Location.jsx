@@ -35,6 +35,7 @@ const LocationModal = () => {
                 withCredentials: true
             });
             if (response) {
+                console.log(response);
                 setCities(response?.data.cities);
             }
         } catch (error) {
@@ -46,12 +47,7 @@ const LocationModal = () => {
 
     useEffect(() => {
         if (!showLocaltionModal) return;
-
-        const delay = setTimeout(() => {
-            fetchCities(search);
-        }, 400);
-
-        return () => clearTimeout(delay);
+        fetchCities(search);
     }, [search, showLocaltionModal]);
 
     const handleSearchChange = (e) => {
@@ -103,7 +99,7 @@ const LocationModal = () => {
                                 ) : cities.length > 0 ? (
                                     cities.slice(0, 8).map((city, i) =>
                                         <div className="city_box" key={i} onClick={() => handleLocationSelect(city.city)}>
-                                            <div className="box_inner">
+                                            <div className={`box_inner ${selectedLocation === city.city ? 'selected' : ''}`}>
                                                 <i className="fa-solid fa-city"></i>
                                                 <p>{city.city}</p>
                                             </div>

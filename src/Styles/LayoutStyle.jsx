@@ -16,8 +16,10 @@ export const PageWrapper = styled('div')`
     }
 
     .top_section {
-        position: relative;
+        position: sticky;
+        top: 0;
         width: 100%;
+        z-index: 999;
     }
 
     .body_section {
@@ -38,8 +40,9 @@ export const NavbarWrapper = styled('div')`
     width: 100%;
     display: flex;
     justify-content: center;
+    background: ${colors.customColors.whiteColor};
     border-bottom: 1px solid ${colors.customColors.borderColor};
-    z-index: 999;
+    transition: all 0.6s ease;
 
     .nav_inner {
         position: relative;
@@ -54,6 +57,7 @@ export const NavbarWrapper = styled('div')`
             padding: 8px 0;
             display: flex;
             align-items: center;
+            overflow: hidden;
 
             .logo {
                 position: relative;
@@ -102,6 +106,69 @@ export const NavbarWrapper = styled('div')`
                 }
             }
 
+            .scrolled_items {
+                position: relative;
+                margin-left: auto;
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                li {
+                    position: relative;
+                    height: 100%;
+                    list-style: none;
+                    margin: 0 5px;
+                    transform: translateY(50px);
+                    transition: transform 0.5s ease;
+                    transition-delay: calc(var(--i) * 0.1s);
+
+                    a {
+                        position: relative;
+                        height: 100%;
+                        padding: 0 20px;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        text-decoration: none;
+                        font-size: 14px;
+                        color: ${colors.customColors.blackColor1};
+                        transition: all 0.5s ease;
+                        
+                        &:hover {
+                            color: ${colors.customColors.blackColor};
+                            transition: all 0.5s ease;
+                        }
+
+                        &.active {
+                            color: ${colors.customColors.blackColor};
+
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                left: 0;
+                                bottom: -8px;
+                                width: 100%;
+                                height: 3px;
+                                background: ${colors.themeColor};
+                                border-radius: 20px 20px 0 0;
+                            }
+
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                left: 50%;
+                                bottom: -15px;
+                                width: 0;
+                                height: 0;
+                                border-right: 11px solid transparent;
+                                border-top: 11px solid ${colors.themeColor};
+                                transform: rotate(45deg) translateX(-50%);
+                            }
+                        }
+                    }
+                }
+            }
+
             .location_sec {
                 position: relative;
                 margin-left: auto;
@@ -127,6 +194,10 @@ export const NavbarWrapper = styled('div')`
                     font-size: 13px;
                     margin-left: 5px;
                     margin-right: 3px;
+                    max-width: 100px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
             }
 
@@ -273,6 +344,8 @@ export const NavbarWrapper = styled('div')`
             position: relative;
             width: 100%;
             height: 40px;
+            overflow: hidden;
+            transition: height 0.6s ease;
 
             &::before {
                 content: '';
@@ -328,9 +401,43 @@ export const NavbarWrapper = styled('div')`
                                 background: ${colors.themeColor};
                                 border-radius: 20px 20px 0 0;
                             }
+
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                left: 50%;
+                                bottom: -3px;
+                                width: 0;
+                                height: 0;
+                                border-right: 7px solid transparent;
+                                border-top: 7px solid ${colors.themeColor};
+                                transform: rotate(45deg) translateX(-50%);
+                            }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    &.scrolled {
+        box-shadow: 0 10px 20px ${colors.boxShadowColors.shadowColor1};
+        border-bottom: none;
+        .nav_inner {
+            .top_part {
+                .search_sec input {
+                    width: 270px;
+                    transition: width 0.5s ease;
+                }
+                .scrolled_items li {
+                    transform: translateY(0);
+                    transition: transform 0.5s ease;
+                    transition-delay: calc(var(--i) * 0.1s);
+                }
+            }
+            .bottom_part {
+                height: 0;
+                transition: height 0.6s ease;
             }
         }
     }

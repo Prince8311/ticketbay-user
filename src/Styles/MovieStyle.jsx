@@ -215,6 +215,23 @@ export const MovieListWrapper = styled('div')`
                             }
                         }
                     }
+
+                    .empty_box {
+                        position: relative;
+                        margin-top: 50px;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+
+                        p {
+                            position: relative;
+                            font-family: "Lemonada", cursive;
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor3};
+                            pointer-events: none;
+                        }
+                    }
                 }
             }
         }

@@ -360,6 +360,34 @@ export const LocationWrapper = styled('div')`
                             transition: all 0.5s ease;
                         }
 
+                        &.selected {
+                            border: 1px solid ${colors.themeColor};
+                            background: ${colors.themeColor};
+                            pointer-events: none;
+
+                            i {
+                                color: ${colors.customColors.whiteColor};
+                            }
+                            
+                            p {
+                                color: ${colors.customColors.whiteColor};
+                            }
+
+                            &:hover {
+                                border: 1px solid ${colors.themeColor};
+                                background: ${colors.themeColor};
+                                box-shadow: none;
+
+                                i {
+                                    color: ${colors.customColors.whiteColor};
+                                }
+                                
+                                p {
+                                    color: ${colors.customColors.whiteColor};
+                                }
+                            }
+                        }
+
                         &:hover {
                             border-color: transparent;
                             box-shadow: 4px 4px 8px ${colors.boxShadowColors.shadowColor1},
@@ -480,7 +508,7 @@ export const MovieFilterWrapper = styled('div')`
 
                 i {
                     position: relative;
-                    margin-left: 15px;
+                    margin-left: 10px;
                     font-size: 13px;
                     color: ${colors.customColors.blackColor2};
                 }

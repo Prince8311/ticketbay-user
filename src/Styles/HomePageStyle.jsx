@@ -505,6 +505,7 @@ export const HomePageWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
 
                 h4 {
                     position: relative;
@@ -543,12 +544,12 @@ export const HomePageWrapper = styled('div')`
 
                 a {
                     position: relative;
-                    margin-left: auto;
                     width: 150px;
                     height: 35px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    text-decoration: none;
                     border: 1px solid ${colors.customColors.blackColor3};
                     color: ${colors.customColors.blackColor2};
                     font-size: 12px;
@@ -673,7 +674,7 @@ export const HomePageWrapper = styled('div')`
                                     width: 100%;
                                     font-size: 12px;
                                     font-weight: 600;
-                                    line-height: 1.4;
+                                    line-height: 1.35;
                                     color: ${colors.customColors.blackColor};
                                     display: -webkit-box;
                                     -webkit-line-clamp: 2;
@@ -681,6 +682,22 @@ export const HomePageWrapper = styled('div')`
                                     text-overflow: ellipsis;
                                 }
                             }
+                        }
+                    }
+
+                    .empty_box {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+
+                        p {
+                            position: relative;
+                            font-family: "Lemonada", cursive;
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor3};
+                            pointer-events: none;
                         }
                     }
                 }

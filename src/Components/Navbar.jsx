@@ -5,12 +5,26 @@ import { UserData } from "../Context/PageContext";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [isNavScrolled, setIsNavScrolled] = useState(false);
     const { setShowLocaltionModal, selectedLocation } = UserData();
     const words = ["movie name ...", "theater name ..."];
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
     const [deleting, setDeleting] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
+
+    useEffect(() => {
+        function handleScroll() {
+            if (window.scrollY) {
+                setIsNavScrolled(true);
+            } else {
+                setIsNavScrolled(false);
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const typingSpeed = deleting ? 50 : 120;
@@ -46,13 +60,12 @@ const Navbar = () => {
     }
 
     return (
-        <NavbarWrapper>
+        <NavbarWrapper className={isNavScrolled ? 'scrolled' : ''}>
             <div className="nav_inner">
                 <div className="top_part">
                     <div className="logo">
                         <img src="/images/Logo.png" alt="Logo" />
                     </div>
-
                     <div className="search_sec">
                         <i className="fa-solid fa-magnifying-glass"></i>
                         <input
@@ -60,7 +73,12 @@ const Navbar = () => {
                             placeholder={`Search by ${words[wordIndex].substring(0, subIndex)}`}
                         />
                     </div>
-
+                    <div className="scrolled_items">
+                        <li style={{ "--i": 1 }}><NavLink to="/home">Home</NavLink></li>
+                        <li style={{ "--i": 2 }}><NavLink to="/recommended-movies">Movies</NavLink></li>
+                        <li style={{ "--i": 3 }}><NavLink to="/theaters">Theaters</NavLink></li>
+                        <li style={{ "--i": 4 }}><NavLink to="/contact-us">Contact us</NavLink></li>
+                    </div>
                     <div className="location_sec" onClick={openLocationModal}>
                         <i className="fa-solid fa-location-dot"></i>
                         <p>

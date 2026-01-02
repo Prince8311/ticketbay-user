@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { HomePageWrapper } from "../Styles/HomePageStyle";
+import { NavLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import axios from "axios";
-import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import { getApiEndpoints, moviePosterURL } from "../Services/Api/ApiConfig";
 import { UserData } from "../Context/PageContext";
+import SkeletonLoader from "../Components/Loader/SkeletonLoader";
 
 const banners = [
     { id: 1, image: "/images/add1.jpeg" },
@@ -15,14 +17,12 @@ const banners = [
 
 const HomePage = () => {
     const api = getApiEndpoints();
-    const {selectedLocation} = UserData();
+    const { selectedLocation } = UserData();
     const [activeIndex, setActiveIndex] = useState(0);
-    const [movies, setMovies] = useState([]);
     const [isRecommendedMoviesLoading, setIsRecommendedMoviesLoading] = useState(false);
-
-    useEffect(() => {
-        console.log("Selected Location", selectedLocation);
-    }, [selectedLocation]);
+    const [recommendedMovies, setRecommendedMovies] = useState([]);
+    const [isComingSoonMoviesLoading, setIsComingSoonMoviesLoading] = useState(false);
+    const [comingSoonMovies, setComingSoonMovies] = useState([]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -35,14 +35,18 @@ const HomePage = () => {
         setIsRecommendedMoviesLoading(true);
         try {
             const response = await axios.get(api.recommendedMovies, {
+                params: {
+                    page: 1,
+                    location: selectedLocation
+                },
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 withCredentials: true
             });
-            if (response) { 
-                console.log(response);
+            if (response) {
+                setRecommendedMovies(response?.data.movies || []);
             }
         } catch (error) {
             console.log(error.response?.data.message || error.message);
@@ -51,9 +55,35 @@ const HomePage = () => {
         }
     }
 
-    useEffect(() => { 
+    const fetchComingSoonMovies = async () => {
+        setIsComingSoonMoviesLoading(true);
+        try {
+            const response = await axios.get(api.comingSoonMovies, {
+                params: {
+                    page: 1,
+                    location: selectedLocation
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                console.log(response);
+                setComingSoonMovies(response?.data.movies || []);
+            }
+        } catch (error) {
+            console.log(error.response?.data.message || error.message);
+        } finally {
+            setIsComingSoonMoviesLoading(false);
+        }
+    }
+
+    useEffect(() => {
         fetchRecommendedMovies();
-    }, []);
+        fetchComingSoonMovies();
+    }, [selectedLocation]);
 
     return (
         <HomePageWrapper className={!selectedLocation ? 'no_scroll' : ''}>
@@ -241,7 +271,13 @@ const HomePage = () => {
                 <div className="sec_content">
                     <div className="sec_head">
                         <h4>Recommended <span><b>M</b>ovies</span></h4>
-                        <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
+                        {
+                            isRecommendedMoviesLoading ? (
+                                <SkeletonLoader width="150px" height="35px" />
+                            ) : recommendedMovies.length > 0 && (
+                                <NavLink to="/recommended-movies"><span>View All <i className="fa-solid fa-angles-right"></i></span></NavLink>
+                            )
+                        }
                     </div>
                     <div className="sec_items">
                         <Swiper
@@ -249,118 +285,54 @@ const HomePage = () => {
                             spaceBetween={30}
                             className="mySwiper"
                         >
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
+                            {
+                                isRecommendedMoviesLoading ? (
+                                    Array.from({ length: 7 }).map((_, i) => (
+                                        <SwiperSlide key={i}>
+                                            <div className="movie_box">
+                                                <div className="image_box">
+                                                    <SkeletonLoader width="100%" height="100%" />
+                                                </div>
+                                                <div className="movie_brief">
+                                                    <li>
+                                                        <div style={{ display: "flex" }}>
+                                                            <SkeletonLoader width="14px" height="14px" margin="0 5px 0 0" />
+                                                            <SkeletonLoader width="30px" height="14px" />
+                                                        </div>
+                                                        <div style={{ display: "flex" }}>
+                                                            <SkeletonLoader width="60px" height="14px" margin="5px 8px 0 0" />
+                                                            <SkeletonLoader width="60px" height="14px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </li>
+                                                    <SkeletonLoader width="100%" height="14px" margin="8px 0 0 0" />
+                                                    <SkeletonLoader width="100%" height="14px" margin="5px 0 0 0" />
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))
+                                ) : recommendedMovies.length > 0 ? (
+                                    recommendedMovies.slice(0, 8).map((movie, i) =>
+                                        <SwiperSlide key={i}>
+                                            <div className="movie_box">
+                                                <div className="image_box">
+                                                    <img src={movie.poster_image ? `${moviePosterURL}/${movie.poster_image}` : '/images/blank-poster.jpg'} alt="" />
+                                                </div>
+                                                <div className="movie_brief">
+                                                    <li>
+                                                        <span><i className="fa-solid fa-star"></i>4.2</span>
+                                                        <p>[ 5k ratings | 1.5k reviews ]</p>
+                                                    </li>
+                                                    <h5>{movie.movie_name}</h5>
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                ) : (
+                                    <div className="empty_box">
+                                        <p>No shows available</p>
                                     </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
+                                )
+                            }
                         </Swiper>
                     </div>
                 </div>
@@ -369,7 +341,13 @@ const HomePage = () => {
                 <div className="sec_content">
                     <div className="sec_head">
                         <h4>Coming <span><b>S</b>oon</span></h4>
-                        <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
+                        {
+                            isComingSoonMoviesLoading ? (
+                                <SkeletonLoader width="150px" height="35px" />
+                            ) : comingSoonMovies.length > 0 && (
+                                <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
+                            )
+                        }
                     </div>
                     <div className="sec_items">
                         <Swiper
@@ -377,118 +355,54 @@ const HomePage = () => {
                             spaceBetween={30}
                             className="mySwiper"
                         >
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
+                            {
+                                isComingSoonMoviesLoading ? (
+                                    Array.from({ length: 7 }).map((_, i) => (
+                                        <SwiperSlide key={i}>
+                                            <div className="movie_box">
+                                                <div className="image_box">
+                                                    <SkeletonLoader width="100%" height="100%" />
+                                                </div>
+                                                <div className="movie_brief">
+                                                    <li>
+                                                        <div style={{ display: "flex" }}>
+                                                            <SkeletonLoader width="14px" height="14px" margin="0 5px 0 0" />
+                                                            <SkeletonLoader width="30px" height="14px" />
+                                                        </div>
+                                                        <div style={{ display: "flex" }}>
+                                                            <SkeletonLoader width="60px" height="14px" margin="5px 8px 0 0" />
+                                                            <SkeletonLoader width="60px" height="14px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </li>
+                                                    <SkeletonLoader width="100%" height="14px" margin="8px 0 0 0" />
+                                                    <SkeletonLoader width="100%" height="14px" margin="5px 0 0 0" />
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))
+                                ) : comingSoonMovies.length > 0 ? (
+                                    comingSoonMovies.slice(0, 8).map((movie, i) =>
+                                        <SwiperSlide key={i}>
+                                            <div className="movie_box">
+                                                <div className="image_box">
+                                                    <img src="/images/Movie-1.jpg" alt="" />
+                                                </div>
+                                                <div className="movie_brief">
+                                                    <li>
+                                                        <span><i className="fa-solid fa-star"></i>4.2</span>
+                                                        <p>[ 5k ratings | 1.5k reviews ]</p>
+                                                    </li>
+                                                    <h5>Avatar: The Way of Water</h5>
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                ) : (
+                                    <div className="empty_box">
+                                        <p>No shows available</p>
                                     </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="movie_box">
-                                    <div className="image_box">
-                                        <img src="/images/Movie-1.jpg" alt="" />
-                                    </div>
-                                    <div className="movie_brief">
-                                        <li>
-                                            <span><i className="fa-solid fa-star"></i>4.2</span>
-                                            <p>[ 5k ratings | 1.5k reviews ]</p>
-                                        </li>
-                                        <h5>Avatar: The Way of Water</h5>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
+                                )
+                            }
                         </Swiper>
                     </div>
                 </div>

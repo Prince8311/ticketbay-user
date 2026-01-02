@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import ScrollToTop from "../Components/ScrollToTop";
 
 import PageLayout from "../Layouts/PageLayout";
 import AuthenticationPage from "../Auth/Authentication";
@@ -24,6 +25,7 @@ const Routers = () => {
     return (
         <>
             <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                     <Route path="auth" element={<AuthenticationPage />} />
                     <Route path="/" element={<PageLayout />}>

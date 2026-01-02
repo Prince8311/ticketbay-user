@@ -1,7 +1,46 @@
+import { useEffect, useState } from "react";
 import MovieFilters from "../../Components/FilterBox";
 import { MovieListWrapper } from "../../Styles/MovieStyle";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
+import { UserData } from "../../Context/PageContext";
+import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 
 const RecommendedMoviesPage = () => {
+    const api = getApiEndpoints();
+    const { selectedLocation } = UserData();
+    const [isRecommendedMoviesLoading, setIsRecommendedMoviesLoading] = useState(false);
+    const [recommendedMovies, setRecommendedMovies] = useState([]);
+
+    const fetchRecommendedMovies = async () => {
+        setIsRecommendedMoviesLoading(true);
+        try {
+            const response = await axios.get(api.recommendedMovies, {
+                params: {
+                    page: 1,
+                    location: selectedLocation
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                setRecommendedMovies(response?.data.movies || []);
+            }
+        } catch (error) {
+            console.log(error.response?.data.message || error.message);
+        } finally {
+            setIsRecommendedMoviesLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchRecommendedMovies();
+    }, [selectedLocation]);
+
     return (
         <>
             <MovieListWrapper>
@@ -21,90 +60,54 @@ const RecommendedMoviesPage = () => {
                                 <h3>Recommended <span><b>M</b>ovies</span></h3>
                             </div>
                             <div className="sec_items">
-                                <div className="movie_box">
-                                    <div className="box_inner">
-                                        <div className="image_box">
-                                            <img src="/images/Movie-1.jpg" alt="" />
+                                {
+                                    isRecommendedMoviesLoading ? (
+                                        Array.from({ length: 6 }).map((_, i) => (
+                                            <div className="movie_box">
+                                                <div className="box_inner">
+                                                    <div className="image_box">
+                                                        <SkeletonLoader width="100%" height="100%" />
+                                                    </div>
+                                                    <div className="movie_brief">
+                                                        <li>
+                                                            <div style={{display: "flex"}}>
+                                                                <SkeletonLoader width="14px" height="14px" margin="0 5px 0 0" />
+                                                                <SkeletonLoader width="30px" height="14px" />
+                                                            </div>
+                                                            <div style={{display: "flex"}}>
+                                                                <SkeletonLoader width="60px" height="14px" margin="5px 8px 0 0" />
+                                                                <SkeletonLoader width="60px" height="14px" margin="5px 0 0 0" />
+                                                            </div>
+                                                        </li>
+                                                        <SkeletonLoader width="100%" height="14px" margin="8px 0 0 0" />
+                                                        <SkeletonLoader width="100%" height="14px" margin="5px 0 0 0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : recommendedMovies.length > 0 ? (
+                                        recommendedMovies.slice(0, 8).map((movie, i) =>
+                                            <div className="movie_box" key={i}>
+                                                <div className="box_inner">
+                                                    <div className="image_box">
+                                                        <img src={movie.poster_image ? `${moviePosterURL}/${movie.poster_image}` : '/images/blank-poster.jpg'} alt="" />
+                                                    </div>
+                                                    <div className="movie_brief">
+                                                        <li>
+                                                            <span><i className="fa-solid fa-star"></i>4.2</span>
+                                                            <p>[ 5k ratings | 1.5k reviews ]</p>
+                                                        </li>
+                                                        <h5>{movie.movie_name}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    ) : (
+                                        <div className="empty_box">
+                                            <p>No shows available</p>
                                         </div>
-                                        <div className="movie_brief">
-                                            <li>
-                                                <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                <p>[ 5k ratings | 1.5k reviews ]</p>
-                                            </li>
-                                            <h5>Avatar: The Way of Water</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="movie_box">
-                                    <div className="box_inner">
-                                        <div className="image_box">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="movie_brief">
-                                            <li>
-                                                <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                <p>[ 5k ratings | 1.5k reviews ]</p>
-                                            </li>
-                                            <h5>Avatar: The Way of Water</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="movie_box">
-                                    <div className="box_inner">
-                                        <div className="image_box">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="movie_brief">
-                                            <li>
-                                                <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                <p>[ 5k ratings | 1.5k reviews ]</p>
-                                            </li>
-                                            <h5>Avatar: The Way of Water</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="movie_box">
-                                    <div className="box_inner">
-                                        <div className="image_box">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="movie_brief">
-                                            <li>
-                                                <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                <p>[ 5k ratings | 1.5k reviews ]</p>
-                                            </li>
-                                            <h5>Avatar: The Way of Water</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="movie_box">
-                                    <div className="box_inner">
-                                        <div className="image_box">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="movie_brief">
-                                            <li>
-                                                <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                <p>[ 5k ratings | 1.5k reviews ]</p>
-                                            </li>
-                                            <h5>Avatar: The Way of Water</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="movie_box">
-                                    <div className="box_inner">
-                                        <div className="image_box">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="movie_brief">
-                                            <li>
-                                                <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                <p>[ 5k ratings | 1.5k reviews ]</p>
-                                            </li>
-                                            <h5>Avatar: The Way of Water</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
