@@ -6,12 +6,14 @@ import axios from "axios";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../Context/PageContext";
 import { castCrewImageURL, getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
+import MovieTrailerPage from "../../Modals/MovieTrailer";
 
 const MovieDetailsPage = () => {
     const api = getApiEndpoints();
     const { selectedLocation } = UserData();
     const [isDetailsLoading, setIsDetailsLoading] = useState(false);
     const [movieDetails, setMovieDetails] = useState({});
+    const [showMovieTrailer, setShowMovieTrailer] = useState(false);
 
     const fetchMovieDetails = async () => {
         setIsDetailsLoading(true);
@@ -42,6 +44,10 @@ const MovieDetailsPage = () => {
     useEffect(() => {
         fetchMovieDetails();
     }, [selectedLocation]);
+
+    const handleOpenMovieTrailerModal = () => {
+        setShowMovieTrailer(true);
+    }
 
     return (
         <>
@@ -169,7 +175,7 @@ const MovieDetailsPage = () => {
                                             )
                                         }
                                         <ul>
-                                            <button className="trailer_btn"><i className="fa-regular fa-circle-play"></i> See Trailer</button>
+                                            <button className="trailer_btn" onClick={handleOpenMovieTrailerModal}><i className="fa-regular fa-circle-play"></i> See Trailer</button>
                                             <button className="booking_btn"><i className="fa-solid fa-ticket"></i> Book Ticket</button>
                                         </ul>
                                     </div>
@@ -450,6 +456,10 @@ const MovieDetailsPage = () => {
                         </div>
                     </div>
                 </div>
+                <MovieTrailerPage
+                    showMovieTrailer={showMovieTrailer}
+                    setShowMovieTrailer={setShowMovieTrailer}
+                />
             </MovieDetailsPageWrapper>
         </>
     );
