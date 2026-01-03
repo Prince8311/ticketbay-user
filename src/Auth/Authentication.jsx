@@ -47,6 +47,12 @@ const AuthenticationPage = () => {
         setTransitionDelay('0');
     }
 
+    function redirectToChangePassword() {
+        setAuthSubStatus('changePassword');
+        localStorage.setItem("Auth SubStatus", 'changePassword');
+        setTransitionDelay('0');
+    }
+
     const maskEmail = (email) => {
         const [user, domain] = email.split("@");
         const maskedUser =
@@ -113,6 +119,37 @@ const AuthenticationPage = () => {
     // OTP Verify 
     const [isOtpButtonLoading, setIsOtpButtonLoading] = useState(false);
     const [otp, setOtp] = useState('');
+
+    const handleOtpVerify = async (e) => {
+        e.preventDefault();
+        setIsOtpButtonLoading(true);
+        const payload = {
+            otp,
+            ...(authStatus === 'signup' && { isRegistration: true }),
+        };
+        try {
+            const response = await axios.post(api.verifyOtp, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                localStorage.removeItem("Registration Mail");
+                setRegistrationMail('');
+                toast.success(response?.data.message);
+                setOtp('');
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsOtpButtonLoading(false);
+            if (authStatus === 'signup') {
+                redirectToSignIn();
+            } else { }
+        }
+    }
 
     return (
         <>
@@ -214,8 +251,40 @@ const AuthenticationPage = () => {
                             />
                         </div>
                         <div className="form_btn">
-                            <button className={(otp.length < 6 || isOtpButtonLoading) ? 'disable' : ''} disabled={otp.length < 6 || isOtpButtonLoading}>Verify</button>
+                            {/* <button className={(otp.length < 6 || isOtpButtonLoading) ? 'disable' : ''} onClick={handleOtpVerify} disabled={otp.length < 6 || isOtpButtonLoading}>
+                                {
+                                    isOtpButtonLoading ?
+                                        <ButtonLoader />
+                                        :
+                                        <>Verify</>
+                                }
+                            </button> */}
+                            <button onClick={redirectToChangePassword}>Verify</button>
                             <a onClick={() => { authStatus === 'signin' ? redirectToForgotPassword() : redirectToSignUp() }}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
+                        </div>
+                    </div>
+                </div>
+                <div className="auth_form change_password">
+                    <div className="form_head">
+                        <h4>Change <span><b>P</b>assword</span></h4>
+                        <p>Please reset your current password</p>
+                    </div>
+                    <div className="form_sec">
+                        <div className="input_box">
+                            <label><i className="fa-solid fa-lock"></i></label>
+                            <input type="text" required />
+                            <span>New Password</span>
+                            <a><i className="fa-solid fa-eye-slash"></i></a>
+                        </div>
+                        <div className="input_box">
+                            <label><i className="fa-solid fa-lock"></i></label>
+                            <input type="text" required />
+                            <span>Confirm Password</span>
+                            <a><i className="fa-solid fa-eye-slash"></i></a>
+                        </div>
+                        <div className="form_btn">
+                            <button onClick={redirectToOtpVerify}>Submit</button>
+                            <a onClick={redirectToOtpVerify}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
                         </div>
                     </div>
                 </div>

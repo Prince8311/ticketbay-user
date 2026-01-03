@@ -39,13 +39,6 @@ export const AuthWrapper = styled('div')`
             top: 0;
         }
 
-        &.forgot_password {
-            top: 50%;
-            left: 70px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
         .form_head {
             position: relative;
             width: 100%;
@@ -118,7 +111,7 @@ export const AuthWrapper = styled('div')`
                 height: 40px;
                 background: ${colors.customColors.lightBackground};
                 border-radius: 8px;
-                margin-top: 20px;
+                margin-top: 15px;
 
                 label {
                     position: relative;
@@ -377,6 +370,20 @@ export const AuthWrapper = styled('div')`
                 pointer-events: none;
                 transition-delay: 0;
             }
+
+            &.forgot_password {
+                top: 50%;
+                left: 70px;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            &.change_password {
+                top: 50%;
+                left: 70px;
+                opacity: 0;
+                pointer-events: none;
+            }
         }
 
         .panel_content {
@@ -456,6 +463,40 @@ export const AuthWrapper = styled('div')`
                 &.otp_verify {
                     top: 0;
                     left: 70px;
+                    opacity: 1;
+                    pointer-events: initial;
+                    transition-delay: 0;
+                }
+
+                &.change_password {
+                    top: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition-delay: 0;
+                }
+            }
+        }
+
+        &.changePassword {
+            .auth_form {
+                transition: all 1s ease-in-out;
+
+                &.sign_in {
+                    left: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &.otp_verify {
+                    top: 0;
+                    left: 50%;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition-delay: 0;
+                }
+
+                &.change_password {
+                    top: 0;
                     opacity: 1;
                     pointer-events: initial;
                     transition-delay: 0;
