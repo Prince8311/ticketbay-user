@@ -1,6 +1,7 @@
 export const baseURL = "https://api.ticketbay.in";
 export const apiURL = `${baseURL}/user`;
 export const moviePosterURL = `${baseURL}/posters/movies`;
+export const castCrewImageURL = `${baseURL}/profile-images/casts_crews`;
 
 export const getApiEndpoints = () => {
     return {
@@ -20,6 +21,7 @@ export const getApiEndpoints = () => {
         recommendedMovies: `${apiURL}/api/movies/recommended-movies.php`,
         comingSoonMovies: `${apiURL}/api/movies/coming-soon-movies.php`,
         upcomingMovies: `${apiURL}/api/movies/upcoming-movies.php`,
+        movieDetails: `${apiURL}/api/movies/movie-details.php`,
 
         // Theaters 
         fetchTheaters: `${apiURL}/api/theaters/theaters.php`,

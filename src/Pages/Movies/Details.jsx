@@ -1,8 +1,48 @@
 import { MovieDetailsPageWrapper } from "../../Styles/MovieStyle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
+import { UserData } from "../../Context/PageContext";
+import { castCrewImageURL, getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
 
 const MovieDetailsPage = () => {
+    const api = getApiEndpoints();
+    const { selectedLocation } = UserData();
+    const [isDetailsLoading, setIsDetailsLoading] = useState(false);
+    const [movieDetails, setMovieDetails] = useState({});
+
+    const fetchMovieDetails = async () => {
+        setIsDetailsLoading(true);
+        const movieName = localStorage.getItem("Current Movie");
+        try {
+            const response = await axios.get(api.movieDetails, {
+                params: {
+                    name: movieName,
+                    location: selectedLocation
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                console.log(response);
+                setMovieDetails(response?.data.movie || {});
+            }
+        } catch (error) {
+            console.log(error.response?.data.message || error.message);
+        } finally {
+            setIsDetailsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchMovieDetails();
+    }, [selectedLocation]);
+
     return (
         <>
             <MovieDetailsPageWrapper>
@@ -10,52 +50,131 @@ const MovieDetailsPage = () => {
                     <div className="sec_content">
                         <div className="left_sec">
                             <div className="movie_image">
-                                <img src="/images/Movie-1.jpg" alt="" />
+                                {
+                                    isDetailsLoading ? (
+                                        <SkeletonLoader width="100%" height="100%" />
+                                    ) : <img src={movieDetails.poster_image ? `${moviePosterURL}/${movieDetails.poster_image}` : '/images/blank-poster.jpg'} alt="" />
+                                }
                             </div>
                         </div>
                         <div className="right_sec">
-                            <div className="right_inner">
-                                <h2>Avatar</h2>
-                                <li>
-                                    <span>25 Oct, 2025</span>
-                                    <i className="fa-solid fa-circle"></i>
-                                    <span>2hr 20min</span>
-                                </li>
-                                <div className="rating_sec">
-                                    <h5>Rating: </h5>
-                                    <div className="stars">
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star-half-stroke"></i>
+                            {
+                                isDetailsLoading ? (
+                                    <div className="right_inner">
+                                        <SkeletonLoader width="100%" height="30px" />
+                                        <li>
+                                            <SkeletonLoader width="75px" height="16px" margin="5px 8px 0 0" />
+                                            <SkeletonLoader width="75px" height="16px" margin="5px 0 0 0" />
+                                        </li>
+                                        <div className="rating_sec">
+                                            <SkeletonLoader width="225px" height="16px" margin="5px 0 0 0" />
+                                        </div>
+                                        <li className="genres">
+                                            <SkeletonLoader width="75px" height="16px" margin="5px 8px 0 0" />
+                                            <SkeletonLoader width="75px" height="16px" margin="5px 8px 0 0" />
+                                            <SkeletonLoader width="75px" height="16px" margin="5px 0 0 0" />
+                                        </li>
+                                        <li>
+                                            <SkeletonLoader width="55px" height="25px" margin="0 8px 0 0" />
+                                            <SkeletonLoader width="55px" height="25px" margin="0 8px 0 0" />
+                                            <SkeletonLoader width="55px" height="25px" margin="0 8px 0 0" />
+                                            <SkeletonLoader width="55px" height="25px" margin="0 0 0 0" />
+                                        </li>
+                                        <li>
+                                            <SkeletonLoader width="55px" height="25px" margin="5px 8px 0 0" />
+                                            <SkeletonLoader width="55px" height="25px" margin="5px 8px 0 0" />
+                                            <SkeletonLoader width="55px" height="25px" margin="5px 8px 0 0" />
+                                            <SkeletonLoader width="55px" height="25px" margin="5px 0 0 0" />
+                                        </li>
+                                        <ul>
+                                            <SkeletonLoader width="135px" height="35px" margin="10px 20px 0 0" />
+                                            <SkeletonLoader width="135px" height="35px" margin="10px 0 0 0" />
+                                        </ul>
                                     </div>
-                                    <span>(4.7)</span>
-                                    <span className="dot">
-                                        <i className="fa-solid fa-circle"></i>
-                                    </span>
-                                    <p>[ 12,255 users ]</p>
-                                </div>
-                                <li className="genres">
-                                    <span>Comedy</span>
-                                    <i className="fa-solid fa-circle"></i>
-                                    <span>Horror</span>
-                                </li>
-                                <li>
-                                    <a href="">2D</a>
-                                    <a href="">3D</a>
-                                    <a href="">IMAX</a>
-                                    <a href="">4DX</a>
-                                </li>
-                                <li>
-                                    <a href="">Kanada</a>
-                                    <a href="">English</a>
-                                </li>
-                                <ul>
-                                    <button className="trailer_btn"><span> <i className="fa-regular fa-circle-play"></i> See Trailer</span></button>
-                                    <button className="booking_btn"><span> <i className="fa-solid fa-ticket"></i> Book Ticket</span></button>
-                                </ul>
-                            </div>
+                                ) : (
+                                    <div className="right_inner">
+                                        <h2>{movieDetails.name}</h2>
+                                        <li>
+                                            <span>{movieDetails.release_date ? `${movieDetails.release_date}` : `${movieDetails.release_year}`}</span>
+                                            {
+                                                movieDetails.total_time &&
+                                                <>
+                                                    <i className="fa-solid fa-circle"></i>
+                                                    <span>{movieDetails.total_time}</span>
+                                                </>
+                                            }
+                                            {
+                                                movieDetails.age_category &&
+                                                <>
+                                                    <i className="fa-solid fa-circle"></i>
+                                                    <span>{movieDetails.age_category}</span>
+                                                </>
+                                            }
+                                        </li>
+                                        <div className="rating_sec">
+                                            <h5>Rating: </h5>
+                                            <div className="stars">
+                                                <i className="fa-solid fa-star"></i>
+                                                <i className="fa-solid fa-star"></i>
+                                                <i className="fa-solid fa-star"></i>
+                                                <i className="fa-solid fa-star"></i>
+                                                <i className="fa-solid fa-star-half-stroke"></i>
+                                            </div>
+                                            <span>(4.7)</span>
+                                            <span className="dot">
+                                                <i className="fa-solid fa-circle"></i>
+                                            </span>
+                                            <p>[ 12,255 users ]</p>
+                                        </div>
+                                        {
+                                            movieDetails.genres && (
+                                                <li className="genres">
+                                                    {movieDetails.genres
+                                                        .split(',')
+                                                        .map((genre, index, arr) => (
+                                                            <span key={index}>
+                                                                {genre.trim()}
+                                                                {index !== arr.length - 1 && (
+                                                                    <i className="fa-solid fa-circle"></i>
+                                                                )}
+                                                            </span>
+                                                        ))}
+                                                </li>
+                                            )
+                                        }
+                                        {
+                                            movieDetails.available_formats && (
+                                                <li>
+                                                    {
+                                                        movieDetails.available_formats
+                                                            .split(',')
+                                                            .map((format, index) => (
+                                                                <a key={index}>{format.trim()}</a>
+                                                            ))
+                                                    }
+                                                </li>
+                                            )
+                                        }
+                                        {
+                                            movieDetails.available_languages && (
+                                                <li className="languages">
+                                                    {
+                                                        movieDetails.available_languages
+                                                            .split(',')
+                                                            .map((language, index) => (
+                                                                <a key={index}>{language.trim()}</a>
+                                                            ))
+                                                    }
+                                                </li>
+                                            )
+                                        }
+                                        <ul>
+                                            <button className="trailer_btn"><i className="fa-regular fa-circle-play"></i> See Trailer</button>
+                                            <button className="booking_btn"><i className="fa-solid fa-ticket"></i> Book Ticket</button>
+                                        </ul>
+                                    </div>
+                                )
+                            }
                         </div>
                         <div className="share_sec">
                             <div className="share_inner">
@@ -69,98 +188,105 @@ const MovieDetailsPage = () => {
                 <div className="movie_info_section">
                     <div className="sec_content">
                         <div className="movie_content_box">
-                            <div className="box_head">
-                                <h4>About the <span><b>M</b>ovie</span></h4>
-                            </div>
-                            <div className="box_items">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt enim voluptatibus expedita optio eum. Blanditiis magnam est corporis qui repellendus ea dolor, iure sit dolore deleniti quisquam veritatis odio labore rerum excepturi obcaecati fuga modi inventore facilis in numquam. Expedita est quaerat soluta recusandae ea natus voluptatem rerum delectus repudiandae ipsum distinctio sapiente quam nulla earum dolor officiis ex quae nam sit odit, dicta veniam saepe, commodi unde? Tempora voluptates, nemo rerum qui numquam deleniti, repellat at facere consectetur, nulla voluptatum aliquid assumenda optio vero eum nisi fuga nihil quas placeat iusto modi pariatur accusantium? Vero labore voluptatibus, maxime quod repellendus blanditiis enim accusantium, facilis sed veritatis dolorem vel perferendis sequi odio aut omnis voluptates voluptas culpa necessitatibus ex atque quam consectetur expedita. Iure excepturi voluptatem accusantium laborum doloribus nihil eum minus commodi impedit? Excepturi voluptates, eum pariatur sapiente eos possimus, rem aperiam sed expedita quod asperiores reiciendis doloribus ducimus.</p>
-                            </div>
+                            {
+                                isDetailsLoading ? (
+                                    <>
+                                        <div className="box_head">
+                                            <SkeletonLoader width="180px" height="33px" />
+                                        </div>
+                                        <div className="box_items">
+                                            <SkeletonLoader width="100%" height="50px" />
+                                        </div>
+                                    </>
+                                ) : movieDetails.description && (
+                                    <>
+                                        <div className="box_head">
+                                            <h4>About the <span><b>M</b>ovie</span></h4>
+                                        </div>
+                                        <div className="box_items">
+                                            <p>{movieDetails.description}</p>
+                                        </div>
+                                    </>
+                                )
+                            }
                         </div>
                         <div className="movie_content_box">
-                            <div className="box_head">
-                                <h4>Movie <span><b>C</b>asts</span></h4>
-                            </div>
-                            <div className="box_items">
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                            </div>
+                            {
+                                isDetailsLoading ? (
+                                    <>
+                                        <div className="box_head">
+                                            <SkeletonLoader width="180px" height="33px" />
+                                        </div>
+                                        <div className="box_items">
+                                            {
+                                                Array.from({ length: 6 }).map((_, i) => (
+                                                    <div className="item_box">
+                                                        <SkeletonLoader width="100px" height="100px" />
+                                                        <SkeletonLoader width="100%" height="14px" margin="10px 0 0 0" />
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </>
+                                ) : movieDetails.casts && (
+                                    <>
+                                        <div className="box_head">
+                                            <h4>Movie <span><b>C</b>asts</span></h4>
+                                        </div>
+                                        <div className="box_items">
+                                            {
+                                                movieDetails.casts.map((cast, i) => (
+                                                    <div className="item_box" key={i}>
+                                                        <div className="box_img">
+                                                            <img src={cast.profile_image ? `${castCrewImageURL}/${cast.profile_image}` : '/images/profile-image.png'} alt="" />
+                                                        </div>
+                                                        <p>{cast.name}</p>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </>
+                                )
+                            }
                         </div>
                         <div className="movie_content_box">
-                            <div className="box_head">
-                                <h4>Movie <span><b>C</b>rew</span></h4>
-                            </div>
-                            <div className="box_items">
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                                <div className="item_box">
-                                    <div className="box_img">
-                                        <img src="/images/Shaneel Gautham.jpg" alt="" />
-                                    </div>
-                                    <p>Shaneel Gautham</p>
-                                </div>
-                            </div>
+                            {
+                                isDetailsLoading ? (
+                                    <>
+                                        <div className="box_head">
+                                            <SkeletonLoader width="180px" height="33px" />
+                                        </div>
+                                        <div className="box_items">
+                                            {
+                                                Array.from({ length: 6 }).map((_, i) => (
+                                                    <div className="item_box">
+                                                        <SkeletonLoader width="100px" height="100px" />
+                                                        <SkeletonLoader width="100%" height="14px" margin="10px 0 0 0" />
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </>
+                                ) : movieDetails.crews && (
+                                    <>
+                                        <div className="box_head">
+                                            <h4>Movie <span><b>C</b>rew</span></h4>
+                                        </div>
+                                        <div className="box_items">
+                                            {
+                                                movieDetails.crews.map((crew, i) => (
+                                                    <div className="item_box" key={i}>
+                                                        <div className="box_img">
+                                                            <img src={crew.profile_image ? `${castCrewImageURL}/${crew.profile_image}` : '/images/profile-image.png'} alt="" />
+                                                        </div>
+                                                        <p>{crew.name}</p>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

@@ -65,7 +65,7 @@ export const TheaterListWrapper = styled('div')`
 
             .theater_box {
                 position: relative;
-                width: 14.28%;
+                width: 12.5%;
                 padding: 0 25px;
                 margin-bottom: 45px;
 
@@ -79,7 +79,7 @@ export const TheaterListWrapper = styled('div')`
 
                     img {
                         position: relative;
-                        width: 100px;
+                        width: 95px;
                         height: auto;
                     }
 
@@ -89,6 +89,23 @@ export const TheaterListWrapper = styled('div')`
                         font-size: 12px;
                         color: ${colors.customColors.blackColor1};
                     }
+                }
+            }
+
+            .empty_box {
+                position: relative;
+                margin-top: 50px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                p {
+                    position: relative;
+                    font-family: "Lemonada", cursive;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: ${colors.customColors.blackColor3};
+                    pointer-events: none;
                 }
             }
         }

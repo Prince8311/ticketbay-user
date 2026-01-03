@@ -226,7 +226,7 @@ export const MovieListWrapper = styled('div')`
                         p {
                             position: relative;
                             font-family: "Lemonada", cursive;
-                            font-size: 16px;
+                            font-size: 15px;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor3};
                             pointer-events: none;
@@ -294,6 +294,7 @@ export const UpcomingMovieListWrapper = styled('div')`
 
         .page_items {
             position: relative;
+            margin-top: 25px;
             width: 100%;
             display: flex;
             flex-wrap: wrap;
@@ -393,7 +394,7 @@ export const UpcomingMovieListWrapper = styled('div')`
                 p {
                     position: relative;
                     font-family: "Lemonada", cursive;
-                    font-size: 16px;
+                    font-size: 15px;
                     font-weight: 500;
                     color: ${colors.customColors.blackColor3};
                     pointer-events: none;
@@ -472,10 +473,13 @@ export const MovieDetailsPageWrapper = styled('div')`
                         -moz-box-align: center;
                         align-items: center;
                         font-family: "Poppins", sans-serif;
-                        margin-top: 4px;
+                        margin-top: 5px;
 
                         &.genres {
-                            margin-bottom: 4px;
+                            margin-bottom: 6px;
+                        }
+                        &.languages {
+                            margin-top: 0;
                         }
 
                         span {
@@ -511,7 +515,7 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                     .rating_sec {
                         position: relative;
-                        margin-top: 10px;
+                        margin-top: 6px;
                         display: flex;
                         -moz-box-align: center;
                         align-items: center;
@@ -564,14 +568,14 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                     ul {
                         position: relative;
+                        margin-top: 10px;
                         display: flex;
                         align-items: center;
 
                         button {
                             position: relative;
-                            width: 150px;
-                            height: 40px;
-                            font-family: "Ubuntu", sans-serif;
+                            width: 135px;
+                            height: 35px;
                             font-size: 12px;
                             font-weight: 500;
                             cursor: pointer;
@@ -580,6 +584,11 @@ export const MovieDetailsPageWrapper = styled('div')`
                             background: none;
                             outline: none;
                             border: none;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: ${colors.customColors.whiteColor};
+                            transition: all 0.5s ease;
 
                             &.trailer_btn {
                                 margin-right: 20px;
@@ -588,20 +597,20 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                             &.booking_btn {
                                 background: ${colors.customColors.blueColor};
-                            }
-
-
-                            span {
-                                position: relative;
-                                color: ${colors.customColors.whiteColor};
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
 
                                 i {
-                                    font-size: 14px;
-                                    margin-right: 8px;
+                                    transform: rotate(-35deg);
                                 }
+                            }
+
+                            i {
+                                font-size: 14px;
+                                margin-right: 6px;
+                            }
+
+                            &:hover {
+                                border-radius: 25px;
+                                transition: all 0.5s ease;
                             }
                         }
                     }
@@ -718,7 +727,7 @@ export const MovieDetailsPageWrapper = styled('div')`
 
                     .item_box {
                         position: relative;
-                        width: 100px;
+                        width: 95px;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
@@ -732,7 +741,7 @@ export const MovieDetailsPageWrapper = styled('div')`
                         .box_img {
                             position: relative;
                             width: 100%;
-                            height: 100px;
+                            height: 95px;
                             border: 1px solid ${colors.customColors.borderColor};
                             border-radius: 50%;
                             padding: 3px;

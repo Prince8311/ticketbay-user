@@ -694,7 +694,7 @@ export const HomePageWrapper = styled('div')`
                         p {
                             position: relative;
                             font-family: "Lemonada", cursive;
-                            font-size: 16px;
+                            font-size: 15px;
                             font-weight: 500;
                             color: ${colors.customColors.blackColor3};
                             pointer-events: none;

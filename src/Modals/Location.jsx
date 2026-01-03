@@ -1,7 +1,6 @@
 import axios from "axios";
 import { UserData } from "../Context/PageContext";
 import { LocationWrapper } from "../Styles/ModalStyle";
-import { toast } from "react-toastify";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
 import { useEffect, useState } from "react";
 import SkeletonLoader from "../Components/Loader/SkeletonLoader";

@@ -7,7 +7,7 @@ import AuthenticationPage from "../Auth/Authentication";
 import HomePage from "../Pages/Home";
 import RecommendedMoviesPage from "../Pages/Movies/Recommended";
 import UpcomingMoviesPage from "../Pages/Movies/Upcoming";
-import TheaterListPage from "../Pages/Theaters";
+import TheaterListPage from "../Pages/Theaters/Theaters";
 import ContactUsPage from "../Pages/Contact";
 import TermsConditionsPage from "../Pages/TermsConditions";
 import PrivacyPolicyPage from "../Pages/PrivacyPolicy";

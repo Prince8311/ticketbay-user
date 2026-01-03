@@ -169,6 +169,15 @@ export const AuthWrapper = styled('div')`
                     color: ${colors.customColors.blackColor3};
                     cursor: pointer;
                 }
+
+                input:focus ~ span,
+                input:valid ~ span {
+                    top: 0;
+                    left: 40px;
+                    font-weight: 500;
+                    color: ${colors.themeColor};
+                    font-size: 10px;
+                }
             }
 
             .otp_input_box {
@@ -240,6 +249,12 @@ export const AuthWrapper = styled('div')`
                     &:hover {
                         letter-spacing: 1.5px;
                         border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+
+                    &.disable {
+                        opacity: 0.3;
+                        pointer-events: none;
                         transition: all 0.5s ease;
                     }
                 }

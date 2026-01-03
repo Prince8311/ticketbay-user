@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MovieFilters from "../../Components/FilterBox";
 import { MovieListWrapper } from "../../Styles/MovieStyle";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
 import { UserData } from "../../Context/PageContext";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 
 const RecommendedMoviesPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const { selectedLocation } = UserData();
     const [isRecommendedMoviesLoading, setIsRecommendedMoviesLoading] = useState(false);
     const [recommendedMovies, setRecommendedMovies] = useState([]);
@@ -40,6 +41,11 @@ const RecommendedMoviesPage = () => {
     useEffect(() => {
         fetchRecommendedMovies();
     }, [selectedLocation]);
+
+    const handleDetailsNavigation = (movie) => {
+        localStorage.setItem("Current Movie", movie);
+        navigate(`/movie-details?${encodeURIComponent(movie)}`);
+    }
 
     return (
         <>
@@ -87,7 +93,7 @@ const RecommendedMoviesPage = () => {
                                         ))
                                     ) : recommendedMovies.length > 0 ? (
                                         recommendedMovies.slice(0, 8).map((movie, i) =>
-                                            <div className="movie_box" key={i}>
+                                            <div className="movie_box" key={i} onClick={() => handleDetailsNavigation(movie.movie_name)}>
                                                 <div className="box_inner">
                                                     <div className="image_box">
                                                         <img src={movie.poster_image ? `${moviePosterURL}/${movie.poster_image}` : '/images/blank-poster.jpg'} alt="" />
