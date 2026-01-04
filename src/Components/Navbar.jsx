@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserData } from "../Context/PageContext";
+import { profileImageURL } from "../Services/Api/ApiConfig";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [isNavScrolled, setIsNavScrolled] = useState(false);
-    const { setShowLocaltionModal, selectedLocation, authToken, setAuthToken, userDetails, setUserDetails } = UserData();
+    const { isLocationButtonShow, setShowLocaltionModal, selectedLocation, authToken, setAuthToken, userDetails, setUserDetails } = UserData();
     const words = ["movie name ...", "theater name ..."];
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
@@ -81,20 +82,23 @@ const Navbar = () => {
                         <li style={{ "--i": 3 }}><NavLink to="/theaters">Theaters</NavLink></li>
                         <li style={{ "--i": 4 }}><NavLink to="/contact-us">Contact us</NavLink></li>
                     </div>
-                    <div className="location_sec" onClick={openLocationModal}>
-                        <i className="fa-solid fa-location-dot"></i>
-                        <p>
-                            {selectedLocation ? `${selectedLocation}` : 'Select your location'}
-                        </p>
-                        <i className="fa-solid fa-angle-down"></i>
-                    </div>
+                    {
+                        isLocationButtonShow &&
+                        <div className="location_sec" onClick={openLocationModal}>
+                            <i className="fa-solid fa-location-dot"></i>
+                            <p>
+                                {selectedLocation ? `${selectedLocation}` : 'Select your location'}
+                            </p>
+                            <i className="fa-solid fa-angle-down"></i>
+                        </div>
+                    }
                     <div className="auth_sec">
                         {
                             authToken ? (
                                 <div className="profile">
                                     <div className="profile_btn" onClick={openProfileDropdown}>
-                                        <img src="/images/profile-image.png" alt="" />
-                                        <p>Sourish Mondal</p>
+                                        <img src={userDetails.image ? `${profileImageURL}/${userDetails.image}` : '/images/profile-image.png'} alt="" />
+                                        <p>{userDetails.name}</p>
                                         <i className={`fa-solid fa-angle-down ${profileDropdown ? 'active' : ''}`}></i>
                                     </div>
                                     <div className={`profile_dropdown ${profileDropdown ? 'active' : ''}`}>

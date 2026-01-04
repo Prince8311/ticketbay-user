@@ -1,11 +1,20 @@
-import { useState } from "react";
-import EditProfileModal from "../Modals/EditProfile";
-import { ProfilePageWrapper } from "../Styles/ProfileStyle";
+import { useEffect, useState } from "react";
+import EditProfileModal from "../../Modals/EditProfile";
+import { ProfilePageWrapper } from "../../Styles/ProfileStyle";
+import { UserData } from "../../Context/PageContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getApiEndpoints, profileImageURL } from "../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 
 const ProfilePage = () => {
-
+    const { userDetails } = UserData();
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
+    useEffect(() => {
+        console.log(userDetails);
+    }, [userDetails]);
+    
     const handleOpenEditProfileModal = () => {
         setShowEditProfileModal(true);
     }
@@ -14,17 +23,16 @@ const ProfilePage = () => {
         <>
             <ProfilePageWrapper>
                 <div className="page_content">
-                    <div className="profile_image_sec">
+                    <div className="user_details_sec">
                         <div className="image_box">
                             <div className="box_inner">
-                                <img src="/images/profile-image.png" alt="" />
+                                <img src={userDetails.image ? `${profileImageURL}/${userDetails.image}` : '/images/profile-image.png'} alt="" />
                             </div>
-                            <a><i className="fa-solid fa-camera"></i></a>
                         </div>
                         <div className="profile_content">
-                            <h6>Sourish Mondal</h6>
-                            <p>8637361996</p>
-                            <span>demo123@gmail.com</span>
+                            <h6>{userDetails.name}</h6>
+                            <p>{userDetails.phone}</p>
+                            <span>{userDetails.email}</span>
                         </div>
                         <div className="edit_btn_sec">
                             <a onClick={handleOpenEditProfileModal}><i className="fa-solid fa-pen-to-square"></i></a>

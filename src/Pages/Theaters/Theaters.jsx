@@ -4,9 +4,11 @@ import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import axios from "axios";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../Context/PageContext";
+import { useNavigate } from "react-router-dom";
 
 const TheaterListPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const { selectedLocation } = UserData();
     const [isTheaterLoading, setIsTheaterLoading] = useState(false);
     const [theaters, setTheaters] = useState([]);
@@ -40,6 +42,11 @@ const TheaterListPage = () => {
         fetchTheaters();
     }, [selectedLocation]);
 
+    const handleTheaterInfoRedirection = (theater) => {
+        localStorage.setItem("Current Theater", theater);
+        navigate(`/theater-info?${encodeURIComponent(theater)}`);
+    }
+
     return (
         <>
             <TheaterListWrapper>
@@ -60,7 +67,7 @@ const TheaterListPage = () => {
                                 ))
                             ) : theaters.length > 0 ? (
                                 theaters.map((theater, i) =>
-                                    <div className="theater_box" key={i}>
+                                    <div className="theater_box" key={i} onClick={() => handleTheaterInfoRedirection(theater.name)}>
                                         <div className="box_inner">
                                             <img src="/images/theater.png" alt="" />
                                             <p>{theater.name}</p>

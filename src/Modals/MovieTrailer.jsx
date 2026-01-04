@@ -1,8 +1,9 @@
 import { MovieTrailerWrapper } from "../Styles/ModalStyle";
 
-const MovieTrailerPage = ({showMovieTrailer, setShowMovieTrailer}) => {
+const MovieTrailerPage = ({showMovieTrailer, setShowMovieTrailer, trailer, setTrailer}) => {
 
     function closeModal() {
+        setTrailer('');
         setShowMovieTrailer(false);
     }
 
@@ -16,9 +17,7 @@ const MovieTrailerPage = ({showMovieTrailer, setShowMovieTrailer}) => {
                             <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
                     </div>
-                    <div className="modal_video">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/M2OnifMgvps?si=SOnjMtKVC2Qu_yFF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
+                    <div className="modal_video" dangerouslySetInnerHTML={{ __html: trailer }}></div>
                 </div>
             </MovieTrailerWrapper>
         </>

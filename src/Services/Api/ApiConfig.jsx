@@ -1,5 +1,6 @@
 export const baseURL = "https://api.ticketbay.in";
 export const apiURL = `${baseURL}/user`;
+export const profileImageURL = `${baseURL}/profile-images/users`;
 export const moviePosterURL = `${baseURL}/posters/movies`;
 export const castCrewImageURL = `${baseURL}/profile-images/casts_crews`;
 
@@ -22,8 +23,12 @@ export const getApiEndpoints = () => {
         comingSoonMovies: `${apiURL}/api/movies/coming-soon-movies.php`,
         upcomingMovies: `${apiURL}/api/movies/upcoming-movies.php`,
         movieDetails: `${apiURL}/api/movies/movie-details.php`,
+        movieDates: `${apiURL}/api/movies/movie-dates.php`,
+        movieInfo: `${apiURL}/api/movies/movie-info.php`,
 
         // Theaters 
         fetchTheaters: `${apiURL}/api/theaters/theaters.php`,
+        theaterMovieDates: `${apiURL}/api/theaters/movie-dates.php`,
+        theaterMovieInfo: `${apiURL}/api/theaters/theater-info.php`,
     };
 }

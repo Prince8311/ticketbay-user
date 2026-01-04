@@ -1046,7 +1046,6 @@ export const MovieInfoPageWrapper = styled('div')`
     .info_section {
         position: relative;
         width: 100%;
-        /* background: ${colors.customColors.lightBackground}; */
         padding: 25px 0;
         display: flex;
         justify-content: center;
@@ -1078,12 +1077,20 @@ export const MovieInfoPageWrapper = styled('div')`
                     flex-wrap: wrap;
                     align-items: center;
                     list-style: none;
-                    margin-top: 5px;
+                    margin-top: 3px;
+
+                    b {
+                        position: relative;
+                        font-size: 13.5px;
+                        color: ${colors.customColors.blackColor1};
+                        margin-right: 5px;
+                        font-weight: 500;
+                    }
 
                     p {
                         position: relative;
                         font-size: 13px;
-                        color: ${colors.customColors.blackColor1};
+                        color: ${colors.customColors.blackColor2};
                         margin-right: 5px;
 
                         &:last-of-type {
@@ -1099,7 +1106,6 @@ export const MovieInfoPageWrapper = styled('div')`
                 display: flex;
                 padding: 10px 0;
                 margin-top: 20px;
-                justify-content: center;
 
                 &::before {
                     content: '';
@@ -1108,7 +1114,7 @@ export const MovieInfoPageWrapper = styled('div')`
                     top: 0;
                     width: 100%;
                     height: 1px;
-                    background: linear-gradient(to right, #fff, #b1b1b1, #fff);
+                    background: linear-gradient(to right, ${colors.customColors.borderColor}, ${colors.customColors.whiteColor});
                 }
 
                 &::after {
@@ -1118,7 +1124,7 @@ export const MovieInfoPageWrapper = styled('div')`
                     bottom: 0;
                     width: 100%;
                     height: 1px;
-                    background: linear-gradient(to right, #fff, #b1b1b1, #fff);
+                    background: linear-gradient(to right, ${colors.customColors.borderColor}, ${colors.customColors.whiteColor});
                 }
 
                 .date_box {
@@ -1132,7 +1138,9 @@ export const MovieInfoPageWrapper = styled('div')`
                     padding: 10px;
                     margin-right: 7px;
                     border-radius: 6px;
+                    opacity: 0.7;
                     cursor: pointer;
+                    transition: all 0.5s ease;
 
                     &:last-of-type {
                         margin-right: 0;
@@ -1140,30 +1148,47 @@ export const MovieInfoPageWrapper = styled('div')`
 
                     p {
                         position: relative;
-                        font-size: 12px;
-                        color: ${colors.customColors.blackColor1};
-                        font-weight: 500;
+                        font-size: 11px;
+                        color: ${colors.customColors.blackColor3};
                         text-transform: uppercase;
                     }
 
                     h6 {
                         position: relative;
                         font-size: 15px;
-                        color: ${colors.customColors.blackColor};
-                        font-weight: 600;
-                        margin: 3px 0;
+                        color: ${colors.customColors.blackColor3};
+                        font-weight: 500;
+                        margin-top: 4px;
+                        font-style: italic;
                     }
 
                     span {
                         position: relative;
-                        font-size: 13px;
-                        color: ${colors.customColors.blackColor2};
-                        font-weight: 500;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor3};
                         text-transform: capitalize;
                     }
 
+                    &.available {
+                        opacity: 1;
+
+                        p {
+                            color: ${colors.customColors.blackColor1};
+                        }
+
+                        h6 {
+                            color: ${colors.customColors.blackColor};
+                        }
+
+                        span {
+                            color: ${colors.customColors.blackColor2};
+                        }
+                    }
+
                     &.active {
+                        opacity: 1;
                         background: ${colors.customColors.orangeColor};
+                        transition: all 0.5s ease;
 
                         p {
                             color: ${colors.customColors.whiteColor};
@@ -1185,7 +1210,7 @@ export const MovieInfoPageWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                margin-top: 20px;
+                margin-top: 25px;
 
                 .movie_info_box {
                     position: relative;
@@ -1226,8 +1251,7 @@ export const MovieInfoPageWrapper = styled('div')`
                                 position: relative;
                                 width: 100%;
                                 height: 100%;
-                                object-fit: cover;
-                                border-radius: 3px;
+                                object-fit: contain;
                             }
                         }
 
@@ -1235,6 +1259,9 @@ export const MovieInfoPageWrapper = styled('div')`
                             position: relative;
                             width: calc(100% - 40px);
                             padding-left: 15px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
 
                             h5 {
                                 position: relative;
@@ -1245,18 +1272,9 @@ export const MovieInfoPageWrapper = styled('div')`
 
                             p {
                                 position: relative;
-                                margin-top: 3px;
+                                margin-top: 2px;
                                 font-size: 11px;
-                                font-weight: 500;
                                 color: ${colors.customColors.blackColor2};
-
-                                b {
-                                    margin-right: 4px;
-                                    font-size: 12px;
-                                    font-weight: 500;
-                                    font-style: italic;
-                                    color: ${colors.customColors.blackColor1};
-                                }
                             }
                         }
                     }
@@ -1272,7 +1290,7 @@ export const MovieInfoPageWrapper = styled('div')`
                             width: 100%;
                             display: flex;
                             flex-wrap: wrap;
-                            align-items: center;
+                            align-items: flex-start;
 
                             .inner_box {
                                 position: relative;
@@ -1284,11 +1302,17 @@ export const MovieInfoPageWrapper = styled('div')`
                                     position: relative;
                                     padding: 5px 15px;
                                     color: ${colors.customColors.blackColor1};
-                                    font-weight: 400;
                                     border: 1px solid ${colors.customColors.blueColor};
                                     border-radius: 4px;
                                     font-size: 12px;
                                     cursor: pointer;
+                                    transition: all 0.5s ease;
+                                    
+                                    &:hover {
+                                        background: ${colors.customColors.blueColor};
+                                        color: ${colors.customColors.whiteColor};
+                                        transition: all 0.5s ease;
+                                    }
                                 }
 
                                 .info_desc {
@@ -1301,6 +1325,7 @@ export const MovieInfoPageWrapper = styled('div')`
                                     transform: translateX(-50%);
                                     box-shadow: 4px 4px 7px ${colors.boxShadowColors.shadowColor1},
                                                 -2px -2px 5px ${colors.boxShadowColors.shadowColor2};
+                                    pointer-events: none;
                                     opacity: 0;
                                     visibility: hidden;
                                     transition: all 0.5s ease;
@@ -1361,7 +1386,36 @@ export const MovieInfoPageWrapper = styled('div')`
                                     }
                                 }
                             }
+
+                            .empty_box {
+                                position: relative;
+                                padding-top: 0;
+                                padding-bottom: 0;
+                                width: 100%;
+
+                                p {
+                                    position: relative;
+                                    font-family: 'Poppins', sans-serif;
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                }
+                            }
                         }
+                    }
+                }
+
+                .empty_box {
+                    position: relative;
+                    padding-top: 25px;
+                    padding-bottom: 15px;
+
+                    p {
+                        position: relative;
+                        font-family: "Lemonada", cursive;
+                        font-size: 15px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor3};
+                        pointer-events: none;
                     }
                 }
             }

@@ -113,7 +113,7 @@ export const NavbarWrapper = styled('div')`
 
             .scrolled_items {
                 position: relative;
-                margin-left: auto;
+                margin: 0 auto;
                 height: 100%;
                 display: flex;
                 align-items: center;
@@ -285,7 +285,7 @@ export const NavbarWrapper = styled('div')`
 
                     .profile_dropdown {
                         position: absolute;
-                        top: 40px;
+                        top: 35px;
                         left: 0;
                         width: 100%;
                         max-height: 0;

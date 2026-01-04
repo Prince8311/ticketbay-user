@@ -1,7 +1,8 @@
 import { MovieDetailsPageWrapper } from "../../Styles/MovieStyle";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { useEffect, useState } from "react";
 import axios from "axios";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../Context/PageContext";
@@ -10,10 +11,12 @@ import MovieTrailerPage from "../../Modals/MovieTrailer";
 
 const MovieDetailsPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const { selectedLocation } = UserData();
     const [isDetailsLoading, setIsDetailsLoading] = useState(false);
     const [movieDetails, setMovieDetails] = useState({});
     const [showMovieTrailer, setShowMovieTrailer] = useState(false);
+    const [trailer, setTrailer] = useState('');
 
     const fetchMovieDetails = async () => {
         setIsDetailsLoading(true);
@@ -45,8 +48,13 @@ const MovieDetailsPage = () => {
         fetchMovieDetails();
     }, [selectedLocation]);
 
-    const handleOpenMovieTrailerModal = () => {
+    const handleOpenMovieTrailerModal = (trailer) => {
+        setTrailer(trailer);
         setShowMovieTrailer(true);
+    }
+
+    const handleMovieInfoRedirection = (movie) => {
+        navigate(`/movie-info?${encodeURIComponent(movie)}`);
     }
 
     return (
@@ -175,8 +183,8 @@ const MovieDetailsPage = () => {
                                             )
                                         }
                                         <ul>
-                                            <button className="trailer_btn" onClick={handleOpenMovieTrailerModal}><i className="fa-regular fa-circle-play"></i> See Trailer</button>
-                                            <button className="booking_btn"><i className="fa-solid fa-ticket"></i> Book Ticket</button>
+                                            <button className="trailer_btn" onClick={() => handleOpenMovieTrailerModal(movieDetails.trailer)}><i className="fa-regular fa-circle-play"></i> See Trailer</button>
+                                            <button className="booking_btn" onClick={() => handleMovieInfoRedirection(movieDetails.name)}><i className="fa-solid fa-ticket"></i> Book Ticket</button>
                                         </ul>
                                     </div>
                                 )
@@ -459,6 +467,8 @@ const MovieDetailsPage = () => {
                 <MovieTrailerPage
                     showMovieTrailer={showMovieTrailer}
                     setShowMovieTrailer={setShowMovieTrailer}
+                    trailer={trailer}
+                    setTrailer={setTrailer}
                 />
             </MovieDetailsPageWrapper>
         </>

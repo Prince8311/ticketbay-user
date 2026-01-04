@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axiosInstance from "../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
 
@@ -6,6 +7,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const api = getApiEndpoints();
+    const location = useLocation();
     const [showLocaltionModal, setShowLocaltionModal] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState(() => {
         return localStorage.getItem("Location") || '';
@@ -14,12 +16,15 @@ export const UserProvider = ({ children }) => {
         return localStorage.getItem("authToken") || '';
     });
     const [userDetails, setUserDetails] = useState({});
+    const [isLocationButtonShow, setIsLocationButtonShow] = useState(false);
+    const isMoviePage = location.pathname.includes("/movie-details") || location.pathname.includes("/movie-info");
+    const isTheaterInfoPage = location.pathname.includes("/theater-info");
+    const isLocationAvailablePages = location.pathname.includes("/home") || location.pathname.includes("/recommended-movies") || location.pathname.includes("/upcoming-movies") || location.pathname.includes("/coming-soon-movies") || location.pathname.includes("/theaters");
 
     const checkAuth = async () => {
         try {
             const response = await axiosInstance.get(api.checkAuth);
             if (response?.data?.status === 200) {
-                console.log("User Details", response);
                 setUserDetails(response?.data.user);
             } else {
                 throw new Error("Invalid auth");
@@ -35,8 +40,22 @@ export const UserProvider = ({ children }) => {
         }
     }, [authToken]);
 
+    useEffect(() => {
+        if (!isMoviePage) {
+            localStorage.removeItem("Current Movie");
+        }
+        if (!isTheaterInfoPage) {
+            localStorage.removeItem("Current Theater");
+        }
+        if (isLocationAvailablePages) { 
+            setIsLocationButtonShow(true);
+        } else {
+            setIsLocationButtonShow(false);
+        }
+    }, [location.pathname]);
+
     return (
-        <UserContext.Provider value={{ showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation, authToken, setAuthToken, userDetails, setUserDetails }}>
+        <UserContext.Provider value={{ isLocationButtonShow, showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation, authToken, setAuthToken, userDetails, setUserDetails }}>
             {children}
         </UserContext.Provider>
     );

@@ -77,7 +77,7 @@ export const EditProfileWrapper = styled('div')`
         .modal_head {
             position: relative;
             width: 100%;
-            padding: 13px 25px;
+            padding: 13px 20px;
             border-bottom: 1px solid ${colors.customColors.borderColor};
             display: flex;
             align-items: center;
@@ -118,19 +118,64 @@ export const EditProfileWrapper = styled('div')`
                 position: relative;
                 width: 100%;
                 display: flex;
+                justify-content: center;
                 flex-wrap: wrap;
                 padding: 0px 20px;
                 padding-bottom: 10px;
 
+                .image_box {
+                    position: relative;
+                    width: 120px;
+                    height: 120px;
+                    border: 2px solid ${colors.customColors.borderColor};
+                    border-radius: 50%;
+                    padding: 5px;
+                    margin-bottom: 20px;
+
+                    .box_inner {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        display: flex;
+                        overflow: hidden;
+
+                        img {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+
+                    }
+
+                    a {
+                        position: absolute;
+                        bottom: 1px;
+                        right: 5px;
+                        width: 27px;
+                        height: 27px;
+                        background: ${colors.customColors.blueColor};
+                        color: ${colors.customColors.whiteColor};
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 6px;
+                        text-decoration: none;
+                        font-size: 13px;
+                    }
+                }
+
                 .input_box {
                     position: relative;
                     width: 100%;
-                    margin-bottom: 20px;
+                    margin-bottom: 15px;
 
                     input {
                         position: relative;
                         width: 100%;
-                        height: 40px;
+                        height: 37px;
                         border: 1px solid ${colors.customColors.borderColor};
                         font-size: 12px;
                         border-radius: 5px;
@@ -171,7 +216,7 @@ export const EditProfileWrapper = styled('div')`
                 
                 .form_btn {
                     position: relative;
-                    margin-top: 20px;
+                    margin-top: 10px;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
@@ -245,7 +290,7 @@ export const MovieTrailerWrapper = styled('div')`
         .modal_head {
             position: relative;
             width: 100%;
-            padding: 13px 25px;
+            padding: 13px 20px;
             border-bottom: 1px solid ${colors.customColors.borderColor};
             display: flex;
             align-items: center;
@@ -283,7 +328,7 @@ export const MovieTrailerWrapper = styled('div')`
         .modal_video {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: 325px;
             display: flex;
             padding: 20px;
 
@@ -389,7 +434,7 @@ export const LocationWrapper = styled('div')`
                 .search_inner {
                     position: relative;
                     width: 100%;
-                    height: 40px;
+                    height: 35px;
                     border: 1px solid ${colors.customColors.borderColor};
                     border-radius: 6px;
                     padding: 5px 0;
@@ -411,7 +456,7 @@ export const LocationWrapper = styled('div')`
                     input {
                         position: relative;
                         margin-left: 20px;
-                        width: 100%;
+                        width: calc(100% - 40px);
                         height: 100%;
                         border: none;
                         outline: none;

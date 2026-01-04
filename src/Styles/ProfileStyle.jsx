@@ -16,14 +16,14 @@ export const ProfilePageWrapper = styled('div')`
         display: flex;
         flex-direction: column;
 
-        .profile_image_sec {
+        .user_details_sec {
             position: relative;
             width: 100%;
             display: flex;
             align-items: center;
             background: ${colors.customColors.whiteColor};
             border: 1px solid ${colors.customColors.borderColor1};
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 10px;
             box-shadow: 5px 8px 10px ${colors.boxShadowColors.shadowColor2};
             margin-bottom: 10px;
@@ -34,7 +34,7 @@ export const ProfilePageWrapper = styled('div')`
                 height: 100px;
                 border: 2px solid ${colors.customColors.borderColor};
                 border-radius: 50%;
-                padding: 5px;
+                padding: 4px;
 
                 .box_inner {
                     position: relative;
@@ -52,23 +52,6 @@ export const ProfilePageWrapper = styled('div')`
                     }
 
                 }
-
-                a {
-                    position: absolute;
-                    bottom: 1px;
-                    right: 5px;
-                    width: 25px;
-                    height: 25px;
-                    background: ${colors.customColors.blueColor};
-                    color: ${colors.customColors.whiteColor};
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 6px;
-                    text-decoration: none;
-                    font-size: 13px;
-                }
             }
 
             .profile_content {
@@ -81,15 +64,14 @@ export const ProfilePageWrapper = styled('div')`
                 h6 {
                     position: relative;
                     font-size: 16px;
+                    font-weight: 500;
                     color: ${colors.customColors.blackColor};
-                    font-weight: 600;
                 }
 
                 p {
                     position: relative;
                     font-size: 12px;
                     color: ${colors.customColors.blackColor2};
-                    font-weight: 500;
                     margin-top: 7px;
                 }
 
@@ -97,7 +79,6 @@ export const ProfilePageWrapper = styled('div')`
                     position: relative;
                     font-size: 12px;
                     color: ${colors.customColors.blackColor2};
-                    font-weight: 500;
                 }
             }
 

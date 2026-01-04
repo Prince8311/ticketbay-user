@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import { MovieInfoPageWrapper } from "../../Styles/MovieStyle";
-import { getApiEndpoints } from "../../Services/Api/ApiConfig";
+import { TheaterInfoPageWrapper } from "../../Styles/TheaterStyle";
+import { getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
+import { toast } from "react-toastify";
 import axios from "axios";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
-import { toast } from "react-toastify";
 
-const MovieInfoPage = () => {
+const TheaterInfoPage = () => {
     const api = getApiEndpoints();
-    const movieName = localStorage.getItem("Current Movie") || '';
-    const [releaseDate, setReleaseDate] = useState('');
+    const theaterName = localStorage.getItem("Current Theater") || '';
+    const [location, setLocation] = useState('');
     const [dates, setDates] = useState([]);
     const [availableDates, setAvailableDates] = useState([]);
     const [isDatesLoading, setIsDatesLoading] = useState(false);
     const [selectedDateIndex, setSelectedDateIndex] = useState(0);
     const [isInfoLoading, setIsInfoLoading] = useState(false);
-    const [movieInfo, setMovieInfo] = useState([]);
+    const [theaterInfo, setTheaterInfo] = useState([]);
 
     const getNext10Dates = () => {
         const dates = [];
@@ -39,9 +39,9 @@ const MovieInfoPage = () => {
     const fetchMovieAvailableDates = async () => {
         setIsDatesLoading(true);
         try {
-            const response = await axios.get(api.movieDates, {
+            const response = await axios.get(api.theaterMovieDates, {
                 params: {
-                    name: movieName
+                    name: theaterName
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,11 +66,11 @@ const MovieInfoPage = () => {
     }
 
     useEffect(() => {
-        if (movieName) {
+        if (theaterName) {
             setDates(getNext10Dates());
             fetchMovieAvailableDates();
         }
-    }, [movieName]);
+    }, [theaterName]);
 
     useEffect(() => {
         if (!dates.length) return;
@@ -85,14 +85,14 @@ const MovieInfoPage = () => {
         }
     }, [dates, availableDates]);
 
-    const fetchMovieInfo = async () => {
+    const fetchTheaterInfo = async () => {
         setIsInfoLoading(true);
         const d = dates[selectedDateIndex];
         const selectedDate = `${d.date} ${d.month}, ${d.iso.split("-")[0]}`;
         try {
-            const response = await axios.get(api.movieInfo, {
+            const response = await axios.get(api.theaterMovieInfo, {
                 params: {
-                    name: movieName,
+                    name: theaterName,
                     date: selectedDate
                 },
                 headers: {
@@ -102,8 +102,9 @@ const MovieInfoPage = () => {
                 withCredentials: true
             });
             if (response) {
-                setReleaseDate(response?.data.releaseDate);
-                setMovieInfo(response?.data.theaters || []);
+                console.log(response);
+                setLocation(response?.data.location);
+                setTheaterInfo(response?.data.movies || []);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -113,26 +114,25 @@ const MovieInfoPage = () => {
     }
 
     useEffect(() => {
-        if (!movieName) return;
+        if (!theaterName) return;
         if (!dates.length) return;
 
-        fetchMovieInfo();
-    }, [movieName, selectedDateIndex, dates]);
+        fetchTheaterInfo();
+    }, [theaterName, selectedDateIndex, dates]);
 
     return (
         <>
-            <MovieInfoPageWrapper>
+            <TheaterInfoPageWrapper>
                 <div className="info_section">
                     <div className="section_inner">
                         <div className="page_head">
-                            <h4>{movieName}</h4>
+                            <h4>{theaterName}</h4>
                             {
                                 isInfoLoading ? (
-                                    <SkeletonLoader width="190px" height="18px" margin="5px 0 0 0" />
+                                    <SkeletonLoader width="100%" height="18px" margin="5px 0 0 0" />
                                 ) : (
                                     <li>
-                                        <b>Release Date:</b>
-                                        <p>{releaseDate}</p>
+                                        <p>{location}</p>
                                     </li>
                                 )
                             }
@@ -182,16 +182,16 @@ const MovieInfoPage = () => {
                                             </div>
                                         </div>
                                     </div>
-                                ) : movieInfo.length > 0 ? (
-                                    movieInfo.map((item, index) =>
+                                ) : theaterInfo.length > 0 ? (
+                                    theaterInfo.map((item, index) =>
                                         <div className="movie_info_box" key={index}>
                                             <div className="left_info">
                                                 <div className="img_sec">
-                                                    <img src="images/theater.png" alt="" />
+                                                    <img src={item.poster_image ? `${moviePosterURL}/${item.poster_image}` : '/images/blank-poster.jpg'} alt="" />
                                                 </div>
                                                 <div className="left_item">
-                                                    <h5>{item.theater_name}</h5>
-                                                    <p>{item.location}</p>
+                                                    <h5>{item.movie_name}</h5>
+                                                    <p><b>Release Date :</b> {item.release_date}</p>
                                                 </div>
                                             </div>
                                             <div className="right_info">
@@ -238,9 +238,9 @@ const MovieInfoPage = () => {
                         </div>
                     </div>
                 </div>
-            </MovieInfoPageWrapper>
+            </TheaterInfoPageWrapper>
         </>
     );
 }
 
-export default MovieInfoPage;
+export default TheaterInfoPage;
