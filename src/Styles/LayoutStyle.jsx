@@ -54,15 +54,14 @@ export const NavbarWrapper = styled('div')`
             position: relative;
             width: 100%;
             height: 50px;
-            padding: 8px 0;
             display: flex;
             align-items: center;
-            overflow: hidden;
 
             .logo {
                 position: relative;
                 height: 100%;
                 display: flex;
+                padding: 8px 0;
 
                 img {
                     position: relative;
@@ -75,34 +74,40 @@ export const NavbarWrapper = styled('div')`
                 position: relative;
                 margin-left: 20px;
                 height: 100%;
-                border: 1px solid ${colors.customColors.borderColor};
-                border-radius: 6px;
-                padding: 5px 0;
-                padding-right: 15px;
-                display: flex;
+                padding: 8px 0;
 
-                i {
+                .search_sec_inner {
                     position: relative;
-                    width: 40px;
                     height: 100%;
+                    border: 1px solid ${colors.customColors.borderColor};
+                    border-radius: 6px;
+                    padding: 5px 0;
+                    padding-right: 15px;
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 12px;
-                    border-right: 1px solid ${colors.customColors.borderColor};
-                    color: ${colors.customColors.blackColor3};
-                }
 
-                input {
-                    position: relative;
-                    margin-left: 20px;
-                    width: 300px;
-                    height: 100%;
-                    border: none;
-                    outline: none;
-                    font-size: 12px;
-                    color: ${colors.customColors.blackColor1};
-                    transition: all 0.3s ease;
+                    i {
+                        position: relative;
+                        width: 40px;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 12px;
+                        border-right: 1px solid ${colors.customColors.borderColor};
+                        color: ${colors.customColors.blackColor3};
+                    }
+
+                    input {
+                        position: relative;
+                        margin-left: 20px;
+                        width: 300px;
+                        height: 100%;
+                        border: none;
+                        outline: none;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor1};
+                        transition: all 0.3s ease;
+                    }
                 }
             }
 
@@ -112,6 +117,8 @@ export const NavbarWrapper = styled('div')`
                 height: 100%;
                 display: flex;
                 align-items: center;
+                padding: 8px 0;
+                overflow: hidden;
 
                 li {
                     position: relative;
@@ -205,7 +212,8 @@ export const NavbarWrapper = styled('div')`
                 position: relative;
                 margin-left: 30px;
                 height: 100%;
-
+                padding: 8px 0;
+                
                 .auth_btn {
                     position: relative;
                     height: 100%;

@@ -67,11 +67,13 @@ const Navbar = () => {
                         <img src="/images/Logo.png" alt="Logo" />
                     </div>
                     <div className="search_sec">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                        <input
-                            type="text"
-                            placeholder={`Search by ${words[wordIndex].substring(0, subIndex)}`}
-                        />
+                        <div className="search_sec_inner">
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                            <input
+                                type="text"
+                                placeholder={`Search by ${words[wordIndex].substring(0, subIndex)}`}
+                            />
+                        </div>
                     </div>
                     <div className="scrolled_items">
                         <li style={{ "--i": 1 }}><NavLink to="/home">Home</NavLink></li>
