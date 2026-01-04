@@ -216,6 +216,18 @@ export const AuthWrapper = styled('div')`
                 }
             }
 
+            .error_message {
+                position: relative;
+                margin-top: 6px;
+                padding-left: 5px;
+
+                p {
+                    position: relative;
+                    font-size: 10px;
+                    color: ${colors.customColors.redColor};
+                }
+            }
+
             .form_btn {
                 position: relative;
                 margin-top: 25px;

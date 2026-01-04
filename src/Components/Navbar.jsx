@@ -6,7 +6,7 @@ import { UserData } from "../Context/PageContext";
 const Navbar = () => {
     const navigate = useNavigate();
     const [isNavScrolled, setIsNavScrolled] = useState(false);
-    const { setShowLocaltionModal, selectedLocation } = UserData();
+    const { setShowLocaltionModal, selectedLocation, authToken, setAuthToken, userDetails, setUserDetails } = UserData();
     const words = ["movie name ...", "theater name ..."];
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
@@ -87,35 +87,39 @@ const Navbar = () => {
                         <i className="fa-solid fa-angle-down"></i>
                     </div>
                     <div className="auth_sec">
-                        <div className="auth_btn">
-                            <Link to="/auth">Sign In/Up</Link>
-                        </div>
-
-                        {/* <div className="profile">
-                            <div className="profile_btn" onClick={openProfileDropdown}>
-                                <img src="/images/profile-image.png" alt="" />
-                                <p>Sourish Mondal</p>
-                                <i className={`fa-solid fa-angle-down ${profileDropdown ? 'active' : ''}`}></i>
-                            </div>
-                            <div className={`profile_dropdown ${profileDropdown ? 'active' : ''}`}>
-                                <div className="dropdown_inner">
-                                    <ul>
-                                        <a onClick={() => pageRedirection("/profile")}>
-                                            <i className="fa-solid fa-circle-user"></i>
-                                            <span>My Profile</span>
-                                        </a>
-                                        <a onClick={() => pageRedirection("/bookings")}>
-                                            <i className="fa-solid fa-list-ol"></i>
-                                            <span>My Booking List</span>
-                                        </a>
-                                        <a>
-                                            <i className="fa-solid fa-right-from-bracket"></i>
-                                            <span>Sign Out</span>
-                                        </a>
-                                    </ul>
+                        {
+                            authToken ? (
+                                <div className="profile">
+                                    <div className="profile_btn" onClick={openProfileDropdown}>
+                                        <img src="/images/profile-image.png" alt="" />
+                                        <p>Sourish Mondal</p>
+                                        <i className={`fa-solid fa-angle-down ${profileDropdown ? 'active' : ''}`}></i>
+                                    </div>
+                                    <div className={`profile_dropdown ${profileDropdown ? 'active' : ''}`}>
+                                        <div className="dropdown_inner">
+                                            <ul>
+                                                <a onClick={() => pageRedirection("/profile")}>
+                                                    <i className="fa-solid fa-circle-user"></i>
+                                                    <span>My Profile</span>
+                                                </a>
+                                                <a onClick={() => pageRedirection("/bookings")}>
+                                                    <i className="fa-solid fa-list-ol"></i>
+                                                    <span>My Booking List</span>
+                                                </a>
+                                                <a>
+                                                    <i className="fa-solid fa-right-from-bracket"></i>
+                                                    <span>Sign Out</span>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div> */}
+                            ) : (
+                                <div className="auth_btn">
+                                    <Link to="/auth">Sign In/Up</Link>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
 

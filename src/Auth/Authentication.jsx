@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthWrapper } from "../Styles/AuthStyle";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
 import ButtonLoader from "../Components/Loader/ButtonLoader";
 import axios from "axios";
+import { UserData } from "../Context/PageContext";
 
 const AuthenticationPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
+    const { setAuthToken } = UserData();
     const [authStatus, setAuthStatus] = useState(() => {
         return localStorage.getItem("Auth Status") || 'signin';
     });
@@ -15,13 +19,19 @@ const AuthenticationPage = () => {
         return localStorage.getItem("Auth SubStatus") || '';
     });
     const [transitionDelay, setTransitionDelay] = useState('0.7');
-    const [registrationMail, setRegistrationMail] = useState(() => {
-        return localStorage.getItem("Registration Mail") || '';
+    const [verificationMail, setVerificationMail] = useState(() => {
+        return localStorage.getItem("verification Mail") || '';
     });
 
     function redirectToSignIn() {
         setAuthStatus('signin');
         setAuthSubStatus('');
+        setRegistrationFormData({
+            name: '',
+            email: '',
+            phone: '',
+            password: ''
+        });
         localStorage.setItem("Auth Status", 'signin');
         localStorage.removeItem("Auth SubStatus");
         setTransitionDelay('0.7');
@@ -30,6 +40,8 @@ const AuthenticationPage = () => {
     function redirectToSignUp() {
         setAuthStatus('signup');
         setAuthSubStatus('');
+        setUserName('');
+        setPassword('');
         localStorage.setItem("Auth Status", 'signup');
         localStorage.removeItem("Auth SubStatus");
         setTransitionDelay('0.7');
@@ -61,7 +73,6 @@ const AuthenticationPage = () => {
                 : `${user.slice(0, 3)}****${user.slice(-2)}`;
         return `${maskedUser}@${domain}`;
     };
-    const maskedEmail = maskEmail('sourishmondal.vizac@gmail.com');
 
     // Registration 
     const [isRegistrationButtonLoading, setIsRegistrationButtonLoading] = useState(false);
@@ -98,8 +109,8 @@ const AuthenticationPage = () => {
                 withCredentials: true
             });
             if (response) {
-                localStorage.setItem("Registration Mail", registrationFormData.email.trim());
-                setRegistrationMail(registrationFormData.email.trim());
+                localStorage.setItem("verification Mail", registrationFormData.email.trim());
+                setVerificationMail(registrationFormData.email.trim());
                 toast.success(response?.data.message);
                 setRegistrationFormData({
                     name: '',
@@ -107,12 +118,12 @@ const AuthenticationPage = () => {
                     phone: '',
                     password: ''
                 });
+                redirectToOtpVerify();
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         } finally {
             setIsRegistrationButtonLoading(false);
-            redirectToOtpVerify();
         }
     }
 
@@ -136,18 +147,127 @@ const AuthenticationPage = () => {
                 withCredentials: true
             });
             if (response) {
-                localStorage.removeItem("Registration Mail");
-                setRegistrationMail('');
+                localStorage.removeItem("verification Mail");
+                setVerificationMail('');
                 toast.success(response?.data.message);
                 setOtp('');
+                if (authStatus === 'signup') {
+                    redirectToSignIn();
+                } else {
+                    redirectToChangePassword();
+                }
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
         } finally {
             setIsOtpButtonLoading(false);
-            if (authStatus === 'signup') {
-                redirectToSignIn();
-            } else { }
+        }
+    }
+
+    // Forgot Password 
+    const [isForgotButtonLoading, setIsForgotButtonLoading] = useState(false);
+    const [recoveryMail, setRecoveryMail] = useState('');
+    const isForgotButtonValid = recoveryMail.trim() !== '';
+
+    const handleVerifyEmail = async (e) => {
+        e.preventDefault();
+        const payload = { email: recoveryMail };
+        setIsForgotButtonLoading(true);
+        try {
+            const response = await axios.post(api.forgotPassword, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                localStorage.setItem("verification Mail", recoveryMail.trim());
+                setVerificationMail(recoveryMail.trim());
+                toast.success(response?.data.message);
+                setRecoveryMail('');
+                redirectToOtpVerify();
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsForgotButtonLoading(false);
+        }
+    }
+
+    // Change Password 
+    const [isChangeButtonLoading, setIsChangeButtonLoading] = useState(false);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const isChangePasswordFormValid = newPassword.length > 0 && confirmPassword.length > 0 && newPassword === confirmPassword;
+    const showMismatchWarning =
+        (newPassword.length > 0 && confirmPassword.length > 0 && newPassword !== confirmPassword) ||
+        ((newPassword.length > 0 && confirmPassword.length === 0) ||
+            (confirmPassword.length > 0 && newPassword.length === 0));
+
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+        const payload = { password: newPassword, confirmPassword: confirmPassword };
+        setIsChangeButtonLoading(true);
+        try {
+            const response = await axios.post(api.resetPassword, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                toast.success(response?.data.message);
+                setNewPassword('');
+                setConfirmPassword('');
+                setAuthSubStatus('');
+                setTransitionDelay('0');
+                localStorage.removeItem("Auth SubStatus");
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsChangeButtonLoading(false);
+            setShowNewPassword(false);
+            setShowConfirmPassword(false);
+        }
+    }
+
+    // Login 
+    const [isLoginButtonLoading, setIsLoginButtonLoading] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const isLoginFormValid = userName.trim() !== '' && password.trim() !== '';
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        const payload = { name: userName, password: password };
+        setIsLoginButtonLoading(true);
+        try {
+            const response = await axios.post(api.login, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                toast.success(response?.data.message);
+                localStorage.setItem("authToken", response?.data.authToken);
+                setAuthToken(response?.data.authToken);
+                setUserName('');
+                setPassword('');
+                navigate('/');
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsLoginButtonLoading(false);
         }
     }
 
@@ -161,20 +281,31 @@ const AuthenticationPage = () => {
                     <div className="form_sec">
                         <div className="input_box">
                             <label><i className="fa-solid fa-user"></i></label>
-                            <input type="text" required />
+                            <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
                             <span>Email / Mobile No.</span>
                         </div>
                         <div className="input_box">
                             <label><i className="fa-solid fa-lock"></i></label>
-                            <input type="text" required />
+                            <input type={showPassword ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required />
                             <span>Password</span>
-                            <a><i className="fa-solid fa-eye-slash"></i></a>
+                            <a onClick={() => setShowPassword(!showPassword)}><i className={`fa-solid ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`}></i></a>
                         </div>
                         <div className="forgot_btn">
-                            <a onClick={redirectToForgotPassword}>Forgot password?</a>
+                            <a onClick={() => {
+                                redirectToForgotPassword();
+                                setUserName('');
+                                setPassword('');
+                            }}>Forgot password?</a>
                         </div>
                         <div className="form_btn">
-                            <button>Sign In</button>
+                            <button className={(!isLoginFormValid || isLoginButtonLoading) ? 'disable' : ''} onClick={handleLoginSubmit} disabled={!isLoginFormValid || isLoginButtonLoading}>
+                                {
+                                    isLoginButtonLoading ?
+                                        <ButtonLoader />
+                                        :
+                                        <>Sign In</>
+                                }
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -185,22 +316,22 @@ const AuthenticationPage = () => {
                     <div className="form_sec">
                         <div className="input_box">
                             <label><i className="fa-solid fa-user"></i></label>
-                            <input type="text" name="name" onChange={handleRegistrationInputChange} required />
+                            <input type="text" name="name" value={registrationFormData.name} onChange={handleRegistrationInputChange} required />
                             <span>Name</span>
                         </div>
                         <div className="input_box">
                             <label><i className="fa-solid fa-envelope"></i></label>
-                            <input type="text" name="email" onChange={handleRegistrationInputChange} required />
+                            <input type="text" name="email" value={registrationFormData.email} onChange={handleRegistrationInputChange} required />
                             <span>Email</span>
                         </div>
                         <div className="input_box">
                             <label><i className="fa-solid fa-phone"></i></label>
-                            <input type="text" name="phone" onChange={handleRegistrationInputChange} required />
+                            <input type="text" name="phone" value={registrationFormData.phone} onChange={handleRegistrationInputChange} required />
                             <span>Mobile No.</span>
                         </div>
                         <div className="input_box">
                             <label><i className="fa-solid fa-lock"></i></label>
-                            <input type={showRegistrationPassword ? 'text' : 'password'} name="password" onChange={handleRegistrationInputChange} required />
+                            <input type={showRegistrationPassword ? 'text' : 'password'} name="password" value={registrationFormData.password} onChange={handleRegistrationInputChange} required />
                             <span>Password</span>
                             <a onClick={toggleRegistrationPassword}><i className={`fa-solid ${showRegistrationPassword ? 'fa-eye' : 'fa-eye-slash'}`}></i></a>
                         </div>
@@ -224,14 +355,24 @@ const AuthenticationPage = () => {
                     <div className="form_sec">
                         <div className="input_box">
                             <label><i className="fa-solid fa-envelope"></i></label>
-                            <input type="text" required />
+                            <input type="text" value={recoveryMail} onChange={(e) => setRecoveryMail(e.target.value)} required />
                             <span>Email</span>
                         </div>
                         <div className="form_btn">
-                            <button onClick={redirectToOtpVerify}>Send OTP</button>
+                            <button className={(!isForgotButtonValid || isForgotButtonLoading) ? 'disable' : ''} onClick={handleVerifyEmail} disabled={!isForgotButtonValid || isForgotButtonLoading}>
+                                {
+                                    isForgotButtonLoading ?
+                                        <ButtonLoader />
+                                        :
+                                        <>Send OTP</>
+                                }
+                            </button>
                             <a onClick={() => {
                                 setAuthSubStatus('');
                                 setTransitionDelay('0');
+                                setRecoveryMail('');
+                                localStorage.removeItem("Auth SubStatus");
+                                localStorage.removeItem("verification Mail");
                             }}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
                         </div>
                     </div>
@@ -239,7 +380,7 @@ const AuthenticationPage = () => {
                 <div className="auth_form otp_verify">
                     <div className="form_head">
                         <h4>Verify <span><b>O</b>tp</span></h4>
-                        <p>We have send a 6 digit otp to <span>{maskEmail(registrationMail)}</span></p>
+                        <p>We have send a 6 digit otp to <span>{maskEmail(verificationMail)}</span></p>
                     </div>
                     <div className="form_sec">
                         <div className="otp_input_box">
@@ -251,16 +392,21 @@ const AuthenticationPage = () => {
                             />
                         </div>
                         <div className="form_btn">
-                            {/* <button className={(otp.length < 6 || isOtpButtonLoading) ? 'disable' : ''} onClick={handleOtpVerify} disabled={otp.length < 6 || isOtpButtonLoading}>
+                            <button className={(otp.length < 6 || isOtpButtonLoading) ? 'disable' : ''} onClick={handleOtpVerify} disabled={otp.length < 6 || isOtpButtonLoading}>
                                 {
                                     isOtpButtonLoading ?
                                         <ButtonLoader />
                                         :
                                         <>Verify</>
                                 }
-                            </button> */}
-                            <button onClick={redirectToChangePassword}>Verify</button>
-                            <a onClick={() => { authStatus === 'signin' ? redirectToForgotPassword() : redirectToSignUp() }}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
+                            </button>
+                            <a onClick={() => {
+                                authStatus === 'signin'
+                                    ? redirectToForgotPassword()
+                                    : redirectToSignUp();
+                                setOtp('');
+                                localStorage.removeItem("verification Mail");
+                            }}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
                         </div>
                     </div>
                 </div>
@@ -272,19 +418,38 @@ const AuthenticationPage = () => {
                     <div className="form_sec">
                         <div className="input_box">
                             <label><i className="fa-solid fa-lock"></i></label>
-                            <input type="text" required />
+                            <input type={showNewPassword ? 'text' : 'password'} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
                             <span>New Password</span>
-                            <a><i className="fa-solid fa-eye-slash"></i></a>
+                            <a onClick={() => setShowNewPassword(!showNewPassword)}><i className={`fa-solid ${showNewPassword ? 'fa-eye' : 'fa-eye-slash'}`}></i></a>
                         </div>
                         <div className="input_box">
                             <label><i className="fa-solid fa-lock"></i></label>
-                            <input type="text" required />
+                            <input type={showConfirmPassword ? 'text' : 'password'} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
                             <span>Confirm Password</span>
-                            <a><i className="fa-solid fa-eye-slash"></i></a>
+                            <a onClick={() => setShowConfirmPassword(!showConfirmPassword)}><i className={`fa-solid ${showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'}`}></i></a>
                         </div>
+                        {showMismatchWarning && (
+                            <div className="error_message">
+                                <p>Passwords must match</p>
+                            </div>
+                        )}
                         <div className="form_btn">
-                            <button onClick={redirectToOtpVerify}>Submit</button>
-                            <a onClick={redirectToOtpVerify}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
+                            <button className={(!isChangePasswordFormValid || isChangeButtonLoading) ? 'disable' : ''} onClick={handleChangePassword} disabled={!isChangePasswordFormValid || isChangeButtonLoading}>
+                                {
+                                    isChangeButtonLoading ?
+                                        <ButtonLoader />
+                                        :
+                                        <>Submit</>
+                                }
+                            </button>
+                            <a onClick={() => {
+                                setAuthSubStatus('');
+                                setTransitionDelay('0');
+                                setNewPassword('');
+                                setConfirmPassword('');
+                                setShowNewPassword(false);
+                                setShowConfirmPassword(false);
+                            }}><i className="fa-solid fa-arrow-left-long"></i>Go Back</a>
                         </div>
                     </div>
                 </div>

@@ -70,7 +70,6 @@ const HomePage = () => {
                 withCredentials: true
             });
             if (response) {
-                console.log(response);
                 setComingSoonMovies(response?.data.movies || []);
             }
         } catch (error) {
