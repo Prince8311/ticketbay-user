@@ -722,3 +722,252 @@ export const MovieFilterWrapper = styled('div')`
         }
     }
 `;
+
+export const SeatCapacityWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: initial;
+        transition: all 0.3s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 500px;
+        max-height: 100%;
+        background: ${colors.customColors.whiteColor};
+        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(-150px);
+        transition: transform 0.8s ease;
+
+        &.active {
+            transform: translateY(0);
+            transition: transform 0.8s ease;
+        }
+
+        .modal_head {
+            position: relative;
+            width: 100%;
+            padding: 13px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            h4 {
+                position: relative;
+                font-size: 14px;
+                line-height: 1;
+                font-weight: 600;
+                font-style: italic;
+                color: ${colors.customColors.redColor};
+            }
+        }
+
+        .modal_items {
+            position: relative;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+
+            .middle_part {
+                position: relative;
+                width: 100%;
+                padding-bottom: 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(to right, ${colors.customColors.whiteColor}, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
+                }
+
+                .icon_box {
+                    position: relative;
+                    display: flex;
+
+                    img {
+                        position: relative;
+                        display: flex;
+                        height: 60px;
+                    }
+                }
+
+                .selection_btn_sec {
+                    position: relative;
+                    margin-top: 15px;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+
+                    a {
+                        position: relative;
+                        margin: 0px 5px;
+                        cursor: pointer;
+                        width: 22px;
+                        height: 22px;
+                        border: 1px solid ${colors.customColors.blueColor};
+                        color: ${colors.customColors.blueColor};
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 11px;
+                        font-weight: 500;
+                        border-radius: 50%;
+                        transition: all 0.5s;
+
+                        &:hover {
+                            border: 1px solid ${colors.customColors.redColor};
+                            background: ${colors.customColors.redColor};
+                            color: ${colors.customColors.whiteColor};
+                            transition: all 0.5s;
+                        }
+
+                        &.selected {
+                            border: 1px solid ${colors.customColors.redColor};
+                            background: ${colors.customColors.redColor};
+                            color: ${colors.customColors.whiteColor};
+                        }
+                    }
+                }
+            }
+
+            .section_part {
+                position: relative;
+                width: 100%;
+                padding: 15px 0;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(to right, ${colors.customColors.whiteColor}, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
+                }
+
+                .part_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
+
+                    .section_btn {
+                        position: relative;
+                        padding: 5px;
+
+                        .btn_inner {
+                            position: relative;
+                            padding: 8px;
+                            display: flex;
+                            flex-direction: column;
+                            border: 1px solid ${colors.customColors.blueColor};
+                            border-radius: 6px;
+                            cursor: pointer;
+                            color: ${colors.customColors.blueColor};
+                            text-align: center;
+                            transition: all 0.5s;
+
+                            &:hover {
+                                background: ${colors.customColors.blueColor};
+                                color: ${colors.customColors.whiteColor};
+                            }
+
+                            &.selected {
+                                border: 1px solid ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColor};
+                                color: ${colors.customColors.whiteColor};
+                            }
+
+                            h5 {
+                                position: relative;
+                                font-size: 13px;
+                                font-weight: 500;
+                            }
+
+                            b {
+                                position: relative;
+                                margin: 0 5px;
+                                display: none;
+                            }
+
+                            span {
+                                position: relative;
+                                margin-top: 4px;
+                                font-size: 13px;
+                                font-weight: 400;
+
+                                i {
+                                    position: relative;
+                                    font-size: 13px;
+                                }
+                            }
+
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .bottom_part {
+                position: relative;
+                width: 100%;
+                margin-top: 15px;
+                padding: 0px 50px;
+
+                button {
+                    position: relative;
+                    width: 100%;
+                    height: 35px;
+                    border: 1px solid ${colors.customColors.greenColor};
+                    background: ${colors.customColors.greenColor};
+                    color: ${colors.customColors.whiteColor};
+                    font-size: 13px;
+                    letter-spacing: 0.3px;
+                    font-weight: 500;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.5s;
+
+                    &:hover {
+                        background: ${colors.customColors.whiteColor};
+                        color: ${colors.customColors.greenColor};
+                        transition: all 0.5s;
+                    }
+                }
+            }
+        }
+    }
+`;

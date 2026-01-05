@@ -381,4 +381,310 @@ export const SeatLayoutWrapper = styled('div')`
     height: 100vh;
     display: flex;
     flex-direction: column;
+
+    .top_section {
+        position: relative;
+        width: 100%;
+        height: 53px;
+        padding: 7px 0;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid ${colors.customColors.borderColor1};
+
+        .top_inner {
+            position: relative;
+            width: 1320px;
+            display: flex;
+
+            .back_btn {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 0 5px ${colors.boxShadowColors.shadowColor1};
+                cursor: pointer;
+
+                i {
+                    position: relative;
+                    font-size: 14px;
+                    color: ${colors.customColors.blackColor2};
+                }
+            }
+
+            .top_info_sec {
+                position: relative;
+                width: calc(100% - 140px);
+                display: flex;
+                flex-direction: column;
+                padding: 0 25px;
+
+                .movie_info_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    h6 {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor};
+                        font-weight: 500;
+                        line-height: 1;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor3};
+                        margin-left: 5px;
+                    }
+                }
+
+                .theater_info_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 3px;
+
+                    h6 {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor};
+                        font-weight: 500;
+                        line-height: 1;
+                        margin-right: 15px;
+                    }
+
+                    a {
+                        position: relative;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor3};
+                        text-decoration: none;
+                        padding: 0 15px;
+
+                        span {
+                            margin-left: 5px;
+                        }
+
+                        ::before {
+                           content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 1px;
+                            height: 100%;
+                            background: linear-gradient(to bottom, ${colors.customColors.blackColor}); 
+                        }
+                        ::after {
+                           content: '';
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            width: 1px;
+                            height: 100%;
+                            background: linear-gradient(to bottom, ${colors.customColors.blackColor3}); 
+                        }
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 12px;
+                        color: ${colors.customColors.blackColor3};
+                        margin-left: 15px;
+                    }
+                }
+            }
+
+            .seat_btn {
+                position: relative;
+                width: 100px;
+                display: flex;
+                align-items: flex-end;
+
+                button {
+                    position: relative;
+                    width: 100%;
+                    height: 30px;
+                    border: 1px solid ${colors.customColors.blueColor};
+                    border-radius: 6px;
+                    color: ${colors.customColors.blueColor};
+                    font-size: 12px;
+                    font-weight: 400;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: ${colors.customColors.whiteColor};
+
+                    i {
+                        margin-right: 8px;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+
+    .middle_section {
+        position: relative;
+        width: 100%;
+        height: calc(100% - 103px);
+        padding: 30px 0;
+
+        .middle_inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .inner_content {
+                position: relative;
+                width: 1320px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .swiper {
+                    position: relative;
+                    width: 100%;
+
+                    .swiper-slide {
+                        position: relative;
+                        min-width: 100%;
+                        width: max-content !important;
+                        min-height: 250px;
+
+                        &:last-of-type {
+                            width: 0 !important;
+                            min-width: 0 !important;
+                        }
+
+                        .screen_box {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+
+                            .display_image {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+                                margin-bottom: 50px;
+
+                                img {
+                                    position: relative;
+                                    width: 550px;
+                                    display: flex;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom_section {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        padding: 7px 0;
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid ${colors.customColors.borderColor1};
+
+        .bottom_inner {
+            position: relative;
+            width: 1320px;
+            display: flex;
+
+            .seat_information_sec {
+                position: relative;
+                width: calc(100% - 250px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .information_item {
+                    position: relative;
+                    display: flex;
+                    margin-right: 15px;
+
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+
+                    .box {
+                        position: relative;
+                        width: 17px;
+                        height: 17px;
+                        border: 1px solid ${colors.customColors.yellowColor};
+                        border-radius: 2px;
+
+                        &.available {
+                            border: 1px solid ${colors.customColors.greenColor};
+                        }
+                        &.selected {
+                            border: 1px solid ${colors.customColors.greenColor};
+                            background: ${colors.customColors.greenColor};
+                        }
+                        &.sold {
+                            border: 1px solid ${colors.customColors.borderColor1};
+                            background: ${colors.customColors.borderColor1};
+                        }
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor};
+                        margin-left: 7px;
+                    }
+                }
+            }
+
+            .btn_sec {
+                position: relative;
+                width: 250px;
+                display: flex;
+
+                button {
+                    position: relative;
+                    width: 100%;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: ${colors.customColors.whiteColor};
+                    background: ${colors.customColors.redColor};
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 13px;
+                    font-weight: 500;
+
+                    span {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
 `;
