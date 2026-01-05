@@ -130,7 +130,7 @@ export const EditProfileWrapper = styled('div')`
                     border: 2px solid ${colors.customColors.borderColor};
                     border-radius: 50%;
                     padding: 5px;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
 
                     .box_inner {
                         position: relative;
@@ -170,7 +170,7 @@ export const EditProfileWrapper = styled('div')`
                 .input_box {
                     position: relative;
                     width: 100%;
-                    margin-bottom: 15px;
+                    margin-top: 17px;
 
                     input {
                         position: relative;
@@ -213,10 +213,28 @@ export const EditProfileWrapper = styled('div')`
                         transition: all 0.5s ease;
                     }
                 }
-                
+ 
+                .verify_sec {
+                    position: relative;
+                    margin-top: 8px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding-right: 5px;
+
+                    a {
+                        position: relative;
+                        text-decoration: none;
+                        font-size: 11px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blueColor};
+                        cursor: pointer;
+                    }
+                }
+
                 .form_btn {
                     position: relative;
-                    margin-top: 10px;
+                    margin-top: 20px;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
