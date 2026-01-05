@@ -374,3 +374,11 @@ export const TicketBoxWrapper = styled('div')`
         }
     }
 `;
+
+export const SeatLayoutWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;

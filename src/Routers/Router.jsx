@@ -14,13 +14,14 @@ import TermsConditionsPage from "../Pages/TermsConditions";
 import PrivacyPolicyPage from "../Pages/PrivacyPolicy";
 import RefundPolicyPage from "../Pages/RefundPolicy";
 import ProfilePage from "../Pages/Account/Profile";
-import BookingListPage from "../Pages/BookingList";
-import UpcomingBookings from "../Pages/Bookings/Upcoming";
-import PreviousBookings from "../Pages/Bookings/Previous";
-import CancelledBookings from "../Pages/Bookings/Cancelled";
+import BookingListPage from "../Pages/Bookings/BookingList";
+import UpcomingBookings from "../Pages/Bookings/BookingsTypes/Upcoming";
+import PreviousBookings from "../Pages/Bookings/BookingsTypes/Previous";
+import CancelledBookings from "../Pages/Bookings/BookingsTypes/Cancelled";
 import MovieDetailsPage from "../Pages/Movies/Details";
 import MovieInfoPage from "../Pages/Movies/MovieInfo";
 import ComingSoonMoviesPage from "../Pages/Movies/ComingSoon";
+import SeatLayoutScreen from "../Pages/Bookings/SeatLayout";
 
 const Routers = () => {
     return (
@@ -50,6 +51,7 @@ const Routers = () => {
                         <Route path="previous" element={<PreviousBookings />} />
                         <Route path="cancelled" element={<CancelledBookings />} />
                     </Route>
+                    <Route path="seat-layout" element={<SeatLayoutScreen />} />
                 </Route>
             </Routes>
         </>

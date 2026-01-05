@@ -22,7 +22,7 @@ const TheaterInfoPage = () => {
         today.setHours(0, 0, 0, 0);
 
         for (let i = 0; i < 10; i++) {
-            const date = new Date();
+            const date = new Date(today);
             date.setDate(today.getDate() + i);
 
             dates.push({

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MovieInfoPageWrapper } from "../../Styles/MovieStyle";
 import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import axios from "axios";
@@ -7,6 +8,7 @@ import { toast } from "react-toastify";
 
 const MovieInfoPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const movieName = localStorage.getItem("Current Movie") || '';
     const [releaseDate, setReleaseDate] = useState('');
     const [dates, setDates] = useState([]);
@@ -22,7 +24,7 @@ const MovieInfoPage = () => {
         today.setHours(0, 0, 0, 0);
 
         for (let i = 0; i < 10; i++) {
-            const date = new Date();
+            const date = new Date(today);
             date.setDate(today.getDate() + i);
 
             dates.push({
@@ -56,6 +58,7 @@ const MovieInfoPage = () => {
                     d.setHours(0, 0, 0, 0);
                     return d.toISOString().split("T")[0];
                 });
+                console.log(formattedDates);
                 setAvailableDates(formattedDates);
             }
         } catch (error) {
@@ -118,6 +121,10 @@ const MovieInfoPage = () => {
 
         fetchMovieInfo();
     }, [movieName, selectedDateIndex, dates]);
+
+    const handleSeatLayoutRedirection = () => {
+        navigate('/seat-layout');
+    }
 
     return (
         <>
@@ -200,7 +207,7 @@ const MovieInfoPage = () => {
                                                         item.timings.length > 0 ? (
                                                             item.timings.map((slot, i) =>
                                                                 <div className="inner_box" key={i}>
-                                                                    <a>{slot.start_time}</a>
+                                                                    <a onClick={handleSeatLayoutRedirection}>{slot.start_time}</a>
                                                                     <div className="info_desc">
                                                                         <ul>
                                                                             <li>

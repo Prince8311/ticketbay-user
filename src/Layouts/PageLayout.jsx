@@ -6,20 +6,26 @@ import LocationModal from "../Modals/Location";
 import { UserData } from "../Context/PageContext";
 
 const PageLayout = () => {
-    const {selectedLocation} = UserData();
+    const { isNavFooterShow, selectedLocation } = UserData();
 
     return (
         <>
             <PageWrapper className={!selectedLocation ? 'no_scroll' : ''}>
-                <div className="top_section">
-                    <Navbar />
-                </div>
+                {
+                    isNavFooterShow &&
+                    <div className="top_section">
+                        <Navbar />
+                    </div>
+                }
                 <div className="body_section">
                     <Outlet />
                 </div>
-                <div className="bottom_section">
-                    <Footer />
-                </div>
+                {
+                    isNavFooterShow &&
+                    <div className="bottom_section">
+                        <Footer />
+                    </div>
+                }
                 <LocationModal />
             </PageWrapper>
         </>

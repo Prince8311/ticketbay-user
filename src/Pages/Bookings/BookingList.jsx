@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { BookingListPageWrapper } from "../Styles/BookingStyle";
+import { BookingListPageWrapper } from "../../Styles/BookingStyle";
 
 const BookingListPage = () => {
     return (

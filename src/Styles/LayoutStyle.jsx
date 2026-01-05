@@ -25,11 +25,11 @@ export const PageWrapper = styled('div')`
     .body_section {
         position: relative;
         width: 100%;
-        margin-bottom: 15px;
     }
-
+    
     .bottom_section {
         position: relative;
+        margin-top: 15px;
         width: 100%;
         margin-top: auto;
     }

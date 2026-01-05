@@ -17,8 +17,10 @@ export const UserProvider = ({ children }) => {
     });
     const [userDetails, setUserDetails] = useState({});
     const [isLocationButtonShow, setIsLocationButtonShow] = useState(false);
-    const isMoviePage = location.pathname.includes("/movie-details") || location.pathname.includes("/movie-info");
-    const isTheaterInfoPage = location.pathname.includes("/theater-info");
+    const [isNavFooterShow, setIsNavFooterShow] = useState(true);
+    const navFooterHiddenScreen = location.pathname.includes("/seat-layout");
+    const isMoviePage = location.pathname.includes("/movie-details") || location.pathname.includes("/movie-info") || location.pathname.includes("/seat-layout");
+    const isTheaterInfoPage = location.pathname.includes("/theater-info") || location.pathname.includes("/seat-layout");
     const isLocationAvailablePages = location.pathname.includes("/home") || location.pathname.includes("/recommended-movies") || location.pathname.includes("/upcoming-movies") || location.pathname.includes("/coming-soon-movies") || location.pathname.includes("/theaters");
 
     const checkAuth = async () => {
@@ -47,15 +49,20 @@ export const UserProvider = ({ children }) => {
         if (!isTheaterInfoPage) {
             localStorage.removeItem("Current Theater");
         }
-        if (isLocationAvailablePages) { 
+        if (isLocationAvailablePages) {
             setIsLocationButtonShow(true);
         } else {
             setIsLocationButtonShow(false);
         }
+        if (navFooterHiddenScreen) { 
+            setIsNavFooterShow(false);
+        } else {
+            setIsNavFooterShow(true);
+        }
     }, [location.pathname]);
 
     return (
-        <UserContext.Provider value={{ isLocationButtonShow, showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation, authToken, setAuthToken, userDetails, setUserDetails }}>
+        <UserContext.Provider value={{ isNavFooterShow, isLocationButtonShow, showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation, authToken, setAuthToken, userDetails, setUserDetails }}>
             {children}
         </UserContext.Provider>
     );
