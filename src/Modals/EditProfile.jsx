@@ -55,6 +55,9 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
                                 <input type="text" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
                                 <span>Email</span>
                             </div>
+                            <div className="verify_sec">
+                                <a>Verify Current Email</a>
+                            </div>
                             <div className="form_btn">
                                 <button>Update</button>
                             </div>

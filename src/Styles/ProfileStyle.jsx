@@ -180,6 +180,45 @@ export const ProfilePageWrapper = styled('div')`
                         }
                     }
                 }
+
+                .btn_sec {
+                    position: relative;
+                    width: 100%;
+
+                    button {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        padding: 12px 15px;
+                        border: none;
+                        border-radius: 6px;
+                        background: ${colors.customColors.redColor};
+                        color: ${colors.customColors.whiteColor};
+                        cursor: pointer;
+
+                        i {
+                            position: relative;
+                            font-size: 14px;
+                            display: flex;
+
+                            &:first-of-type {
+                                width: 25px;
+                            }
+                            &:last-of-type {
+                                margin-left: auto;
+                            }
+                        }
+
+                        p {
+                            position: relative;
+                            font-size: 13px;
+                            font-weight: 500;
+                            margin-right: 8px;
+                        }
+
+                    }
+                }
             }
         }
     }

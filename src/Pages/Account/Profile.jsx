@@ -123,20 +123,12 @@ const ProfilePage = () => {
                             </div>
                         </div>
                         <div className="item_box">
-                            <div className="item_head">
-                                <h4>Account</h4>
-                            </div>
-                            <div className="item_content_sec">
-                                <div className="content_box">
-                                    <i className="fa-solid fa-trash" style={{ color: "#f00" }}></i>
+                            <div className="btn_sec">
+                                <button>
+                                    <i className="fa-solid fa-trash"></i>
                                     <p>Delete My Account</p>
                                     <i className="fa-solid fa-angle-right"></i>
-                                </div>
-                                <div className="content_box">
-                                    <i className="fa-solid fa-arrow-right-from-bracket" style={{ color: "#f00" }}></i>
-                                    <p>Sign Out</p>
-                                    <i className="fa-solid fa-angle-right"></i>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
