@@ -6,7 +6,7 @@ const SeatCapacityModal = () => {
             <SeatCapacityWrapper>
                 <div className="modal_box">
                     <div className="modal_head">
-                        <h4>How Many Seats You Want to Book ?</h4>
+                        <h4>How many seats you want to Book ?</h4>
                     </div>
                     <div className="modal_items">
                         <div className="middle_part">

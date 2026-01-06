@@ -766,7 +766,7 @@ export const SeatCapacityWrapper = styled('div')`
         .modal_head {
             position: relative;
             width: 100%;
-            padding: 13px 20px;
+            padding: 25px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -784,8 +784,7 @@ export const SeatCapacityWrapper = styled('div')`
         .modal_items {
             position: relative;
             width: 100%;
-            padding-top: 20px;
-            padding-bottom: 15px;
+            padding-bottom: 25px;
             display: flex;
             flex-direction: column;
 
