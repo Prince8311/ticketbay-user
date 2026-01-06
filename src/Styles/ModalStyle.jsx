@@ -748,13 +748,14 @@ export const SeatCapacityWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 500px;
+        width: 450px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
+        padding: 25px 0;
         transform: translateY(-150px);
         transition: transform 0.8s ease;
 
@@ -763,142 +764,103 @@ export const SeatCapacityWrapper = styled('div')`
             transition: transform 0.8s ease;
         }
 
-        .modal_head {
+        .modal_inner {
             position: relative;
             width: 100%;
-            padding: 25px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            h4 {
-                position: relative;
-                font-size: 14px;
-                line-height: 1;
-                font-weight: 600;
-                font-style: italic;
-                color: ${colors.customColors.redColor};
-            }
-        }
-
-        .modal_items {
-            position: relative;
-            width: 100%;
-            padding-bottom: 25px;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
 
-            .middle_part {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .modal_head {
                 position: relative;
                 width: 100%;
-                padding-bottom: 15px;
+                padding: 0 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                h4 {
+                    position: relative;
+                    font-size: 14px;
+                    line-height: 1;
+                    font-weight: 600;
+                    font-style: italic;
+                    color: ${colors.customColors.redColor};
+                }
+            }
+
+            .modal_items {
+                position: relative;
+                width: 100%;
+                margin-top: 24px;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 1px;
-                    background: linear-gradient(to right, ${colors.customColors.whiteColor}, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
-                }
-
-                .icon_box {
+                .middle_part {
                     position: relative;
+                    width: 100%;
+                    padding-bottom: 11px;
                     display: flex;
+                    flex-direction: column;
+                    align-items: center;
 
-                    img {
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        background: linear-gradient(to right, ${colors.customColors.whiteColor}, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
+                    }
+
+                    .icon_box {
                         position: relative;
                         display: flex;
-                        height: 60px;
+
+                        img {
+                            position: relative;
+                            display: flex;
+                            height: 60px;
+                        }
                     }
-                }
 
-                .selection_btn_sec {
-                    position: relative;
-                    margin-top: 15px;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-wrap: wrap;
-
-                    a {
+                    .selection_btn_sec {
                         position: relative;
-                        margin: 0px 5px;
-                        cursor: pointer;
-                        width: 22px;
-                        height: 22px;
-                        border: 1px solid ${colors.customColors.blueColor};
-                        color: ${colors.customColors.blueColor};
+                        margin-top: 15px;
+                        width: 100%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 11px;
-                        font-weight: 500;
-                        border-radius: 50%;
-                        transition: all 0.5s;
+                        flex-wrap: wrap;
 
-                        &:hover {
-                            border: 1px solid ${colors.customColors.redColor};
-                            background: ${colors.customColors.redColor};
-                            color: ${colors.customColors.whiteColor};
-                            transition: all 0.5s;
-                        }
-
-                        &.selected {
-                            border: 1px solid ${colors.customColors.redColor};
-                            background: ${colors.customColors.redColor};
-                            color: ${colors.customColors.whiteColor};
-                        }
-                    }
-                }
-            }
-
-            .section_part {
-                position: relative;
-                width: 100%;
-                padding: 15px 0;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 1px;
-                    background: linear-gradient(to right, ${colors.customColors.whiteColor}, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
-                }
-
-                .part_inner {
-                    position: relative;
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    flex-wrap: wrap;
-
-                    .section_btn {
-                        position: relative;
-                        padding: 5px;
-
-                        .btn_inner {
+                        a {
                             position: relative;
-                            padding: 8px;
-                            display: flex;
-                            flex-direction: column;
-                            border: 1px solid ${colors.customColors.blueColor};
-                            border-radius: 6px;
+                            margin: 0px 5px;
                             cursor: pointer;
+                            width: 22px;
+                            height: 22px;
+                            border: 1px solid ${colors.customColors.blueColor};
                             color: ${colors.customColors.blueColor};
-                            text-align: center;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 11px;
+                            font-weight: 500;
+                            border-radius: 50%;
                             transition: all 0.5s;
 
                             &:hover {
-                                background: ${colors.customColors.blueColor};
+                                border: 1px solid ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColor};
                                 color: ${colors.customColors.whiteColor};
+                                transition: all 0.5s;
                             }
 
                             &.selected {
@@ -906,64 +868,116 @@ export const SeatCapacityWrapper = styled('div')`
                                 background: ${colors.customColors.redColor};
                                 color: ${colors.customColors.whiteColor};
                             }
+                        }
+                    }
+                }
 
-                            h5 {
+                .section_part {
+                    position: relative;
+                    width: 100%;
+                    padding: 6px 0;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        background: linear-gradient(to right, ${colors.customColors.whiteColor}, ${colors.customColors.blackColor3}, ${colors.customColors.whiteColor});
+                    }
+
+                    .part_inner {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        flex-wrap: wrap;
+
+                        .section_btn {
+                            position: relative;
+                            padding: 5px;
+
+                            .btn_inner {
                                 position: relative;
-                                font-size: 13px;
-                                font-weight: 500;
-                            }
+                                padding: 6px 10px;
+                                display: flex;
+                                flex-direction: column;
+                                border: 1px solid ${colors.customColors.blueColor};
+                                border-radius: 6px;
+                                cursor: pointer;
+                                color: ${colors.customColors.blueColor};
+                                text-align: center;
+                                transition: all 0.5s;
 
-                            b {
-                                position: relative;
-                                margin: 0 5px;
-                                display: none;
-                            }
+                                &:hover {
+                                    background: ${colors.customColors.blueColor};
+                                    color: ${colors.customColors.whiteColor};
+                                }
 
-                            span {
-                                position: relative;
-                                margin-top: 4px;
-                                font-size: 13px;
-                                font-weight: 400;
-
-                                i {
+                                h5 {
                                     position: relative;
-                                    font-size: 13px;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                }
+
+                                b {
+                                    position: relative;
+                                    margin: 0 5px;
+                                    display: none;
+                                }
+
+                                span {
+                                    position: relative;
+                                    margin-top: 2px;
+                                    font-size: 15px;
+                                    font-weight: 500;
+                                    font-style: italic;
+
+                                    a {
+                                        font-size: 12px;
+                                    }
+                                }
+
+                                p {
+                                    position: relative;
+                                    font-size: 10px;
                                 }
                             }
 
-                            p {
-                                position: relative;
-                                font-size: 12px;
+                            &.selected .btn_inner{
+                                border: 1px solid ${colors.customColors.redColor};
+                                background: ${colors.customColors.redColor};
+                                color: ${colors.customColors.whiteColor};
                             }
                         }
                     }
                 }
-            }
 
-            .bottom_part {
-                position: relative;
-                width: 100%;
-                margin-top: 15px;
-                padding: 0px 50px;
-
-                button {
+                .bottom_part {
                     position: relative;
                     width: 100%;
-                    height: 35px;
-                    border: 1px solid ${colors.customColors.greenColor};
-                    background: ${colors.customColors.greenColor};
-                    color: ${colors.customColors.whiteColor};
-                    font-size: 13px;
-                    letter-spacing: 0.3px;
-                    font-weight: 500;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    transition: all 0.5s;
+                    margin-top: 15px;
+                    padding: 0px 45px;
 
-                    &:hover {
-                        background: ${colors.customColors.whiteColor};
-                        color: ${colors.customColors.greenColor};
-                        transition: all 0.5s;
+                    button {
+                        position: relative;
+                        width: 100%;
+                        height: 35px;
+                        border: 1px solid ${colors.customColors.greenColor};
+                        background: ${colors.customColors.greenColor};
+                        color: ${colors.customColors.whiteColor};
+                        font-size: 13px;
+                        letter-spacing: 0.3px;
+                        font-weight: 500;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        transition: all 0.5s ease;
+
+                        &:hover {
+                            border-radius: 25px;
+                            transition: all 0.5s ease;
+                        }
                     }
                 }
             }

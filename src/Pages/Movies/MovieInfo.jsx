@@ -122,8 +122,22 @@ const MovieInfoPage = () => {
         fetchMovieInfo();
     }, [movieName, selectedDateIndex, dates]);
 
-    const handleSeatLayoutRedirection = () => {
-        navigate('/seat-layout');
+    const handleSeatLayoutRedirection = (theater, screen, screenId, time, format, language) => {
+        const d = dates[selectedDateIndex];
+        const day = d.day;
+        const selectedDate = `${d.date} ${d.month}, ${d.iso.split("-")[0]}`;
+        const movieData = {
+            screen: screen,
+            screenId: screenId,
+            day: day,
+            time: time,
+            date: selectedDate,
+            format: format,
+            language: language
+        };
+        localStorage.setItem("Current Theater", theater);
+        localStorage.setItem("Movie Data", JSON.stringify(movieData));
+        navigate(`/seat-layout?movie=${encodeURIComponent(movieName)}theater=${encodeURIComponent(theater)}`);
     }
 
     return (
@@ -207,7 +221,7 @@ const MovieInfoPage = () => {
                                                         item.timings.length > 0 ? (
                                                             item.timings.map((slot, i) =>
                                                                 <div className="inner_box" key={i}>
-                                                                    <a onClick={handleSeatLayoutRedirection}>{slot.start_time}</a>
+                                                                    <a onClick={() => handleSeatLayoutRedirection(item.theater_name, slot.screen, slot.screen_id, slot.start_time, slot.format, slot.language)}>{slot.start_time}</a>
                                                                     <div className="info_desc">
                                                                         <ul>
                                                                             <li>

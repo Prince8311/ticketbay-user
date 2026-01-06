@@ -30,5 +30,9 @@ export const getApiEndpoints = () => {
         fetchTheaters: `${apiURL}/api/theaters/theaters.php`,
         theaterMovieDates: `${apiURL}/api/theaters/movie-dates.php`,
         theaterMovieInfo: `${apiURL}/api/theaters/theater-info.php`,
+
+        // Screen Layout 
+        fecthScreenSections: `${apiURL}/api/screens/screen-sections.php`,
+        fecthScreenLayout: `${apiURL}/api/screens/screen-layout.php`,
     };
 }

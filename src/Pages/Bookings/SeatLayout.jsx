@@ -1,11 +1,56 @@
+import { useEffect, useState } from "react";
 import { SeatLayoutWrapper } from "../../Styles/BookingStyle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import SeatCapacityModal from "../../Modals/SeatCapacity";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { getApiEndpoints } from "../../Services/Api/ApiConfig";
+import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 
 const SeatLayoutScreen = () => {
+    const api = getApiEndpoints();
+    const [showSeatCapacityModal, setShowSeatCapacityModal] = useState(true);
+    const movieName = localStorage.getItem("Current Movie");
+    const theaterName = localStorage.getItem("Current Theater");
+    const movieData = JSON.parse(localStorage.getItem("Movie Data"));
+    const [selectedSeatNo, setSelectedSeatNo] = useState(1);
+    const [selectedSection, setSelectedSection] = useState('');
+
+    const openSeatCapacityModal = () => {
+        setShowSeatCapacityModal(!showSeatCapacityModal);
+    }
+
+    const fetchScreenLayout = async () => {
+        try {
+            const response = await axios.get(api.fecthScreenLayout, {
+                params: {
+                    screenId: movieData.screenId,
+                    sectionName: selectedSection,
+                    theaterName: theaterName
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                console.log("layoutttttttttt", response);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (selectedSection) { 
+            fetchScreenLayout();
+        }
+    }, [selectedSection]);
+
     return (
         <>
             <SeatLayoutWrapper>
@@ -16,20 +61,21 @@ const SeatLayoutScreen = () => {
                         </div>
                         <div className="top_info_sec">
                             <div className="movie_info_sec">
-                                <h6>Kantara Chapter One - </h6>
-                                <p>Hindi, 2D</p>
+                                <h6>{movieName}</h6>
+                                <p> - {movieData.language} {movieData.format}</p>
                             </div>
                             <div className="theater_info_sec">
-                                <h6>Sreelekha Theater</h6>
-                                <a>Day - <span>06 Jan, 2026</span></a>
-                                <p>09:00 AM</p>
+                                <h6>{theaterName}</h6>
+                                <p>{movieData.day} - {movieData.date}</p>
+                                <p>{movieData.time}</p>
                             </div>
                         </div>
                         <div className="seat_btn">
-                            <button>
+                            <a onClick={openSeatCapacityModal}>
+
                                 <i className="fa-solid fa-pen-to-square"></i>
-                                6 Seats
-                            </button>
+                                <p>{selectedSeatNo} Seats</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -72,12 +118,19 @@ const SeatLayoutScreen = () => {
                             </div>
                         </div>
                         <div className="btn_sec">
-                            <button>Pay <span>₹ 700</span></button>
+                            <button>Pay ₹700</button>
                         </div>
                     </div>
                 </div>
-
-                <SeatCapacityModal />
+                <SeatCapacityModal
+                    showSeatCapacityModal={showSeatCapacityModal}
+                    setShowSeatCapacityModal={setShowSeatCapacityModal}
+                    selectedSeatNo={selectedSeatNo}
+                    setSelectedSeatNo={setSelectedSeatNo}
+                    theaterName={theaterName}
+                    movieData={movieData}
+                    setSelectedSection={setSelectedSection}
+                />
             </SeatLayoutWrapper>
         </>
     );

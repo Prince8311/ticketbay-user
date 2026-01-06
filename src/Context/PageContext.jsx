@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
     const [isLocationButtonShow, setIsLocationButtonShow] = useState(false);
     const [isNavFooterShow, setIsNavFooterShow] = useState(true);
     const navFooterHiddenScreen = location.pathname.includes("/seat-layout");
+    const isSeatLayoutPage = location.pathname.includes("/seat-layout");
     const isMoviePage = location.pathname.includes("/movie-details") || location.pathname.includes("/movie-info") || location.pathname.includes("/seat-layout");
     const isTheaterInfoPage = location.pathname.includes("/theater-info") || location.pathname.includes("/seat-layout");
     const isLocationAvailablePages = location.pathname.includes("/home") || location.pathname.includes("/recommended-movies") || location.pathname.includes("/upcoming-movies") || location.pathname.includes("/coming-soon-movies") || location.pathname.includes("/theaters");
@@ -54,10 +55,13 @@ export const UserProvider = ({ children }) => {
         } else {
             setIsLocationButtonShow(false);
         }
-        if (navFooterHiddenScreen) { 
+        if (navFooterHiddenScreen) {
             setIsNavFooterShow(false);
         } else {
             setIsNavFooterShow(true);
+        }
+        if (!isSeatLayoutPage) { 
+            localStorage.removeItem("Movie Data");
         }
     }, [location.pathname]);
 

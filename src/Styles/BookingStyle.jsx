@@ -385,8 +385,8 @@ export const SeatLayoutWrapper = styled('div')`
     .top_section {
         position: relative;
         width: 100%;
-        height: 53px;
-        padding: 7px 0;
+        height: 56px;
+        padding: 10px 0;
         display: flex;
         justify-content: center;
         border-bottom: 1px solid ${colors.customColors.borderColor1};
@@ -419,7 +419,6 @@ export const SeatLayoutWrapper = styled('div')`
 
             .top_info_sec {
                 position: relative;
-                width: calc(100% - 140px);
                 display: flex;
                 flex-direction: column;
                 padding: 0 25px;
@@ -451,7 +450,7 @@ export const SeatLayoutWrapper = styled('div')`
                     width: 100%;
                     display: flex;
                     align-items: center;
-                    margin-top: 3px;
+                    margin-top: 5px;
 
                     h6 {
                         position: relative;
@@ -459,73 +458,44 @@ export const SeatLayoutWrapper = styled('div')`
                         color: ${colors.customColors.blackColor};
                         font-weight: 500;
                         line-height: 1;
-                        margin-right: 15px;
-                    }
-
-                    a {
-                        position: relative;
-                        font-size: 12px;
-                        color: ${colors.customColors.blackColor3};
-                        text-decoration: none;
-                        padding: 0 15px;
-
-                        span {
-                            margin-left: 5px;
-                        }
-
-                        ::before {
-                           content: '';
-                            position: absolute;
-                            left: 0;
-                            top: 0;
-                            width: 1px;
-                            height: 100%;
-                            background: linear-gradient(to bottom, ${colors.customColors.blackColor}); 
-                        }
-                        ::after {
-                           content: '';
-                            position: absolute;
-                            right: 0;
-                            top: 0;
-                            width: 1px;
-                            height: 100%;
-                            background: linear-gradient(to bottom, ${colors.customColors.blackColor3}); 
-                        }
                     }
 
                     p {
                         position: relative;
                         font-size: 12px;
+                        line-height: 1;
                         color: ${colors.customColors.blackColor3};
-                        margin-left: 15px;
+                        margin-left: 12px;
+                        padding-left: 12px;
+                        border-left: 2px solid ${colors.customColors.borderColor};
                     }
                 }
             }
 
             .seat_btn {
                 position: relative;
-                width: 100px;
+                margin-left: auto;
                 display: flex;
                 align-items: flex-end;
 
-                button {
+                a {
                     position: relative;
-                    width: 100%;
-                    height: 30px;
-                    border: 1px solid ${colors.customColors.blueColor};
-                    border-radius: 6px;
+                    display: flex;
+                    align-items: flex-end;
                     color: ${colors.customColors.blueColor};
                     font-size: 12px;
                     font-weight: 400;
                     cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: ${colors.customColors.whiteColor};
 
                     i {
-                        margin-right: 8px;
+                        margin-right: 6px;
                         font-size: 13px;
+                        padding-bottom: 1px;
+                    }
+
+                    p {
+                        position: relative;
+                        line-height: 1;
                     }
                 }
             }
@@ -535,8 +505,9 @@ export const SeatLayoutWrapper = styled('div')`
     .middle_section {
         position: relative;
         width: 100%;
-        height: calc(100% - 103px);
-        padding: 30px 0;
+        height: calc(100% - 108px);
+        padding-top: 10px;
+        padding-bottom: 20px;
 
         .middle_inner {
             position: relative;
@@ -590,7 +561,7 @@ export const SeatLayoutWrapper = styled('div')`
 
                                 img {
                                     position: relative;
-                                    width: 550px;
+                                    width: 450px;
                                     display: flex;
                                 }
                             }
@@ -604,8 +575,8 @@ export const SeatLayoutWrapper = styled('div')`
     .bottom_section {
         position: relative;
         width: 100%;
-        height: 50px;
-        padding: 7px 0;
+        height: 52px;
+        padding: 8px 0;
         display: flex;
         justify-content: center;
         border-top: 1px solid ${colors.customColors.borderColor1};
@@ -617,7 +588,7 @@ export const SeatLayoutWrapper = styled('div')`
 
             .seat_information_sec {
                 position: relative;
-                width: calc(100% - 250px);
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -625,7 +596,8 @@ export const SeatLayoutWrapper = styled('div')`
                 .information_item {
                     position: relative;
                     display: flex;
-                    margin-right: 15px;
+                    align-items: center;
+                    margin-right: 20px;
 
                     &:last-of-type {
                         margin-right: 0;
@@ -633,10 +605,10 @@ export const SeatLayoutWrapper = styled('div')`
 
                     .box {
                         position: relative;
-                        width: 17px;
-                        height: 17px;
+                        width: 15px;
+                        height: 15px;
                         border: 1px solid ${colors.customColors.yellowColor};
-                        border-radius: 2px;
+                        border-radius: 3px;
 
                         &.available {
                             border: 1px solid ${colors.customColors.greenColor};
@@ -653,16 +625,17 @@ export const SeatLayoutWrapper = styled('div')`
 
                     p {
                         position: relative;
-                        font-size: 13px;
+                        font-size: 12px;
                         color: ${colors.customColors.blackColor};
-                        margin-left: 7px;
+                        margin-left: 6px;
                     }
                 }
             }
 
             .btn_sec {
-                position: relative;
-                width: 250px;
+                position: absolute;
+                right: 0;
+                width: 180px;
                 display: flex;
 
                 button {
@@ -679,10 +652,6 @@ export const SeatLayoutWrapper = styled('div')`
                     cursor: pointer;
                     font-size: 13px;
                     font-weight: 500;
-
-                    span {
-                        margin-left: 5px;
-                    }
                 }
             }
         }
