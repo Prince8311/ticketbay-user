@@ -827,7 +827,7 @@ export const SeatCapacityWrapper = styled('div')`
                         img {
                             position: relative;
                             display: flex;
-                            height: 60px;
+                            height: 85px;
                         }
                     }
 

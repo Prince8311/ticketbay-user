@@ -566,6 +566,131 @@ export const SeatLayoutWrapper = styled('div')`
                                 }
                             }
                         }
+
+                        .seat_section {
+                            position: relative;
+                            margin-top: 10px;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+
+                            .sec_name {
+                                position: relative;
+                                width: 100%;
+                                padding-bottom: 8px;
+                                display: flex;
+
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 1px;
+                                    background: linear-gradient(to right, ${colors.customColors.borderColor}, transparent);
+                                }
+
+                                span {
+                                    position: relative;
+                                    font-size: 13px;
+                                    font-style: italic;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                }
+
+                                p {
+                                    position: relative;
+                                    margin-left: 6px;
+                                    font-size: 12px;
+                                    font-weight: 400;
+                                    color: ${colors.customColors.blackColor1};
+
+                                    b {
+                                        font-weight: 400;
+                                        font-size: 10px;
+                                    }
+                                }
+                            }
+
+                            .sec_seat_rows {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 20px;
+                                display: flex;
+                                flex-direction: column-reverse;
+
+                                .seat_row {
+                                    position: relative;
+                                    padding-right: 25px;
+                                    margin-top: 12px;
+
+                                    &:last-of-type {
+                                        margin-top: 0;
+                                    }
+
+                                    .seats {
+                                        position: relative;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        flex-direction: row-reverse;
+
+                                        li {
+                                            position: relative;
+                                            list-style: none;
+                                            width: 27px;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            margin-left: calc(var(--gap, 0) * 27px) !important;
+                                            margin-right: calc(var(--starting, 0) * 27px) !important;
+
+                                            a {
+                                                position: relative;
+                                                color: ${colors.customColors.blackColor2};
+                                                display: flex;
+                                                flex-direction: column;
+                                                align-items: center;
+                                                justify-content: center;
+                                                cursor: pointer;
+                                                transition: all 0.5s ease;
+                                                
+                                                i {
+                                                    font-size: 11px;
+                                                }
+
+                                                span {
+                                                    position: relative;
+                                                    margin-top: 1px;
+                                                    line-height: 1;
+                                                    font-size: 9px;
+                                                }
+                                            }
+
+                                            &.selected a {
+                                                color: ${colors.customColors.greenColor}; 
+                                                transition: all 0.5s ease;
+                                            }
+                                        }
+                                    }
+
+                                    .index {
+                                        position: absolute;
+                                        top: 0;
+                                        right: 0;
+                                        height: 13px;
+                                        display: flex;
+                                        align-items: center;
+
+                                        p {
+                                            position: relative;
+                                            font-size: 12px;
+                                            color: ${colors.themeColor};
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

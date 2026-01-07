@@ -11,16 +11,16 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
     const [sections, setSections] = useState([]);
     const [selectedSectionIndex, setSelectedSectionIndex] = useState(null);
     const seatCountIcons = {
-        1: "/images/cycle-icon.jpg",
-        2: "/images/bike-icon.jpg",
-        3: "/images/auto-icon.jpg",
-        4: "/images/small-car-icon.png",
-        5: "/images/large-car-icon.png",
-        6: "/images/large-car-icon.png",
-        7: "/images/large-car-icon.png",
-        8: "/images/bus-icon.jpg",
-        9: "/images/bus-icon.jpg",
-        10: "/images/bus-icon.jpg",
+        1: "/images/1-seat.png",
+        2: "/images/2-seats.png",
+        3: "/images/3-seats.png",
+        4: "/images/4-seats.png",
+        5: "/images/5-7-seats.png",
+        6: "/images/5-7-seats.png",
+        7: "/images/5-7-seats.png",
+        8: "/images/8-10-seats.png",
+        9: "/images/8-10-seats.png",
+        10: "/images/8-10-seats.png",
     }
 
     function closeModal() {
