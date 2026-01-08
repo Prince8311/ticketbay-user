@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SeatLayoutWrapper } from "../../Styles/BookingStyle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from 'swiper/modules';
@@ -20,6 +20,8 @@ const SeatLayoutScreen = () => {
     const [selectedSection, setSelectedSection] = useState('');
     const [seatsData, setSeatsData] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [adminCommission, setAdminCommission] = useState('');
+    const [theaterCommission, setTheaterCommission] = useState('');
 
     const openSeatCapacityModal = () => {
         setShowSeatCapacityModal(!showSeatCapacityModal);
@@ -40,8 +42,8 @@ const SeatLayoutScreen = () => {
                 withCredentials: true
             });
             if (response) {
-                console.log("layoutttttttttt", response);
                 setSeatsData(response?.data.seatData || []);
+                fetchCommissions(response?.data.seatData[0].price);
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);
@@ -53,6 +55,29 @@ const SeatLayoutScreen = () => {
             fetchScreenLayout();
         }
     }, [selectedSection]);
+
+    const fetchCommissions = async (price) => {
+
+        try {
+            const response = await axios.get(api.fetchCommissions, {
+                params: {
+                    theaterName: theaterName,
+                    price: price
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (response) {
+                setAdminCommission(response?.data.adminCommission);
+                setTheaterCommission(response?.data.theaterCommission);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
 
     const indexToAlphabet = (index) => {
         let letters = '';
@@ -67,7 +92,7 @@ const SeatLayoutScreen = () => {
         return seatsString.split(', ').map(seat => parseInt(seat.trim(), 10));
     };
 
-    const handleSeatSelect = (sectionName, seatNumber, price) => {
+    const handleSeatSelect = (sectionName, seatNumber) => {
         const seatIdentifier = `${sectionName}-${seatNumber}`;
         const isSeatAlreadySelected = selectedSeats.some(seat => seat.identifier === seatIdentifier);
         if (!isSeatAlreadySelected && selectedSeats.length >= selectedSeatNo) {
@@ -78,10 +103,25 @@ const SeatLayoutScreen = () => {
             if (isSeatAlreadySelected) {
                 return prevSelectedSeats.filter(seat => seat.identifier !== seatIdentifier);
             } else {
-                return [...prevSelectedSeats, { sectionName, seatNumber, price: Number(price), identifier: seatIdentifier }];
+                return [...prevSelectedSeats, { seatNumber, identifier: seatIdentifier }];
             }
         });
     };
+
+    const totalPrice = useMemo(() => {
+        return selectedSeats.reduce((sum, seat) => sum + seat.price, 0);
+    }, [selectedSeats]);
+
+    const handleCheckout = async () => {
+        const bookingData = {
+            seats: selectedSeats,
+            price: Number(seatsData[0].price),
+            section: seatsData[0].section_name,
+            adminCommission: adminCommission,
+            theaterCommission: theaterCommission
+        };
+        console.log("Pay", bookingData);
+    }
 
     return (
         <>
@@ -149,12 +189,12 @@ const SeatLayoutScreen = () => {
                                                                                     const seatNumber = `${indexToAlphabet(idx)}-${i + 1}`;
                                                                                     return (
                                                                                         <li key={i}
-                                                                                            className={` ${selectedSeats.some(seat => seat.identifier === `${seatData.sec_name}-${indexToAlphabet(idx)}-${i + 1}`) ? 'selected' : ''}`}
+                                                                                            className={` ${selectedSeats.some(seat => seat.identifier === `${seatData.section_name}-${indexToAlphabet(idx)}-${i + 1}`) ? 'selected' : ''}`}
                                                                                             style={{
                                                                                                 '--gap': gapIndex !== -1 ? gapAmounts[gapIndex] : 0,
                                                                                                 '--starting': i === 0 ? seats.starting : 0
                                                                                             }}
-                                                                                            onClick={() => handleSeatSelect(seatData.sec_name, `${indexToAlphabet(idx)}-${i + 1}`, seatData.price)}
+                                                                                            onClick={() => handleSeatSelect(seatData.section_name, `${indexToAlphabet(idx)}-${i + 1}`)}
                                                                                         >
                                                                                             <a>
                                                                                                 <i className="fa-solid fa-couch"></i>
@@ -199,8 +239,14 @@ const SeatLayoutScreen = () => {
                                 <p>Sold</p>
                             </div>
                         </div>
+                        {/* {
+                            selectedSeats.length > 0 &&
+                            <div className="btn_sec">
+                                <button onClick={handleCheckout}>Checkout</button>
+                            </div>
+                        } */}
                         <div className="btn_sec">
-                            <button>Pay ₹700</button>
+                            <button>Checkout</button>
                         </div>
                     </div>
                 </div>

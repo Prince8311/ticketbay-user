@@ -34,5 +34,8 @@ export const getApiEndpoints = () => {
         // Screen Layout 
         fecthScreenSections: `${apiURL}/api/screens/screen-sections.php`,
         fecthScreenLayout: `${apiURL}/api/screens/screen-layout.php`,
+
+        // Commissions 
+        fetchCommissions: `${apiURL}/api/booking/commissions.php`,
     };
 }
