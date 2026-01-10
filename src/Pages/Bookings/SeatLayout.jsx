@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
+import TermsConditionModal from "../../Modals/TermsCondition";
+import CheckoutModal from "../../Modals/Checkout";
 
 const SeatLayoutScreen = () => {
     const api = getApiEndpoints();
@@ -259,6 +261,8 @@ const SeatLayoutScreen = () => {
                     movieData={movieData}
                     setSelectedSection={setSelectedSection}
                 />
+                <TermsConditionModal />
+                <CheckoutModal />
             </SeatLayoutWrapper>
         </>
     );
