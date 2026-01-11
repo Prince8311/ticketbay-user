@@ -11,6 +11,7 @@ import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import TermsConditionModal from "../../Modals/TermsCondition";
 import CheckoutModal from "../../Modals/Checkout";
+import ReturnPolicyModal from "../../Modals/Returnpolicy";
 
 const SeatLayoutScreen = () => {
     const api = getApiEndpoints();
@@ -262,6 +263,7 @@ const SeatLayoutScreen = () => {
                     setSelectedSection={setSelectedSection}
                 />
                 <TermsConditionModal />
+                <ReturnPolicyModal />
                 <CheckoutModal />
             </SeatLayoutWrapper>
         </>

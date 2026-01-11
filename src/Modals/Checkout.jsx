@@ -13,7 +13,10 @@ const CheckoutModal = () => {
                         <div className="body_inner"></div>
                     </div>
                     <div className="modal_btn">
-                        <button>Pay Now</button>
+                        <button>
+                            <p>Pay</p>
+                            <span>200/-</span>
+                        </button>
                     </div>
                 </div>
             </CheckoutWrapper>
