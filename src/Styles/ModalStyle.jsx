@@ -1353,7 +1353,7 @@ export const ReturnPolicyWrapper = styled('div')`
 export const CheckoutWrapper = styled('div')`
     position: fixed;
     top: 0;
-    right: 0;
+    right: -100%;
     width: 300px;
     height: 100vh;
     border-top-left-radius: 10px;
@@ -1364,7 +1364,7 @@ export const CheckoutWrapper = styled('div')`
 
     &.active {
         right: 0;
-        transition: all 0.4s ease;
+        transition: all 0.6s ease;
     }
 
     .modal_inner {
@@ -1384,10 +1384,11 @@ export const CheckoutWrapper = styled('div')`
             align-items: center;
             justify-content: space-between;
 
-            h3 {
+            h4 {
                 position: relative;
                 font-size: 14px;
                 font-weight: 600;
+                font-style: italic;
                 color: ${colors.customColors.blackColor1};
             }
 
@@ -1403,13 +1404,288 @@ export const CheckoutWrapper = styled('div')`
             position: relative;
             width: 100%;
             height: calc(100% - 116px);
-            padding: 15px 20px;
+            padding: 15px 0px;
 
             .body_inner {
                 position: relative;
                 width: 100%;
                 height: 100%;
                 display: flex;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .checkout_items {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 5px 20px;
+
+                    .movie_details_box {
+                        position: relative;
+                        width: 100%;
+                        padding: 12px 16px;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 6px;
+                        display: flex;
+                        flex-direction: column;
+                        box-shadow: 5px 6px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -3px -3px 5px ${colors.boxShadowColors.shadowColor2};
+
+                        h5 {
+                            position: relative;
+                            font-size: 13px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor};
+                        }
+
+                        li {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            list-style: none;
+                            margin-top: 5px;
+
+                            p {
+                                position: relative;
+                                line-height: 1;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor2};
+                                margin-left: 5px;
+                                padding-left: 5px;
+                                border-left: 2px solid ${colors.customColors.blackColor3};
+
+                                &:first-of-type {
+                                    margin-left: 0;
+                                    padding-left: 0;
+                                    border-left: none;
+                                }
+                            }
+                        }
+
+                        span {
+                            position: relative;
+                            margin-top: 8px;
+                            font-size: 13px;
+                            font-weight: 500;
+                            color: ${colors.customColors.blackColor1};
+
+                            b {
+                                font-weight: 500;
+                            }
+                        }
+                    }
+
+                    .ticket_details_box {
+                        position: relative;
+                        margin-top: 20px;
+                        width: 100%;
+                        padding: 12px 16px;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 6px;
+                        display: flex;
+                        flex-direction: column;
+                        box-shadow: 5px 6px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -3px -3px 5px ${colors.boxShadowColors.shadowColor2};
+
+                        .ticket_seats {
+                            position: relative;
+                            width: 100%;
+                            padding-bottom: 5px;
+                            border-bottom: 1px solid ${colors.customColors.borderColor};
+
+                            li {
+                                position: relative;
+                                width: 100%;
+                                list-style: none;
+                                word-break: break-word;
+                                font-size: 13px;
+                                color: ${colors.customColors.blackColor1};
+                                
+                                span {
+                                    font-weight: 500;
+                                    margin-right: 5px;
+                                    color: ${colors.customColors.blackColor};
+                                }
+                            }
+                        }
+
+                        .ticket_details {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 10px;
+                            display: flex;
+                            flex-direction: column;
+
+                            li {
+                                position: relative;
+                                list-style: none;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                
+                                &.amounts {
+                                    margin-bottom: 5px;
+                                    span {
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+                                    
+                                    a {
+                                        margin-left: 5px;
+                                        font-size: 12px;
+                                        cursor: pointer;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        i {
+                                            position: relative;
+                                            transition: all 0.5s ease;
+                                            
+                                            &.rotate {
+                                                transform: rotate(-180deg);
+                                                transition: all 0.5s ease;
+                                            }
+                                        }
+                                    }
+
+                                    p {
+                                        margin-left: auto;
+                                        font-size: 12px;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        b {
+                                            font-weight: 400;
+                                            font-size: 11px;
+                                        }
+                                    }
+                                }
+                                
+                                &.convenience {
+                                    margin-bottom: 4px;
+
+                                    &:first-of-type {
+                                        margin-top: 5px;
+                                    }
+
+                                    span {
+                                        font-size: 11px;
+                                        color: ${colors.customColors.blackColor2};
+                                    }
+
+                                    p {
+                                        margin-left: auto;
+                                        font-size: 11px;
+                                        color: ${colors.customColors.blackColor2};
+
+                                        b {
+                                            font-weight: 400;
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                                
+                                &.total {
+                                    margin-top: 2px;
+                                    padding-top: 5px;
+                                    border-top: 1px dashed ${colors.customColors.borderColor1};
+                                    span {
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+                                    }
+
+                                    p {
+                                        margin-left: auto;
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+
+                                        b {
+                                            font-weight: 500;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .convenience_details {
+                                position: relative;
+                                width: 100%;
+                                max-height: 0;
+                                overflow: hidden;
+                                display: flex;
+                                flex-direction: column;
+                                transition: all 0.5s ease;
+                                
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 1px;
+                                    background: ${colors.customColors.borderColor};
+                                }
+                                
+                                &.active {
+                                    max-height: 150px;
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+                    }
+
+                    .account_box {
+                        position: relative;
+                        margin-top: 20px;
+                        width: 100%;
+                        padding: 12px 16px;
+                        background: ${colors.customColors.whiteColor};
+                        border-radius: 6px;
+                        display: flex;
+                        flex-direction: column;
+                        box-shadow: 5px 6px 10px ${colors.boxShadowColors.shadowColor2},
+                                    -3px -3px 5px ${colors.boxShadowColors.shadowColor2};
+
+                        li {
+                            position: relative;
+                            width: 100%;
+                            list-style: none;
+                            display: flex;
+                            flex-direction: column;
+                            margin-bottom: 10px;
+
+                            &:last-of-type {
+                                margin-bottom: 0;
+                            }
+
+                            span {
+                                position: relative;
+                                font-size: 13px;
+                                font-weight: 500;
+                                color: ${colors.customColors.blackColor};
+                            }
+
+                            p {
+                                position: relative;
+                                font-size: 12px;
+                                margin-top: 2px;
+                                color: ${colors.customColors.blackColor1};
+
+                                a {
+                                    color: ${colors.customColors.blueColor};
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

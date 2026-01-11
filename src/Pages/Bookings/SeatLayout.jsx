@@ -25,6 +25,10 @@ const SeatLayoutScreen = () => {
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [adminCommission, setAdminCommission] = useState('');
     const [theaterCommission, setTheaterCommission] = useState('');
+    const [showTermsConditionsModal, setShowTermsConditionsModal] = useState(false);
+    const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+    const [isAccepted, setIsAccepted] = useState(false);
+    const [bookingDetails, setBookingDetails] = useState({});
 
     const openSeatCapacityModal = () => {
         setShowSeatCapacityModal(!showSeatCapacityModal);
@@ -123,7 +127,8 @@ const SeatLayoutScreen = () => {
             adminCommission: adminCommission,
             theaterCommission: theaterCommission
         };
-        console.log("Pay", bookingData);
+        setBookingDetails(bookingData);
+        setShowTermsConditionsModal(true);
     }
 
     return (
@@ -242,15 +247,12 @@ const SeatLayoutScreen = () => {
                                 <p>Sold</p>
                             </div>
                         </div>
-                        {/* {
+                        {
                             selectedSeats.length > 0 &&
                             <div className="btn_sec">
                                 <button onClick={handleCheckout}>Checkout</button>
                             </div>
-                        } */}
-                        <div className="btn_sec">
-                            <button>Checkout</button>
-                        </div>
+                        }
                     </div>
                 </div>
                 <SeatCapacityModal
@@ -262,9 +264,17 @@ const SeatLayoutScreen = () => {
                     movieData={movieData}
                     setSelectedSection={setSelectedSection}
                 />
-                <TermsConditionModal />
-                <ReturnPolicyModal />
-                <CheckoutModal />
+                <TermsConditionModal
+                    showTermsConditionsModal={showTermsConditionsModal}
+                    setShowTermsConditionsModal={setShowTermsConditionsModal}
+                    setIsAccepted={setIsAccepted}
+                    setShowCheckoutModal={setShowCheckoutModal}
+                />
+                <CheckoutModal
+                    showCheckoutModal={showCheckoutModal}
+                    setShowCheckoutModal={setShowCheckoutModal}
+                    bookingDetails={bookingDetails}
+                />
             </SeatLayoutWrapper>
         </>
     );

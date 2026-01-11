@@ -1,14 +1,25 @@
 import { TermsConditionWrapper } from "../Styles/ModalStyle";
 
-const TermsConditionModal = () => {
+const TermsConditionModal = ({ showTermsConditionsModal, setShowTermsConditionsModal, setIsAccepted, setShowCheckoutModal }) => {
+
+    function closeModal() {
+        setShowTermsConditionsModal(false);
+    }
+
+    const handleAcceptTerms = () => {
+        setIsAccepted(true);
+        setShowTermsConditionsModal(false);
+        setShowCheckoutModal(true);
+    }
+
     return (
         <>
-            <TermsConditionWrapper>
-                <div className="modal_box">
+            <TermsConditionWrapper className={showTermsConditionsModal ? 'active' : ''}>
+                <div className={`modal_box ${showTermsConditionsModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Terms & Conditions</h4>
                         <div className="close_sec">
-                            <a><i className="fa-solid fa-xmark"></i></a>
+                            <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
                     </div>
                     <div className="modal_body">
@@ -56,7 +67,7 @@ const TermsConditionModal = () => {
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>Accept</button>
+                        <button onClick={handleAcceptTerms}>Accept</button>
                     </div>
                 </div>
             </TermsConditionWrapper>

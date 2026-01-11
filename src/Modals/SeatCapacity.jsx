@@ -118,7 +118,7 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
                                 </div>
                             </div>
                             <div className="bottom_part">
-                                <button>Select Seats</button>
+                                <button onClick={closeModal}>Select Seats</button>
                             </div>
                         </div>
                     </div>
