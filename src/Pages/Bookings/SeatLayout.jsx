@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SeatLayoutWrapper } from "../../Styles/BookingStyle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from 'swiper/modules';
@@ -15,6 +16,7 @@ import ReturnPolicyModal from "../../Modals/Returnpolicy";
 
 const SeatLayoutScreen = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const [showSeatCapacityModal, setShowSeatCapacityModal] = useState(true);
     const movieName = localStorage.getItem("Current Movie");
     const theaterName = localStorage.getItem("Current Theater");
@@ -28,7 +30,10 @@ const SeatLayoutScreen = () => {
     const [showTermsConditionsModal, setShowTermsConditionsModal] = useState(false);
     const [showCheckoutModal, setShowCheckoutModal] = useState(false);
     const [isAccepted, setIsAccepted] = useState(false);
-    const [bookingDetails, setBookingDetails] = useState({});
+    const [bookingDetails, setBookingDetails] = useState(() => {
+        return JSON.parse(localStorage.getItem("Booking Data")) || {}
+    });
+    const [showReturnPolicyModal, setShowReturnPolicyModal] = useState(false);
 
     const openSeatCapacityModal = () => {
         setShowSeatCapacityModal(!showSeatCapacityModal);
@@ -60,6 +65,14 @@ const SeatLayoutScreen = () => {
     useEffect(() => {
         if (selectedSection) {
             fetchScreenLayout();
+            if (Object.keys(bookingDetails).length > 0) { 
+                console.log(bookingDetails);
+                localStorage.removeItem("redirectURL");
+                setShowSeatCapacityModal(false);
+                setShowCheckoutModal(true);
+                setSelectedSeatNo(bookingDetails?.seats?.length);
+                setSelectedSeats(bookingDetails?.seats);
+            }
         }
     }, [selectedSection]);
 
@@ -127,8 +140,14 @@ const SeatLayoutScreen = () => {
             adminCommission: adminCommission,
             theaterCommission: theaterCommission
         };
-        setBookingDetails(bookingData);
-        setShowTermsConditionsModal(true);
+        if (localStorage.getItem("authToken")) {
+            setBookingDetails(bookingData);
+            setShowTermsConditionsModal(true);
+        } else {
+            localStorage.setItem("Booking Data", JSON.stringify(bookingData));
+            localStorage.setItem("redirectURL", '/seat-layout');
+            navigate('/auth');
+        }
     }
 
     return (
@@ -273,7 +292,15 @@ const SeatLayoutScreen = () => {
                 <CheckoutModal
                     showCheckoutModal={showCheckoutModal}
                     setShowCheckoutModal={setShowCheckoutModal}
+                    movieName={movieName}
+                    theaterName={theaterName}
+                    movieData={movieData}
                     bookingDetails={bookingDetails}
+                    setShowReturnPolicyModal={setShowReturnPolicyModal}
+                />
+                <ReturnPolicyModal
+                    showReturnPolicyModal={showReturnPolicyModal}
+                    setShowReturnPolicyModal={setShowReturnPolicyModal}
                 />
             </SeatLayoutWrapper>
         </>

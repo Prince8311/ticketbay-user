@@ -1,14 +1,18 @@
 import { ReturnPolicyWrapper } from "../Styles/ModalStyle";
 
-const ReturnPolicyModal = () => {
+const ReturnPolicyModal = ({ showReturnPolicyModal, setShowReturnPolicyModal }) => {
+    function closeModal() {
+        setShowReturnPolicyModal(false);
+    }
+
     return (
         <>
-            <ReturnPolicyWrapper>
-                <div className="modal_box">
+            <ReturnPolicyWrapper className={showReturnPolicyModal ? 'active' : ''}>
+                <div className={`modal_box ${showReturnPolicyModal ? 'active' : ''}`}>
                     <div className="modal_head">
                         <h4>Cancellation & Refund Policy</h4>
                         <div className="close_sec">
-                            <a><i className="fa-solid fa-xmark"></i></a>
+                            <a onClick={closeModal}><i className="fa-solid fa-xmark"></i></a>
                         </div>
                     </div>
                     <div className="modal_body">

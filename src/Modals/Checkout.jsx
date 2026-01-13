@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CheckoutWrapper } from "../Styles/ModalStyle";
 
-const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal }) => {
+const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, theaterName, movieData, bookingDetails, setShowReturnPolicyModal }) => {
     const [showConvenienceFeeDetails, setShowConvenienceFeeDetails] = useState(false);
 
     function closeModal() {
@@ -11,6 +11,47 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal }) => {
     function toggleDisplayConvenienceFeeDetails() {
         setShowConvenienceFeeDetails(!showConvenienceFeeDetails);
     }
+
+    const totalTicketPrice = (seatCount, price) => {
+        return (seatCount * price).toFixed(2);
+    }
+
+    const baseConvenienceFee = (seatCount, commission) => {
+        return (seatCount * commission).toFixed(2);
+    }
+
+    const convenienceGST = (seatCount, commission) => {
+        return ((seatCount * commission) * 0.18).toFixed(2);
+    }
+
+    const totalConvenienceFee = (seatCount, commission) => {
+        return (Number(seatCount * commission) + Number((seatCount * commission) * 0.18)).toFixed(2);
+    }
+
+    const orderTotalPrice = (seatCount, price, commission) => {
+        return (Number(seatCount * price) + Number(seatCount * commission) + Number((seatCount * commission) * 0.18)).toFixed(2);
+    }
+
+    const calculateCheckoutAmounts = (seatCount, price, adminCommission) => {
+        const ticketPrice = Number(price);
+        const commission = Number(adminCommission);
+
+        const ticketTotal = seatCount * ticketPrice;
+        const baseConvenience = seatCount * commission;
+        const gst = baseConvenience * 0.18;
+        const totalConvenience = baseConvenience + gst;
+        const orderTotal = ticketTotal + baseConvenience + gst;
+
+        return{
+            ticketTotal: ticketTotal.toFixed(2),
+            baseConvenience: baseConvenience.toFixed(2),
+            gst: gst.toFixed(2),
+            totalConvenience: totalConvenience.toFixed(2),
+            orderTotal: orderTotal.toFixed(2),
+        };
+    }
+
+    const amount = calculateCheckoutAmounts(bookingDetails?.seats?.length, bookingDetails?.price, bookingDetails?.adminCommission);
 
     return (
         <>
@@ -24,48 +65,48 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal }) => {
                         <div className="body_inner">
                             <div className="checkout_items">
                                 <div className="movie_details_box">
-                                    <h5>Avatar: The Way of Water</h5>
+                                    <h5>{movieName}</h5>
                                     <li>
-                                        <p>Hindi</p>
-                                        <p>2D</p>
+                                        <p>{movieData.language}</p>
+                                        <p>{movieData.format}</p>
                                     </li>
                                     <li>
-                                        <p>Sun</p>
-                                        <p>10 Jan, 2026</p>
-                                        <p>10:15 PM</p>
+                                        <p>{movieData.day}</p>
+                                        <p>{movieData.date}</p>
+                                        <p>{movieData.time}</p>
                                     </li>
-                                    <span>Sreelekha Theater <b>(Screen 1)</b></span>
+                                    <span>{theaterName} <b>({movieData.screen})</b></span>
                                 </div>
                                 <div className="ticket_details_box">
                                     <div className="ticket_seats">
                                         <li>
-                                            <span>Premium Class:</span>
-                                            A-1, A-2, A-3, A-4, B-3, B-5
+                                            <span>{bookingDetails.section}:</span>
+                                            {bookingDetails?.seats?.map(seat => seat.seatNumber).join(', ')}
                                         </li>
                                     </div>
                                     <div className="ticket_details">
                                         <li className="amounts">
                                             <span>Ticket(s) Price</span>
-                                            <p><b>₹</b>400.00</p>
+                                            <p><b>₹</b>{totalTicketPrice(bookingDetails?.seats?.length, bookingDetails?.price)}</p>
                                         </li>
                                         <li className="amounts">
                                             <span>Convenience fees</span>
                                             <a onClick={toggleDisplayConvenienceFeeDetails}><i className={`fa-solid fa-angle-down ${showConvenienceFeeDetails ? 'rotate' : ''}`}></i></a>
-                                            <p><b>₹</b>46.40</p>
+                                            <p><b>₹</b>{totalConvenienceFee(bookingDetails?.seats?.length, bookingDetails?.adminCommission)}</p>
                                         </li>
                                         <div className={`convenience_details ${showConvenienceFeeDetails ? 'active' : ''}`}>
                                             <li className="convenience">
                                                 <span>Base amount</span>
-                                                <p><b>₹</b>40.00</p>
+                                                <p><b>₹</b>{baseConvenienceFee(bookingDetails?.seats?.length, bookingDetails?.adminCommission)}</p>
                                             </li>
                                             <li className="convenience">
                                                 <span>Integrated GST (@ 18%)</span>
-                                                <p><b>₹</b>6.40</p>
+                                                <p><b>₹</b>{convenienceGST(bookingDetails?.seats?.length, bookingDetails?.adminCommission)}</p>
                                             </li>
                                         </div>
                                         <li className="total">
                                             <span>Order Total</span>
-                                            <p><b>₹</b>446.40</p>
+                                            <p><b>₹</b>{orderTotalPrice(bookingDetails?.seats?.length, bookingDetails?.price, bookingDetails?.adminCommission)}</p>
                                         </li>
                                     </div>
                                 </div>
@@ -76,7 +117,7 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal }) => {
                                     </li>
                                     <li>
                                         <span>Cancellation Available</span>
-                                        <p>To know more <a>view cancellation / refund policy</a></p>
+                                        <p>To know more <a onClick={() => setShowReturnPolicyModal(true)}>view cancellation / refund policy</a></p>
                                     </li>
                                 </div>
                             </div>
@@ -85,7 +126,7 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal }) => {
                     <div className="modal_btn">
                         <button>
                             <p>Pay</p>
-                            <span>200/-</span>
+                            <span>₹{orderTotalPrice(bookingDetails?.seats?.length, bookingDetails?.price, bookingDetails?.adminCommission)}</span>
                         </button>
                     </div>
                 </div>

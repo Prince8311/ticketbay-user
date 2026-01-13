@@ -777,6 +777,81 @@ export const SeatLayoutWrapper = styled('div')`
                     cursor: pointer;
                     font-size: 13px;
                     font-weight: 500;
+                    transition: all 0.5s ease;
+                    
+                    &:hover {
+                        border-radius: 25px;
+                        transition: all 0.5s ease;
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const BookingResponseWrapper = styled('div')`
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 35px;
+    background: ${colors.customColors.lightBackground4};
+
+    .wrapper_inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .status_box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                position: relative;
+                width: 300px;
+            }
+
+            h4 {
+                position: relative;
+                width: max-content;
+                display: flex;
+                font-weight: 600;
+                font-family: 'Oleo Script', cursive;
+                letter-spacing: 0.55px;
+                font-size: 25px;
+                line-height: 1;
+
+                &.success {
+                    color: ${colors.customColors.greenColor};
+                }
+                
+                &.fail {
+                    color: ${colors.customColors.redColor};
+                }
+            }
+
+            h6 {
+                position: relative;
+                margin-top: 7px;
+                font-size: 14px;
+                font-weight: 500;
+                color: ${colors.customColors.blackColor1};
+            }
+
+            p {
+                position: relative;
+                margin-top: 10px;
+                font-size: 12px;
+                color: ${colors.customColors.blackColor2};
+                
+                span {
+                    font-weight: 500;
+                    color: ${colors.customColors.blueColor};
                 }
             }
         }

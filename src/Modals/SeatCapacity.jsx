@@ -9,7 +9,9 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
     const api = getApiEndpoints();
     const [isSectionsLoading, setIsSectionsLoading] = useState(false);
     const [sections, setSections] = useState([]);
-    const [selectedSectionIndex, setSelectedSectionIndex] = useState(null);
+    const [selectedSectionIndex, setSelectedSectionIndex] = useState(() => {
+        return localStorage.getItem("Selected Section") || null;
+    });
     const seatCountIcons = {
         1: "/images/1-seat.png",
         2: "/images/2-seats.png",
@@ -21,7 +23,7 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
         8: "/images/8-10-seats.png",
         9: "/images/8-10-seats.png",
         10: "/images/8-10-seats.png",
-    }
+    };
 
     function closeModal() {
         setShowSeatCapacityModal(false);
@@ -46,8 +48,10 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
                 const fetchedSections = response?.data.sections || [];
                 setSections(fetchedSections);
                 if (fetchedSections.length > 0) {
-                    setSelectedSectionIndex(0);
-                    setSelectedSection(fetchedSections[0].section_name);
+                    const storedIndex = localStorage.getItem("Selected Section");
+                    const selectedIndex = storedIndex !== null && Number(storedIndex) < fetchedSections.length ? Number(storedIndex) : 0;
+                    setSelectedSectionIndex(selectedIndex);
+                    setSelectedSection(fetchedSections[selectedIndex].section_name);
                 }
             }
         } catch (error) {
@@ -66,6 +70,12 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
     const handleSelectSeatCount = (count) => {
         setSelectedSeatNo(count);
     };
+
+    const handleSelectSection = (index, section) => {
+        setSelectedSectionIndex(index);
+        setSelectedSection(section);
+        localStorage.setItem("Selected Section", index);
+    }
 
     return (
         <>
@@ -99,10 +109,7 @@ const SeatCapacityModal = ({ showSeatCapacityModal, setShowSeatCapacityModal, se
                                             ))
                                         ) : sections.length > 0 ? (
                                             sections.map((section, i) =>
-                                                <div className={`section_btn ${selectedSectionIndex === i ? 'selected' : ''}`} key={i} onClick={() => {
-                                                    setSelectedSectionIndex(i);
-                                                    setSelectedSection(section.section_name);
-                                                }}>
+                                                <div className={`section_btn ${selectedSectionIndex === i ? 'selected' : ''}`} key={i} onClick={() => handleSelectSection(i, section.section_name)}>
                                                     <div className="btn_inner">
                                                         <h5>{section.section_name}</h5>
                                                         <b>-</b>

@@ -22,6 +22,8 @@ import MovieDetailsPage from "../Pages/Movies/Details";
 import MovieInfoPage from "../Pages/Movies/MovieInfo";
 import ComingSoonMoviesPage from "../Pages/Movies/ComingSoon";
 import SeatLayoutScreen from "../Pages/Bookings/SeatLayout";
+import BookingSuccessPage from "../Pages/Bookings/BookingSuccess";
+import BookingFailPage from "../Pages/Bookings/BookingFail";
 
 const Routers = () => {
     return (
@@ -52,6 +54,8 @@ const Routers = () => {
                         <Route path="cancelled" element={<CancelledBookings />} />
                     </Route>
                     <Route path="seat-layout" element={<SeatLayoutScreen />} />
+                    <Route path="booking-success" element={<BookingSuccessPage />} />
+                    <Route path="booking-fail" element={<BookingFailPage />} />
                 </Route>
             </Routes>
         </>
