@@ -1,35 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckoutWrapper } from "../Styles/ModalStyle";
+import { UserData } from "../Context/PageContext";
+import { getApiEndpoints } from "../Services/Api/ApiConfig";
+import { toast } from "react-toastify";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
 
 const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, theaterName, movieData, bookingDetails, setShowReturnPolicyModal }) => {
+    const api = getApiEndpoints();
+    const { userDetails } = UserData();
+    const [seats, setSeats] = useState('');
     const [showConvenienceFeeDetails, setShowConvenienceFeeDetails] = useState(false);
+    const [isPayButtonLoading, setIsPayButtonLoading] = useState(false);
 
     function closeModal() {
         setShowCheckoutModal(false);
     }
 
+    useEffect(() => {
+        if (showCheckoutModal) {
+            setSeats(bookingDetails?.seats?.map(seat => seat.seatNumber).join(', '));
+        }
+    }, [showCheckoutModal]);
+
     function toggleDisplayConvenienceFeeDetails() {
         setShowConvenienceFeeDetails(!showConvenienceFeeDetails);
-    }
-
-    const totalTicketPrice = (seatCount, price) => {
-        return (seatCount * price).toFixed(2);
-    }
-
-    const baseConvenienceFee = (seatCount, commission) => {
-        return (seatCount * commission).toFixed(2);
-    }
-
-    const convenienceGST = (seatCount, commission) => {
-        return ((seatCount * commission) * 0.18).toFixed(2);
-    }
-
-    const totalConvenienceFee = (seatCount, commission) => {
-        return (Number(seatCount * commission) + Number((seatCount * commission) * 0.18)).toFixed(2);
-    }
-
-    const orderTotalPrice = (seatCount, price, commission) => {
-        return (Number(seatCount * price) + Number(seatCount * commission) + Number((seatCount * commission) * 0.18)).toFixed(2);
     }
 
     const calculateCheckoutAmounts = (seatCount, price, adminCommission) => {
@@ -42,7 +36,7 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, the
         const totalConvenience = baseConvenience + gst;
         const orderTotal = ticketTotal + baseConvenience + gst;
 
-        return{
+        return {
             ticketTotal: ticketTotal.toFixed(2),
             baseConvenience: baseConvenience.toFixed(2),
             gst: gst.toFixed(2),
@@ -52,6 +46,32 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, the
     }
 
     const amount = calculateCheckoutAmounts(bookingDetails?.seats?.length, bookingDetails?.price, bookingDetails?.adminCommission);
+
+    const handleBookTickets = async () => {
+        setIsPayButtonLoading(true);
+        const payload = {
+            bookingId: bookingDetails.bookingId,
+            userName: userDetails.name,
+            userEmail: userDetails.email,
+            userPhone: userDetails.phone,
+            theaterName: theaterName,
+            movieName: movieName,
+            ticketPrice: amount.ticketTotal,
+            baseConvenience: amount.baseConvenience,
+            gst: amount.gst,
+            theaterCommission: bookingDetails.theaterCommission
+        };
+        try {
+            const response = await axiosInstance.post(api.bookingPayment, payload);
+            if (response?.data?.status === 200) { 
+                window.location.href = response?.data?.payURL
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsPayButtonLoading(false);
+        }
+    }
 
     return (
         <>
@@ -81,39 +101,39 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, the
                                     <div className="ticket_seats">
                                         <li>
                                             <span>{bookingDetails.section}:</span>
-                                            {bookingDetails?.seats?.map(seat => seat.seatNumber).join(', ')}
+                                            {seats}
                                         </li>
                                     </div>
                                     <div className="ticket_details">
                                         <li className="amounts">
                                             <span>Ticket(s) Price</span>
-                                            <p><b>₹</b>{totalTicketPrice(bookingDetails?.seats?.length, bookingDetails?.price)}</p>
+                                            <p><b>₹</b>{amount.ticketTotal}</p>
                                         </li>
                                         <li className="amounts">
                                             <span>Convenience fees</span>
                                             <a onClick={toggleDisplayConvenienceFeeDetails}><i className={`fa-solid fa-angle-down ${showConvenienceFeeDetails ? 'rotate' : ''}`}></i></a>
-                                            <p><b>₹</b>{totalConvenienceFee(bookingDetails?.seats?.length, bookingDetails?.adminCommission)}</p>
+                                            <p><b>₹</b>{amount.totalConvenience}</p>
                                         </li>
                                         <div className={`convenience_details ${showConvenienceFeeDetails ? 'active' : ''}`}>
                                             <li className="convenience">
                                                 <span>Base amount</span>
-                                                <p><b>₹</b>{baseConvenienceFee(bookingDetails?.seats?.length, bookingDetails?.adminCommission)}</p>
+                                                <p><b>₹</b>{amount.baseConvenience}</p>
                                             </li>
                                             <li className="convenience">
                                                 <span>Integrated GST (@ 18%)</span>
-                                                <p><b>₹</b>{convenienceGST(bookingDetails?.seats?.length, bookingDetails?.adminCommission)}</p>
+                                                <p><b>₹</b>{amount.gst}</p>
                                             </li>
                                         </div>
                                         <li className="total">
                                             <span>Order Total</span>
-                                            <p><b>₹</b>{orderTotalPrice(bookingDetails?.seats?.length, bookingDetails?.price, bookingDetails?.adminCommission)}</p>
+                                            <p><b>₹</b>{amount.orderTotal}</p>
                                         </li>
                                     </div>
                                 </div>
                                 <div className="account_box">
                                     <li>
                                         <span>For sending details</span>
-                                        <p>demo12345@gmail.com</p>
+                                        <p>{userDetails.email}</p>
                                     </li>
                                     <li>
                                         <span>Cancellation Available</span>
@@ -124,9 +144,9 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, the
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button>
+                        <button onClick={handleBookTickets}>
                             <p>Pay</p>
-                            <span>₹{orderTotalPrice(bookingDetails?.seats?.length, bookingDetails?.price, bookingDetails?.adminCommission)}</span>
+                            <span>₹{amount.orderTotal}</span>
                         </button>
                     </div>
                 </div>

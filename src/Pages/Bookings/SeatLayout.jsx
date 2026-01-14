@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SeatLayoutWrapper } from "../../Styles/BookingStyle";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,15 +8,19 @@ import 'swiper/css/free-mode';
 import SeatCapacityModal from "../../Modals/SeatCapacity";
 import { toast } from "react-toastify";
 import axios from "axios";
+import axiosInstance from "../../Services/Middleware/AxiosInstance";
 import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import TermsConditionModal from "../../Modals/TermsCondition";
 import CheckoutModal from "../../Modals/Checkout";
 import ReturnPolicyModal from "../../Modals/Returnpolicy";
+import { UserData } from "../../Context/PageContext";
+import ButtonLoader from "../../Components/Loader/ButtonLoader";
 
 const SeatLayoutScreen = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
+    const { userDetails } = UserData();
     const [showSeatCapacityModal, setShowSeatCapacityModal] = useState(true);
     const movieName = localStorage.getItem("Current Movie");
     const theaterName = localStorage.getItem("Current Theater");
@@ -30,6 +34,7 @@ const SeatLayoutScreen = () => {
     const [showTermsConditionsModal, setShowTermsConditionsModal] = useState(false);
     const [showCheckoutModal, setShowCheckoutModal] = useState(false);
     const [isAccepted, setIsAccepted] = useState(false);
+    const [isCheckoutButtonLoading, setIsCheckoutButtonLoading] = useState(false);
     const [bookingDetails, setBookingDetails] = useState(() => {
         return JSON.parse(localStorage.getItem("Booking Data")) || {}
     });
@@ -65,11 +70,11 @@ const SeatLayoutScreen = () => {
     useEffect(() => {
         if (selectedSection) {
             fetchScreenLayout();
-            if (Object.keys(bookingDetails).length > 0) { 
+            if (Object.keys(bookingDetails).length > 0) {
                 console.log(bookingDetails);
                 localStorage.removeItem("redirectURL");
                 setShowSeatCapacityModal(false);
-                setShowCheckoutModal(true);
+                setShowCheckoutModal(false);
                 setSelectedSeatNo(bookingDetails?.seats?.length);
                 setSelectedSeats(bookingDetails?.seats);
             }
@@ -77,7 +82,6 @@ const SeatLayoutScreen = () => {
     }, [selectedSection]);
 
     const fetchCommissions = async (price) => {
-
         try {
             const response = await axios.get(api.fetchCommissions, {
                 params: {
@@ -128,11 +132,23 @@ const SeatLayoutScreen = () => {
         });
     };
 
-    const totalPrice = useMemo(() => {
-        return selectedSeats.reduce((sum, seat) => sum + seat.price, 0);
-    }, [selectedSeats]);
-
     const handleCheckout = async () => {
+        setIsCheckoutButtonLoading(true);
+        const selectedSeatNumbers = selectedSeats.map(seat => seat.seatNumber).join(', ');
+        const payload = {
+            userName: userDetails.name,
+            theaterName: theaterName,
+            movieName: movieName,
+            language: movieData.language,
+            format: movieData.format,
+            day: movieData.day,
+            startTime: movieData.time,
+            startDate: movieData.date,
+            screen: movieData.screen,
+            screenId: movieData.screenId,
+            section: seatsData[0].section_name,
+            seats: selectedSeatNumbers
+        };
         const bookingData = {
             seats: selectedSeats,
             price: Number(seatsData[0].price),
@@ -141,8 +157,23 @@ const SeatLayoutScreen = () => {
             theaterCommission: theaterCommission
         };
         if (localStorage.getItem("authToken")) {
-            setBookingDetails(bookingData);
-            setShowTermsConditionsModal(true);
+            try {
+                const response = await axiosInstance.post(api.seatReserve, payload);
+                if (response?.data?.status === 200) {
+                    const bookingId = response?.data?.bookingId;
+                    const updatedBookingData = {
+                        ...bookingData,
+                        bookingId: bookingId
+                    };
+                    setBookingDetails(updatedBookingData);
+                    localStorage.setItem("Booking Data", JSON.stringify(updatedBookingData));
+                    setShowTermsConditionsModal(true);
+                }
+            } catch (error) {
+                toast.error(error.response?.data.message || error.message);
+            } finally {
+                setIsCheckoutButtonLoading(false);
+            }
         } else {
             localStorage.setItem("Booking Data", JSON.stringify(bookingData));
             localStorage.setItem("redirectURL", '/seat-layout');
@@ -269,7 +300,14 @@ const SeatLayoutScreen = () => {
                         {
                             selectedSeats.length > 0 &&
                             <div className="btn_sec">
-                                <button onClick={handleCheckout}>Checkout</button>
+                                <button className={isCheckoutButtonLoading ? 'disable' : ''} onClick={handleCheckout} disabled={isCheckoutButtonLoading}>
+                                    {
+                                        isCheckoutButtonLoading ?
+                                            <ButtonLoader />
+                                            :
+                                            <>Checkout</>
+                                    }
+                                </button>
                             </div>
                         }
                     </div>

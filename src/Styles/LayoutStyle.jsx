@@ -187,11 +187,11 @@ export const NavbarWrapper = styled('div')`
                     position: relative;
                     color: ${colors.customColors.blackColor1};
 
-                    &:first-child {
+                    &:first-of-type {
                         font-size: 13px;
                         padding-bottom: 3px;
                     }
-                    &:last-child {
+                    &:last-of-type {
                         font-size: 12px;
                     }
                 }

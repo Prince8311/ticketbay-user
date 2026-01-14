@@ -81,7 +81,7 @@ const Footer = () => {
                             </div>
                             <div className="social_media">
                                 <a><i className="fa-brands fa-instagram"></i></a>
-                                <a><i class="fa-brands fa-x-twitter"></i></a>
+                                <a><i className="fa-brands fa-x-twitter"></i></a>
                             </div>
                         </div>
                     </div>

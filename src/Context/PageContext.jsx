@@ -28,6 +28,7 @@ export const UserProvider = ({ children }) => {
         try {
             const response = await axiosInstance.get(api.checkAuth);
             if (response?.data?.status === 200) {
+                console.log(response);
                 setUserDetails(response?.data.user);
             } else {
                 throw new Error("Invalid auth");
