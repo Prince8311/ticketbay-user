@@ -783,6 +783,11 @@ export const SeatLayoutWrapper = styled('div')`
                         border-radius: 25px;
                         transition: all 0.5s ease;
                     }
+
+                    &.disable {
+                        opacity: 0.4;
+                        transition: all 0.5s ease;
+                    }
                 }
             }
         }

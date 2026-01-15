@@ -4,6 +4,7 @@ import { UserData } from "../Context/PageContext";
 import { getApiEndpoints } from "../Services/Api/ApiConfig";
 import { toast } from "react-toastify";
 import axiosInstance from "../Services/Middleware/AxiosInstance";
+import ButtonLoader from "../Components/Loader/ButtonLoader";
 
 const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, theaterName, movieData, bookingDetails, setShowReturnPolicyModal }) => {
     const api = getApiEndpoints();
@@ -63,7 +64,7 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, the
         };
         try {
             const response = await axiosInstance.post(api.bookingPayment, payload);
-            if (response?.data?.status === 200) { 
+            if (response?.data?.status === 200) {
                 window.location.href = response?.data?.payURL
             }
         } catch (error) {
@@ -144,9 +145,16 @@ const CheckoutModal = ({ showCheckoutModal, setShowCheckoutModal, movieName, the
                         </div>
                     </div>
                     <div className="modal_btn">
-                        <button onClick={handleBookTickets}>
-                            <p>Pay</p>
-                            <span>₹{amount.orderTotal}</span>
+                        <button className={isPayButtonLoading ? 'disable' : ''} onClick={handleBookTickets} disabled={isPayButtonLoading}>
+                            {
+                                isPayButtonLoading ?
+                                    <ButtonLoader />
+                                    :
+                                    <>
+                                        <p>Pay</p>
+                                        <span>₹{amount.orderTotal}</span>
+                                    </>
+                            }
                         </button>
                     </div>
                 </div>

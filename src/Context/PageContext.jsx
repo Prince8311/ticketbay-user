@@ -67,6 +67,7 @@ export const UserProvider = ({ children }) => {
             localStorage.removeItem("Selected Section");
             localStorage.removeItem("Movie Data");
             localStorage.removeItem("Booking Data");
+            localStorage.removeItem("IsAccepted");
         }
     }, [location.pathname]);
 

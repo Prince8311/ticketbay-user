@@ -10,6 +10,7 @@ const TermsConditionModal = ({ showTermsConditionsModal, setShowTermsConditionsM
         setIsAccepted(true);
         setShowTermsConditionsModal(false);
         setShowCheckoutModal(true);
+        localStorage.setItem("IsAccepted", true);
     }
 
     return (

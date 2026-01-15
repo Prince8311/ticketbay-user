@@ -33,7 +33,9 @@ const SeatLayoutScreen = () => {
     const [theaterCommission, setTheaterCommission] = useState('');
     const [showTermsConditionsModal, setShowTermsConditionsModal] = useState(false);
     const [showCheckoutModal, setShowCheckoutModal] = useState(false);
-    const [isAccepted, setIsAccepted] = useState(false);
+    const [isAccepted, setIsAccepted] = useState(() => {
+        return localStorage.getItem("IsAccepted") || false
+    });
     const [isCheckoutButtonLoading, setIsCheckoutButtonLoading] = useState(false);
     const [bookingDetails, setBookingDetails] = useState(() => {
         return JSON.parse(localStorage.getItem("Booking Data")) || {}
@@ -167,7 +169,11 @@ const SeatLayoutScreen = () => {
                     };
                     setBookingDetails(updatedBookingData);
                     localStorage.setItem("Booking Data", JSON.stringify(updatedBookingData));
-                    setShowTermsConditionsModal(true);
+                    if (isAccepted) {
+                        setShowCheckoutModal(true);
+                    } else {
+                        setShowTermsConditionsModal(true);
+                    }
                 }
             } catch (error) {
                 toast.error(error.response?.data.message || error.message);
