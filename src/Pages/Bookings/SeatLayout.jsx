@@ -16,7 +16,6 @@ import CheckoutModal from "../../Modals/Checkout";
 import ReturnPolicyModal from "../../Modals/Returnpolicy";
 import { UserData } from "../../Context/PageContext";
 import ButtonLoader from "../../Components/Loader/ButtonLoader";
-import BookingDetailsModal from "../../Modals/BookingDetails";
 
 const SeatLayoutScreen = () => {
     const api = getApiEndpoints();
@@ -347,7 +346,6 @@ const SeatLayoutScreen = () => {
                     showReturnPolicyModal={showReturnPolicyModal}
                     setShowReturnPolicyModal={setShowReturnPolicyModal}
                 />
-                <BookingDetailsModal />
             </SeatLayoutWrapper>
         </>
     );

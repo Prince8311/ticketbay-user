@@ -1770,7 +1770,7 @@ export const BookingDetailsWrapper = styled('div')`
 
     .modal_box {
         position: relative;
-        width: 550px;
+        width: 450px;
         max-height: 100%;
         background: ${colors.customColors.whiteColor};
         box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
@@ -1808,7 +1808,7 @@ export const BookingDetailsWrapper = styled('div')`
                 span {
                     font-size: 13px;
                     color: ${colors.customColors.blackColor2};
-                    margin-left: 10px;
+                    margin-left: 6px;
 
                     &.upcoming {
                         color: ${colors.customColors.greenColor};
@@ -1835,6 +1835,291 @@ export const BookingDetailsWrapper = styled('div')`
                     font-size: 15px;
                     color: ${colors.customColors.blackColor1};
                     cursor: pointer;
+                }
+            }
+        }
+
+        .modal_body {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+
+            .details_box {
+                position: relative;
+                width: 100%;
+                padding: 15px;
+                background: ${colors.customColors.yellowColor};
+                border-radius: 8px;
+
+                .dot_line_1 {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 10px;
+                        top: -9px;
+                        width: calc(100% - 20px);
+                        height: 15px;
+                        background-repeat: repeat-x;
+                        background-size: 15px;
+                        background-image: radial-gradient(circle, ${colors.customColors.whiteColor} 50%, transparent 41%);
+                        background-size: 15px 15px;  
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: -9px;
+                        top: 12px;
+                        width: 15px;
+                        height: calc(100% - 24px);
+                        background-size: 15px;
+                        background-image: radial-gradient(circle, ${colors.customColors.whiteColor} 50%, transparent 41%);
+                        background-size: 15px 15px;     
+                        background-repeat: repeat-y;
+                    }
+                }
+
+                .dot_line_2 {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 10px;
+                        bottom: -9px;
+                        width: calc(100% - 20px);
+                        height: 15px;
+                        background-repeat: repeat-x;
+                        background-image: radial-gradient(circle, ${colors.customColors.whiteColor} 50%, transparent 41%);
+                        background-size: 15px 15px;  
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        right: -9px;
+                        top: 12px;
+                        width: 15px;
+                        height: calc(100% - 24px);
+                        background-image: radial-gradient(circle, ${colors.customColors.whiteColor} 50%, transparent 41%);
+                        background-size: 15px 15px;     
+                        background-repeat: repeat-y;
+                    }
+                }
+
+                .details_inner {
+                    position: relative;
+                    width: 100%;
+                    border: 1px solid ${colors.customColors.blackColor};
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 4px;
+
+                    .top_part {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+
+                        .poster_sec {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 80px;
+                            height: 100%;
+                            border-right: 1px solid ${colors.customColors.blackColor};
+                            border-bottom: 1px solid ${colors.customColors.blackColor};
+                            border-bottom-right-radius: 4px;
+                            padding: 6px;
+                            display: flex;
+
+                            img {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 3px;
+                            }
+                        }
+
+                        .movie_seat_details {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 8px 12px;
+                            padding-left: 92px;
+                            padding-bottom: 0;
+
+                            .id_sec {
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                span {
+                                    position: relative;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    font-style: italic;
+                                }
+
+                                p {
+                                    position: relative;
+                                    margin-left: 5px;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor1}; 
+                                }
+                            }
+
+                            h4 {
+                                position: relative;
+                                margin-top: 4px;
+                                width: 100%;
+                                font-size: 14px;
+                                font-weight: 600;
+                                color: ${colors.customColors.blackColor};
+                            }
+
+                            .show_time {
+                                position: relative;
+                                margin-top: 4px;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                span {
+                                    position: relative;
+                                    margin-right: 8px;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                    font-style: italic;
+                                }
+
+                                p {
+                                    position: relative;
+                                    margin-right: 6px;
+                                    padding-right: 6px;
+                                    line-height: 1;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                    border-right: 2px solid ${colors.customColors.blackColor1};
+
+                                    &:last-of-type {
+                                        border-right: none;
+                                    }
+                                }
+                            }
+
+                            .seats_sec {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 2px;
+
+                                p {
+                                    position: relative;
+                                    width: 100%;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+
+                                    span {
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+                                        font-style: italic;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .bottom_part {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        margin-top: 10px;
+
+                        .amount_details {
+                            position: relative;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 0 10px;
+                            padding-right: 87px;
+                            padding-bottom: 5px;
+
+                            li {
+                                position: relative;
+                                width: 100%;
+                                list-style: none;
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 3px;
+
+                                span {
+                                    position: relative;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor};
+                                }
+
+                                p {
+                                    position: relative;
+                                    margin-left: auto;
+                                    font-weight: 400;
+                                    font-size: 12px;
+
+                                    b {
+                                        font-weight: 400;
+                                        font-size: 10px;
+                                    }
+                                }
+
+                                &.order_total {
+                                    margin-top: 4px;
+                                    padding-top: 5px;
+                                    border-top: 1px dashed ${colors.customColors.blackColor};
+
+                                    span {
+                                        font-size: 14px;
+                                    }
+
+                                    p {
+                                        font-weight: 500;
+                                        font-size: 14px;
+
+                                        b {
+                                            font-weight: 500;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .qr_code_sec {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            width: 77px;
+                            height: 100%;
+                            border-top: 1px solid ${colors.customColors.blackColor};
+                            border-left: 1px solid ${colors.customColors.blackColor};
+                            border-top-left-radius: 4px;
+                            padding: 6px;
+                        }
+                    }
                 }
             }
         }

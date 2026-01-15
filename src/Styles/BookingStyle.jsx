@@ -161,8 +161,13 @@ export const BookingListPageWrapper = styled('div')`
 export const BookedTicketListWrapper = styled('div')`
     position: relative;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+
+    .ticket_list {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
 `;
 
 export const TicketBoxWrapper = styled('div')`

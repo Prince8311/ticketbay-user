@@ -1,14 +1,24 @@
+import { useState } from "react";
 import TicketBox from "../../../Components/TicketBox";
+import BookingDetailsModal from "../../../Modals/BookingDetails";
 import { BookedTicketListWrapper } from "../../../Styles/BookingStyle";
 
 const UpcomingBookings = () => {
-    return(
+    const [showBookingDetails, setShowBookingDetails] = useState(false);
+
+    return (
         <>
             <BookedTicketListWrapper>
-                <TicketBox type="upcoming" />
-                <TicketBox type="upcoming" />
-                <TicketBox type="upcoming" />
-                <TicketBox type="upcoming" />
+                <div className="ticket_list">
+                    <TicketBox type="upcoming" setShowBookingDetails={setShowBookingDetails} />
+                    <TicketBox type="upcoming" setShowBookingDetails={setShowBookingDetails} />
+                    <TicketBox type="upcoming" setShowBookingDetails={setShowBookingDetails} />
+                    <TicketBox type="upcoming" setShowBookingDetails={setShowBookingDetails} />
+                </div>
+                <BookingDetailsModal 
+                    showBookingDetails={showBookingDetails}
+                    setShowBookingDetails={setShowBookingDetails}
+                />
             </BookedTicketListWrapper>
         </>
     );

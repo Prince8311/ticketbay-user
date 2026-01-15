@@ -1,9 +1,9 @@
 import { TicketBoxWrapper } from "../Styles/BookingStyle";
 
-const TicketBox = ({ type }) => {
+const TicketBox = ({ type, setShowBookingDetails }) => {
     return (
         <>
-            <TicketBoxWrapper>
+            <TicketBoxWrapper onClick={() => setShowBookingDetails(true)}>
                 <div className={`ticket_box ${type}`}>
                     <div className="box_inner">
                         <div className="poster_image">
