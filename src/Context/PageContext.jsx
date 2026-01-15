@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
     const [userDetails, setUserDetails] = useState({});
     const [isLocationButtonShow, setIsLocationButtonShow] = useState(false);
     const [isNavFooterShow, setIsNavFooterShow] = useState(true);
-    const navFooterHiddenScreen = location.pathname.includes("/seat-layout");
+    const navFooterHiddenScreen = location.pathname.includes("/seat-layout") || location.pathname.includes("/booking-success") || location.pathname.includes("/booking-fail");
     const isSeatLayoutPage = location.pathname.includes("/seat-layout");
     const isMoviePage = location.pathname.includes("/movie-details") || location.pathname.includes("/movie-info") || location.pathname.includes("/seat-layout");
     const isTheaterInfoPage = location.pathname.includes("/theater-info") || location.pathname.includes("/seat-layout");
@@ -28,6 +28,7 @@ export const UserProvider = ({ children }) => {
         try {
             const response = await axiosInstance.get(api.checkAuth);
             if (response?.data?.status === 200) {
+                console.log(response);
                 setUserDetails(response?.data.user);
             } else {
                 throw new Error("Invalid auth");
@@ -44,10 +45,12 @@ export const UserProvider = ({ children }) => {
     }, [authToken]);
 
     useEffect(() => {
-        if (!isMoviePage) {
+        const redirectLink = localStorage.getItem("redirectURL");
+        console.log(redirectLink);
+        if (!isMoviePage && (!redirectLink || redirectLink !== '/seat-layout')) {
             localStorage.removeItem("Current Movie");
         }
-        if (!isTheaterInfoPage) {
+        if (!isTheaterInfoPage && (!redirectLink || redirectLink !== '/seat-layout')) {
             localStorage.removeItem("Current Theater");
         }
         if (isLocationAvailablePages) {
@@ -60,8 +63,10 @@ export const UserProvider = ({ children }) => {
         } else {
             setIsNavFooterShow(true);
         }
-        if (!isSeatLayoutPage) { 
+        if (!isSeatLayoutPage && (!redirectLink || redirectLink !== '/seat-layout')) { 
+            localStorage.removeItem("Selected Section");
             localStorage.removeItem("Movie Data");
+            localStorage.removeItem("Booking Data");
         }
     }, [location.pathname]);
 

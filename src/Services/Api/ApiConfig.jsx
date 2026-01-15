@@ -37,5 +37,9 @@ export const getApiEndpoints = () => {
 
         // Commissions 
         fetchCommissions: `${apiURL}/api/booking/commissions.php`,
+
+        // Bookings 
+        seatReserve: `${apiURL}/api/booking/seat-reserve.php`,
+        bookingPayment: `${apiURL}/api/booking/payment/payment-process.php`,
     };
 }

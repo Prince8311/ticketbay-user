@@ -260,9 +260,14 @@ const AuthenticationPage = () => {
                 toast.success(response?.data.message);
                 localStorage.setItem("authToken", response?.data.authToken);
                 setAuthToken(response?.data.authToken);
+                const redirectURL = localStorage.getItem("redirectURL");
                 setUserName('');
                 setPassword('');
-                navigate('/');
+                if (redirectURL && redirectURL === '/seat-layout') {
+                    navigate(`${redirectURL}?movie=${encodeURIComponent(localStorage.getItem("Current Movie"))}&&theater=${encodeURIComponent(localStorage.getItem("Current Theater"))}`);
+                } else {
+                    navigate('/');
+                }
             }
         } catch (error) {
             toast.error(error.response?.data.message || error.message);

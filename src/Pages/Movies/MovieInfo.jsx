@@ -137,7 +137,7 @@ const MovieInfoPage = () => {
         };
         localStorage.setItem("Current Theater", theater);
         localStorage.setItem("Movie Data", JSON.stringify(movieData));
-        navigate(`/seat-layout?movie=${encodeURIComponent(movieName)}theater=${encodeURIComponent(theater)}`);
+        navigate(`/seat-layout?movie=${encodeURIComponent(movieName)}&&theater=${encodeURIComponent(theater)}`);
     }
 
     return (
