@@ -12,6 +12,7 @@ import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import TermsConditionModal from "../../Modals/TermsCondition";
 import CheckoutModal from "../../Modals/Checkout";
 import ReturnPolicyModal from "../../Modals/Returnpolicy";
+import BookingDetailsModal from "../../Modals/BookingDetails";
 
 const SeatLayoutScreen = () => {
     const api = getApiEndpoints();
@@ -275,6 +276,7 @@ const SeatLayoutScreen = () => {
                     setShowCheckoutModal={setShowCheckoutModal}
                     bookingDetails={bookingDetails}
                 />
+                <BookingDetailsModal />
             </SeatLayoutWrapper>
         </>
     );
