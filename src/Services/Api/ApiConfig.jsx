@@ -41,5 +41,7 @@ export const getApiEndpoints = () => {
         // Bookings 
         seatReserve: `${apiURL}/api/booking/seat-reserve.php`,
         bookingPayment: `${apiURL}/api/booking/payment/payment-process.php`,
+        bookingList: `${apiURL}/api/booking/list.php`,
+        bookingDetails: `${apiURL}/api/booking/details.php`,
     };
 }

@@ -1,29 +1,34 @@
+import { moviePosterURL } from "../Services/Api/ApiConfig";
 import { TicketBoxWrapper } from "../Styles/BookingStyle";
 
-const TicketBox = ({ type, setShowBookingDetails }) => {
+const TicketBox = ({ type, ticket, setSelectedBookingId, setShowBookingDetails }) => {
+
+    const showBookingDetails = (id) => {
+        setSelectedBookingId(id);
+        setShowBookingDetails(true);
+    }
+
     return (
         <>
-            <TicketBoxWrapper onClick={() => setShowBookingDetails(true)}>
+            <TicketBoxWrapper onClick={() => showBookingDetails(ticket.booking_id)}>
                 <div className={`ticket_box ${type}`}>
                     <div className="box_inner">
                         <div className="poster_image">
-                            <img src="/images/Movie-1.jpg" alt="" />
+                            <img src={ticket.poster_image ? `${moviePosterURL}/${ticket.poster_image}` : '/images/blank-poster.jpg'} alt="" />
                         </div>
                         <div className="details_sec">
                             <div className="details_inner">
-                                <h5>Avatar: The Way of Water</h5>
+                                <h5>{ticket.movie_name}</h5>
                                 <ul>
-                                    <p>25 Oct, 2025</p>
+                                    <p>{ticket.start_date}</p>
                                     <i className="fa-solid fa-circle"></i>
-                                    <p>8:30 PM</p>
+                                    <p>{ticket.start_time}</p>
                                 </ul>
                                 <div className="section">
-                                    <span>Class :</span>
-                                    <p>Premium</p>
+                                    <p><span>Class :</span>{ticket.section}</p>
                                 </div>
                                 <div className="seats">
-                                    <span>Seats :</span>
-                                    <p>A-1, A-2, A-3</p>
+                                    <p><span>Seats :</span>{ticket.seats}</p>
                                 </div>
                             </div>
                             {
@@ -34,7 +39,7 @@ const TicketBox = ({ type, setShowBookingDetails }) => {
                             }
                         </div>
                         <div className="id_sec">
-                            <p>TKB894571</p>
+                            <p>{ticket.booking_id}</p>
                         </div>
                     </div>
                     <div className="circle_sec">

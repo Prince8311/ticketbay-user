@@ -6,6 +6,7 @@ export const BookingListPageWrapper = styled('div')`
     position: relative;
     width: 100%;
     padding: 40px 0;
+    padding-top: 25px;
     display: flex;
     justify-content: center;
 
@@ -15,86 +16,43 @@ export const BookingListPageWrapper = styled('div')`
         display: flex;
         flex-direction: column;
 
-        .info_box_sec {
+        .page_head {
             position: relative;
             width: 100%;
-            display: flex;
+            padding: 0 15px;
 
-            .info_box {
+            h4 {
                 position: relative;
-                width: 300px;
-                height: 80px;
-                padding: 0 15px;
+                width: max-content;
+                display: flex;
 
-                .box_inner {
-                    position: relative;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
                     width: 100%;
-                    height: 100%;
-                    box-shadow: 5px 5px 8px ${colors.boxShadowColors.shadowColor2},
-                            -3px -3px 5px ${colors.boxShadowColors.shadowColor2};
-                    border-radius: 6px;
-                    padding: 15px 25px;
-
-                    .box_items {
-                        position: relative;
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        align-items: flex-end;
-
-                        .inner_item {
-                            position: relative;
-                            width: calc(100% - 45px);
-                            display: flex;
-                            flex-direction: column;
-
-                            h4 {
-                                position: relative;
-                                font-family: 'Lemonada', cursive;
-                                font-size: 13px;
-                                font-weight: 600;
-                                color: ${colors.customColors.blackColor};
-                            }
-
-                            p {
-                                position: relative;
-                                font-size: 18px;
-                                margin-top: 4px;
-                                line-height: 1.3;
-                                font-weight: 500;
-                                font-style: italic;
-                                color: ${colors.customColors.blackColor};
-                            }
-                        }
-
-                        .icon {
-                            position: relative;
-                            width: 45px;
-                            display: flex;
-                            justify-content: flex-end;
-
-                            i {
-                                position: relative;
-                                font-size: 32px;
-                                color: ${colors.customColors.blackColor};
-                            }
-                        }
-                    }
+                    height: 2px;
+                    background: linear-gradient(to right, transparent 15%, ${colors.themeColor} 100%);
+                    border-radius: 30px;
                 }
 
-                &:nth-of-type(1) {
-                    .box_inner {
-                        background: linear-gradient(to bottom, ${colors.customColors.whiteColor} 5%, rgba(63, 228, 79, 0.5) 50%, rgba(63, 228, 79, 0.8) 80%, rgb(63, 228, 79) 100%);
+                span {
+                    position: relative;
+                    margin-right: 6px;
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    font-weight: 800;
+                    font-style: italic;
+                    color: ${colors.customColors.blackColor1};
 
-                        .box_items .icon i {
-                            transform: rotate(-30deg);
-                        }
+                    b {
+                        font-weight: 600;
+                        font-size: 22px;
                     }
-                }
 
-                &:nth-of-type(2) {
-                    .box_inner {
-                        background: linear-gradient(to bottom, ${colors.customColors.whiteColor} 5%, rgba(255, 0, 0, 0.5) 50%, rgba(255, 0, 0, 0.8) 80%, rgb(255, 0, 0) 100%);
+                    &:last-of-type {
+                        margin-right: 0;
                     }
                 }
             }
@@ -102,7 +60,7 @@ export const BookingListPageWrapper = styled('div')`
 
         .page_tab_sec {
             position: relative;
-            margin-top: 35px;
+            margin-top: 25px;
             width: 100%;
             padding: 0 15px;
 
@@ -154,30 +112,43 @@ export const BookingListPageWrapper = styled('div')`
             position: relative;
             width: 100%;
             margin-top: 15px;
+
+            .ticket_list {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 5px;
+
+                .empty_box {
+                    position: relative;
+                    width: 100%;
+                    padding-top: 35px;
+                    display: flex;
+                    justify-content: center;
+
+                    p {
+                        position: relative;
+                        font-family: "Lemonada", cursive;
+                        font-size: 15px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor3};
+                        pointer-events: none;
+                    }
+                }
+            }
         }
-    }
-`;
-
-export const BookedTicketListWrapper = styled('div')`
-    position: relative;
-    width: 100%;
-
-    .ticket_list {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
     }
 `;
 
 export const TicketBoxWrapper = styled('div')`
     position: relative;
-    padding: 15px;
+    padding: 10px;
     
     .ticket_box {
         position: relative;
-        width: 350px;
-        height: 100px;
+        width: 315px;
+        height: 93px;
         border-radius: 10px;
         padding: 8px;
         
@@ -271,7 +242,7 @@ export const TicketBoxWrapper = styled('div')`
                     h5 {
                         position: relative;
                         width: 100%;
-                        font-size: 12px;
+                        font-size: 11px;
                         font-weight: 600;
                         overflow: hidden;
                         white-space: nowrap;
@@ -280,19 +251,20 @@ export const TicketBoxWrapper = styled('div')`
 
                     ul {
                         position: relative;
-                        margin-top: 4px;
+                        margin-top: 2px;
                         width: 100%;
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
 
                         p {
                             position: relative;
-                            font-size: 11px;
+                            font-size: 10px;
+                            color: ${colors.customColors.blackColor1};
                         }
                         
                         i {
-                            font-size: 5px;
+                            font-size: 4px;
+                            margin: 0 10px;
                         }
                     }
 
@@ -302,42 +274,49 @@ export const TicketBoxWrapper = styled('div')`
                         width: 100%;
                         display: flex;
                         align-items: center;
-                        
-                        span {
-                            font-size: 12px;
-                            font-weight: 500;
-                        }
 
                         p {
                             position: relative;
-                            width: 134px;
-                            padding-left: 6px;
-                            font-size: 12px;
+                            width: 100%;
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            font-size: 11px;
+                            color: ${colors.customColors.blackColor1};
+
+                            span {
+                                font-size: 11px;
+                                font-weight: 500;
+                                margin-right: 5px;
+                                font-style: italic;
+                                color: ${colors.customColors.blackColor};
+                            }
                         }
                     }
 
                     .seats {
                         position: relative;
-                        margin-top: 2px;
+                        margin-top: 1px;
                         width: 100%;
                         display: flex;
                         align-items: center;
 
-                        span {
-                            font-size: 12px;
-                            font-weight: 500;
-                        }
-
                         p {
-                            width: 134px;
-                            padding-left: 6px;
-                            font-size: 12px;
+                            position: relative;
+                            width: 100%;
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            font-size: 11px;
+                            color: ${colors.customColors.blackColor1};
+
+                            span {
+                                font-size: 11px;
+                                font-weight: 500;
+                                margin-right: 5px;
+                                font-style: italic;
+                                color: ${colors.customColors.blackColor};
+                            }
                         }
                     }
                 }
@@ -370,7 +349,7 @@ export const TicketBoxWrapper = styled('div')`
                 p {
                     position: relative;
                     font-family: 'Oswald', sans-serif; 
-                    font-size: 16px;
+                    font-size: 14px;
                     font-weight: 500;
                     transform: rotate(-90deg);
                     letter-spacing: 1.2px;

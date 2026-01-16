@@ -1395,7 +1395,6 @@ export const MovieInfoPageWrapper = styled('div')`
 
                                 p {
                                     position: relative;
-                                    font-family: 'Poppins', sans-serif;
                                     font-size: 13px;
                                     font-weight: 400;
                                 }

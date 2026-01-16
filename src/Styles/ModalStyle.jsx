@@ -1778,7 +1778,14 @@ export const BookingDetailsWrapper = styled('div')`
         display: flex;
         flex-direction: column;
         transform: translateY(-150px);
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         transition: transform 0.8s ease;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.active {
             transform: translateY(0);
@@ -1842,7 +1849,15 @@ export const BookingDetailsWrapper = styled('div')`
         .modal_body {
             position: relative;
             width: 100%;
-            padding: 20px;
+            padding: 15px;
+
+            .details_loading {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
 
             .details_box {
                 position: relative;
@@ -1934,7 +1949,7 @@ export const BookingDetailsWrapper = styled('div')`
                             position: absolute;
                             top: 0;
                             left: 0;
-                            width: 80px;
+                            width: 100px;
                             height: 100%;
                             border-right: 1px solid ${colors.customColors.blackColor};
                             border-bottom: 1px solid ${colors.customColors.blackColor};
@@ -1956,8 +1971,8 @@ export const BookingDetailsWrapper = styled('div')`
                             width: 100%;
                             display: flex;
                             flex-direction: column;
-                            padding: 8px 12px;
-                            padding-left: 92px;
+                            padding: 9px 12px;
+                            padding-left: 112px;
                             padding-bottom: 0;
 
                             .id_sec {
@@ -1981,25 +1996,55 @@ export const BookingDetailsWrapper = styled('div')`
                                     font-weight: 500;
                                     color: ${colors.customColors.blackColor1}; 
                                 }
+
+                                a {
+                                    position: relative;
+                                    margin-left: 50px;
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    color: ${colors.customColors.blackColor1}; 
+                                }
                             }
 
                             h4 {
                                 position: relative;
-                                margin-top: 4px;
+                                margin-top: 2px;
                                 width: 100%;
                                 font-size: 14px;
                                 font-weight: 600;
                                 color: ${colors.customColors.blackColor};
                             }
 
-                            .show_time {
+                            .show_info {
                                 position: relative;
-                                margin-top: 4px;
+                                margin-top: 3px;
                                 width: 100%;
                                 display: flex;
                                 align-items: center;
 
-                                span {
+                                p {
+                                    position: relative;
+                                    line-height: 1;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+                                }
+
+                                .gap {
+                                    position: relative;
+                                    margin: 0 6px;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.blackColor};
+                                }
+                            }
+
+                            .show_time {
+                                position: relative;
+                                margin-top: 3px;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                b {
                                     position: relative;
                                     margin-right: 8px;
                                     font-size: 12px;
@@ -2010,23 +2055,54 @@ export const BookingDetailsWrapper = styled('div')`
 
                                 p {
                                     position: relative;
-                                    margin-right: 6px;
-                                    padding-right: 6px;
                                     line-height: 1;
                                     font-size: 12px;
                                     color: ${colors.customColors.blackColor1};
-                                    border-right: 2px solid ${colors.customColors.blackColor1};
+                                }
 
-                                    &:last-of-type {
-                                        border-right: none;
-                                    }
+                                .gap {
+                                    position: relative;
+                                    margin: 0 6px;
+                                    font-size: 10px;
+                                    color: ${colors.customColors.blackColor};
+                                }
+                            }
+
+                            .theater_sec {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 2px;
+
+                                p {
+                                    position: relative;
+                                    font-size: 12px;
+                                    font-weight: 500;
                                 }
                             }
 
                             .seats_sec {
                                 position: relative;
                                 width: 100%;
-                                margin-top: 2px;
+                                margin-top: 1px;
+
+                                p {
+                                    position: relative;
+                                    width: 100%;
+                                    font-size: 12px;
+                                    color: ${colors.customColors.blackColor1};
+
+                                    span {
+                                        font-weight: 500;
+                                        color: ${colors.customColors.blackColor};
+                                        font-style: italic;
+                                    }
+                                }
+                            }
+
+                            .location_sec {
+                                position: relative;
+                                width: 100%;
+                                margin-top: 1px;
 
                                 p {
                                     position: relative;
@@ -2120,6 +2196,32 @@ export const BookingDetailsWrapper = styled('div')`
                             padding: 6px;
                         }
                     }
+                }
+            }
+        }
+
+        .modal_bottom {
+            position: relative;
+            width: 100%;
+            border-top: 1px solid ${colors.customColors.borderColor};
+            padding: 15px 20px;
+
+            button {
+                position: relative;
+                width: 100%;
+                height: 40px;
+                border: none;
+                cursor: pointer;
+                background: ${colors.customColors.blackColor};
+                border-radius: 6px;
+                color: ${colors.customColors.whiteColor};
+                font-size: 13px;
+                font-weight: 500;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
                 }
             }
         }

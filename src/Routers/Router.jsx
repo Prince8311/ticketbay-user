@@ -15,9 +15,6 @@ import PrivacyPolicyPage from "../Pages/PrivacyPolicy";
 import RefundPolicyPage from "../Pages/RefundPolicy";
 import ProfilePage from "../Pages/Account/Profile";
 import BookingListPage from "../Pages/Bookings/BookingList";
-import UpcomingBookings from "../Pages/Bookings/BookingsTypes/Upcoming";
-import PreviousBookings from "../Pages/Bookings/BookingsTypes/Previous";
-import CancelledBookings from "../Pages/Bookings/BookingsTypes/Cancelled";
 import MovieDetailsPage from "../Pages/Movies/Details";
 import MovieInfoPage from "../Pages/Movies/MovieInfo";
 import ComingSoonMoviesPage from "../Pages/Movies/ComingSoon";
@@ -47,12 +44,7 @@ const Routers = () => {
                     <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                     <Route path="refund-policy" element={<RefundPolicyPage />} />
                     <Route path="profile" element={<ProfilePage />} />
-                    <Route path="bookings" element={<BookingListPage />} >
-                        <Route path="" element={<Navigate to="upcoming" />} />
-                        <Route path="upcoming" element={<UpcomingBookings />} />
-                        <Route path="previous" element={<PreviousBookings />} />
-                        <Route path="cancelled" element={<CancelledBookings />} />
-                    </Route>
+                    <Route path="bookings" element={<BookingListPage />} />
                     <Route path="seat-layout" element={<SeatLayoutScreen />} />
                     <Route path="booking-success" element={<BookingSuccessPage />} />
                     <Route path="booking-fail" element={<BookingFailPage />} />
