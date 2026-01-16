@@ -14,7 +14,7 @@ const ProfilePage = () => {
     useEffect(() => {
         console.log(userDetails);
     }, [userDetails]);
-    
+
     const handleOpenEditProfileModal = () => {
         setShowEditProfileModal(true);
     }
@@ -36,6 +36,26 @@ const ProfilePage = () => {
                         </div>
                         <div className="edit_btn_sec">
                             <a onClick={handleOpenEditProfileModal}><i className="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                    <div className="ticket_details_sec">
+                        <div className="ticket_box">
+                            <div className="ticket_inner">
+                                <div className="icon">
+                                    <i className="fa-solid fa-ticket"></i>
+                                </div>
+                                <h4>Ticket Booked</h4>
+                                <p className="book">1000</p>
+                            </div>
+                        </div>
+                        <div className="ticket_box">
+                            <div className="ticket_inner">
+                                <div className="icon">
+                                    <i className="fa-solid fa-ban"></i>
+                                </div>
+                                <h4>Ticket Cancelled</h4>
+                                <p className="cancell">1000</p>
+                            </div>
                         </div>
                     </div>
                     <div className="profile_item_sec">

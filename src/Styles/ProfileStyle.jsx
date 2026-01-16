@@ -105,6 +105,70 @@ export const ProfilePageWrapper = styled('div')`
             }
         }
 
+        .ticket_details_sec {
+            position: relative;
+            width: 100%;
+            display: flex;
+            margin-top: 25px;
+            justify-content: space-between;
+
+            .ticket_box {
+                position: relative;
+                width: 48%;
+                display: flex;
+                align-items: center;
+                border: 1px solid ${colors.customColors.borderColor1};
+                border-radius: 6px;
+                overflow: hidden;
+                padding: 12px 15px;
+                background: ${colors.customColors.whiteColor};
+
+                .ticket_inner {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    .icon {
+                        position: relative;
+                        width: 35px;
+                        display: flex;
+                        justify-content: flex-start;
+
+                        i {
+                            position: relative;
+                            font-size: 19px;
+                            color: ${colors.customColors.blackColor};
+                        }
+                    }
+
+                    h4 {
+                        position: relative;
+                        font-size: 13px;
+                        font-weight: 500;
+                        color: ${colors.customColors.blackColor};
+                        margin-right: 20px;
+                    }
+
+                    p {
+                        position: relative;
+                        font-size: 14px;
+                        font-weight: 500;
+                        font-style: italic;
+                        margin-left: auto;
+                        
+                        &.book {
+                            color: ${colors.customColors.greenColor};
+                        }
+
+                        &.cancell {
+                            color: ${colors.customColors.redColor};
+                        }
+                    }
+                }
+            }
+        }
+
         .profile_item_sec {
             position: relative;
             width: 100%;
