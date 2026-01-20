@@ -243,6 +243,9 @@ export const NavbarWrapper = styled('div')`
 
                 .profile {
                     position: relative;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
 
                     .profile_btn {
                         position: relative;

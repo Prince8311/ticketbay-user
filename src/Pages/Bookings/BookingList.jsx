@@ -7,6 +7,7 @@ import { getApiEndpoints } from "../../Services/Api/ApiConfig";
 import axiosInstance from "../../Services/Middleware/AxiosInstance";
 import { UserData } from "../../Context/PageContext";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
+import BookingCancelConfirmModal from "../../Modals/BookingCancelConfirm";
 
 const BookingListPage = () => {
     const api = getApiEndpoints();
@@ -15,7 +16,10 @@ const BookingListPage = () => {
     const [currentType, setCurrentType] = useState('upcoming');
     const [showBookingDetails, setShowBookingDetails] = useState(false);
     const [tickets, setTickets] = useState([]);
+    const [listReload, setListReload] = useState(false);
     const [selectedBookingId, setSelectedBookingId] = useState('');
+    const [refundAmount, setRefundAmount] = useState(0);
+    const [showConfirmCancel, setShowConfirmCancel] = useState(false);
 
     const fetchBookingList = async () => {
         setIsDataLoading(true);
@@ -33,6 +37,7 @@ const BookingListPage = () => {
             setTickets([]);
             toast.error(error.response?.data.message || error.message);
         } finally {
+            setListReload(false);
             setIsDataLoading(false);
         }
     }
@@ -41,7 +46,7 @@ const BookingListPage = () => {
         if (currentType && userDetails && Object.keys(userDetails).length > 0) {
             fetchBookingList();
         }
-    }, [userDetails, currentType]);
+    }, [userDetails, currentType, listReload]);
 
     return (
         <>
@@ -95,6 +100,17 @@ const BookingListPage = () => {
                     type={currentType}
                     selectedBookingId={selectedBookingId}
                     setSelectedBookingId={setSelectedBookingId}
+                    setRefundAmount={setRefundAmount}
+                    setShowConfirmCancel={setShowConfirmCancel}
+                />
+                <BookingCancelConfirmModal
+                    showConfirmCancel={showConfirmCancel}
+                    setShowConfirmCancel={setShowConfirmCancel}
+                    selectedBookingId={selectedBookingId}
+                    setSelectedBookingId={setSelectedBookingId}
+                    refundAmount={refundAmount}
+                    setRefundAmount={setRefundAmount}
+                    setListReload={setListReload}
                 />
             </BookingListPageWrapper>
         </>

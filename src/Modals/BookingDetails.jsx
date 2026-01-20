@@ -6,12 +6,14 @@ import { getApiEndpoints, moviePosterURL } from "../Services/Api/ApiConfig";
 import axiosInstance from "../Services/Middleware/AxiosInstance";
 import { UserData } from "../Context/PageContext";
 import SkeletonLoader from "../Components/Loader/SkeletonLoader";
+import ButtonLoader from "../Components/Loader/ButtonLoader";
 
-const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, selectedBookingId, setSelectedBookingId }) => {
+const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, selectedBookingId, setSelectedBookingId, setRefundAmount, setShowConfirmCancel }) => {
     const api = getApiEndpoints();
     const { userDetails } = UserData();
     const [isDetailsLoading, setIsDetailsLoading] = useState(false);
     const [bookingDetails, setBookingDetails] = useState({});
+    const [isCancelButtonLoading, setIsCancelButtonLoading] = useState(false);
 
     function closeModal() {
         setShowBookingDetails(false);
@@ -55,6 +57,28 @@ const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, 
             name: name
         };
         return JSON.stringify(values);
+    }
+
+    const handleCancelInitiate = async () => {
+        setIsCancelButtonLoading(true);
+        const payload = {
+            bookingId: bookingDetails.booking_id,
+            userName: userDetails.name
+        };
+
+        try {
+            const response = await axiosInstance.post(api.bookingCancel, payload);
+            if (response?.data?.status === 200) {
+                console.log(response);
+                setRefundAmount(response?.data?.refundAmount);
+                setShowBookingDetails(false);
+                setShowConfirmCancel(true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsCancelButtonLoading(false);
+        }
     }
 
     return (
@@ -151,9 +175,24 @@ const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, 
                         }
                     </div>
                     {
-                        type === 'upcoming' &&
+
+                        (type === 'upcoming' || type === 'cancelled') &&
                         <div className="modal_bottom">
-                            <button>Cancel this booking</button>
+                            {
+                                type === 'upcoming' &&
+                                <button className={isCancelButtonLoading ? 'disable' : ''} onClick={handleCancelInitiate} disabled={isCancelButtonLoading}>
+                                    {
+                                        isCancelButtonLoading ?
+                                            <ButtonLoader />
+                                            :
+                                            <>Cancel Booking</>
+                                    }
+                                </button>
+                            }
+                            {
+                                type === 'cancelled' &&
+                                <></>
+                            }
                         </div>
                     }
                 </div>

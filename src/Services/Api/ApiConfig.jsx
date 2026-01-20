@@ -43,5 +43,7 @@ export const getApiEndpoints = () => {
         bookingPayment: `${apiURL}/api/booking/payment/payment-process.php`,
         bookingList: `${apiURL}/api/booking/list.php`,
         bookingDetails: `${apiURL}/api/booking/details.php`,
+        bookingCancel: `${apiURL}/api/booking/payment/cancel-booking.php`,
+        refundPayment: `${apiURL}/api/booking/payment/payment-refund.php`,
     };
 }

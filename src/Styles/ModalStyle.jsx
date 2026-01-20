@@ -1728,6 +1728,7 @@ export const CheckoutWrapper = styled('div')`
 
                 &.disable {
                     opacity: 0.4;
+                    pointer-events: none;
                 }
 
                 p {
@@ -2222,6 +2223,150 @@ export const BookingDetailsWrapper = styled('div')`
                 &:hover {
                     border-radius: 25px;
                     transition: all 0.5s ease;
+                }
+
+                &.disable {
+                    opacity: 0.4;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+`;
+
+export const BookingCancelConfirmWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: initial;
+        transition: all 0.3s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 410px;
+        max-height: 100%;
+        background: ${colors.customColors.lightBackground4};
+        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(-150px);
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        transition: transform 0.8s ease;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &.active {
+            transform: translateY(0);
+            transition: transform 0.8s ease;
+        }
+
+        .modal_body {
+            position: relative;
+            padding: 20px 25px;
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+
+            .icon_box {
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                img {
+                    position: relative;
+                    width: 150px;
+                }
+            }
+
+            .box_items {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                p {
+                    position: relative;
+                    font-size: 13px;
+                    margin-top: 3px;
+                    color: ${colors.customColors.blackColor1};
+
+                    span {
+                        font-weight: 500;
+                        color: ${colors.customColors.greenColor};
+                        font-style: italic;
+                    }
+
+                    a {
+                        font-weight: 500;
+                        color: ${colors.customColors.blueColor};
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .modal_bottom {
+            position: relative;
+            width: 100%;
+            padding: 15px 20px;
+            border-top: 1px solid ${colors.customColors.borderColor};
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                position: relative;
+                width: 47.5%;
+                height: 40px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 500;
+                color: ${colors.customColors.whiteColor};
+                transition: all 0.5s ease;
+
+                &.cancel_btn {
+                    background: ${colors.customColors.blackColor};
+                }
+
+                &.proceed_btn {
+                    background: ${colors.customColors.redColor};
+                }
+
+                &:hover {
+                    border-radius: 25px;
+                    transition: all 0.5s ease;
+                }
+
+                &.disable {
+                    opacity: 0.4;
+                    pointer-events: none;
                 }
             }
         }
