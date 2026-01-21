@@ -1950,7 +1950,7 @@ export const BookingDetailsWrapper = styled('div')`
                             position: absolute;
                             top: 0;
                             left: 0;
-                            width: 100px;
+                            width: 90px;
                             height: 100%;
                             border-right: 1px solid ${colors.customColors.blackColor};
                             border-bottom: 1px solid ${colors.customColors.blackColor};
@@ -1973,7 +1973,7 @@ export const BookingDetailsWrapper = styled('div')`
                             display: flex;
                             flex-direction: column;
                             padding: 9px 12px;
-                            padding-left: 112px;
+                            padding-left: 102px;
                             padding-bottom: 0;
 
                             .id_sec {
