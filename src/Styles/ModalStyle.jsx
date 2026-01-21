@@ -2099,25 +2099,6 @@ export const BookingDetailsWrapper = styled('div')`
                                     }
                                 }
                             }
-
-                            .location_sec {
-                                position: relative;
-                                width: 100%;
-                                margin-top: 1px;
-
-                                p {
-                                    position: relative;
-                                    width: 100%;
-                                    font-size: 12px;
-                                    color: ${colors.customColors.blackColor1};
-
-                                    span {
-                                        font-weight: 500;
-                                        color: ${colors.customColors.blackColor};
-                                        font-style: italic;
-                                    }
-                                }
-                            }
                         }
                     }
 

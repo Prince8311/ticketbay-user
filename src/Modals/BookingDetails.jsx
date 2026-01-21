@@ -139,9 +139,6 @@ const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, 
                                                 <div className="seats_sec">
                                                     <p><span>{bookingDetails.section} :</span> {bookingDetails.seats}</p>
                                                 </div>
-                                                <div className="location_sec">
-                                                    <p><span>Location :</span> {bookingDetails.location}</p>
-                                                </div>
                                             </div>
                                         </div>
                                         <div className="bottom_part">
