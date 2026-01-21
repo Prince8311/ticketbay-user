@@ -191,7 +191,9 @@ const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, 
                             }
                             {
                                 type === 'cancelled' &&
-                                <></>
+                                <>
+                                    <p>Refund Status : <span className="success">SUCCESS</span></p>
+                                </>
                             }
                         </div>
                     }

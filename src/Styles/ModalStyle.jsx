@@ -2230,6 +2230,34 @@ export const BookingDetailsWrapper = styled('div')`
                     pointer-events: none;
                 }
             }
+
+            P {
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                font-weight: 400;
+                font-size: 13px;
+                font-style: italic;
+                color: ${colors.customColors.blackColor1};
+
+                span {
+                    position: relative;
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin-left: 6px;
+
+                    &.success {
+                        color: ${colors.customColors.greenColor};
+                    }
+                    &.failure {
+                        color: ${colors.customColors.redColor};
+                    }
+                    &.pending {
+                        color: ${colors.customColors.orangeColor};
+                    }
+                }
+            }
         }
     }
 `;
