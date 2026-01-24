@@ -3,11 +3,12 @@ import { NavbarWrapper } from "../Styles/LayoutStyle";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserData } from "../Context/PageContext";
 import { profileImageURL } from "../Services/Api/ApiConfig";
+import SkeletonLoader from "./Loader/SkeletonLoader";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [isNavScrolled, setIsNavScrolled] = useState(false);
-    const { isLocationButtonShow, setShowLocaltionModal, selectedLocation, authToken, setAuthToken, userDetails, setUserDetails } = UserData();
+    const { isLocationButtonShow, setShowLocaltionModal, selectedLocation, authToken, setAuthToken, userDetails, setUserDetails, isDetailsLoading } = UserData();
     const words = ["movie name ...", "theater name ..."];
     const [wordIndex, setWordIndex] = useState(0);
     const [subIndex, setSubIndex] = useState(0);
@@ -97,9 +98,20 @@ const Navbar = () => {
                             authToken ? (
                                 <div className="profile">
                                     <div className="profile_btn" onClick={openProfileDropdown}>
-                                        <img src={userDetails.image ? `${profileImageURL}/${userDetails.image}` : '/images/profile-image.png'} alt="" />
-                                        <p>{userDetails.name}</p>
-                                        <i className={`fa-solid fa-angle-down ${profileDropdown ? 'active' : ''}`}></i>
+                                        {
+                                            isDetailsLoading ? (
+                                                <>
+                                                    <SkeletonLoader width="30px" height="30px" />
+                                                    <SkeletonLoader width="110px" height="18px" margin="0 0 0 8px" />
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <img src={userDetails.image ? `${profileImageURL}/${userDetails.image}` : '/images/profile-image.png'} alt="" />
+                                                    <p>{userDetails.name}</p>
+                                                    <i className={`fa-solid fa-angle-down ${profileDropdown ? 'active' : ''}`}></i>
+                                                </>
+                                            )
+                                        }
                                     </div>
                                     <div className={`profile_dropdown ${profileDropdown ? 'active' : ''}`}>
                                         <div className="dropdown_inner">

@@ -112,6 +112,8 @@ export const BookingListPageWrapper = styled('div')`
             position: relative;
             width: 100%;
             margin-top: 15px;
+            display: flex;
+            flex-direction: column;
 
             .ticket_list {
                 position: relative;
@@ -134,6 +136,30 @@ export const BookingListPageWrapper = styled('div')`
                         font-weight: 500;
                         color: ${colors.customColors.blackColor3};
                         pointer-events: none;
+                    }
+                }
+            }
+
+            .load_more {
+                position: relative;
+                margin-top: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                a {
+                    position: relative;
+                    font-size: 12px;
+                    cursor: pointer;
+                    background: ${colors.customColors.blueColor};
+                    color: ${colors.customColors.whiteColor};
+                    padding: 6px 15px;
+                    font-weight: 500;
+                    border-radius: 5px;
+
+                    i {
+                        margin-left: 5px;
+                        font-size: 10px;
                     }
                 }
             }

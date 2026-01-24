@@ -15,6 +15,9 @@ const BookingListPage = () => {
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [currentType, setCurrentType] = useState('upcoming');
     const [showBookingDetails, setShowBookingDetails] = useState(false);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(false);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
     const [tickets, setTickets] = useState([]);
     const [listReload, setListReload] = useState(false);
     const [selectedBookingId, setSelectedBookingId] = useState('');
@@ -22,16 +25,28 @@ const BookingListPage = () => {
     const [showConfirmCancel, setShowConfirmCancel] = useState(false);
 
     const fetchBookingList = async () => {
-        setIsDataLoading(true);
+        page === 1 ? setIsDataLoading(true) : setIsFetchingMore(true);
         try {
             const response = await axiosInstance.get(api.bookingList, {
                 params: {
                     name: userDetails.name,
-                    type: currentType
+                    type: currentType,
+                    page: page,
+                    limit: 12
                 },
             });
             if (response?.data?.status === 200) {
-                setTickets(response?.data?.list);
+                const newList = response.data.list || [];
+                const totalCount = response.data.totalCount || 0;
+                setTickets(prev => {
+                    const updatedList = page === 1 ? newList : [...prev, ...newList];
+                    if (updatedList.length === totalCount) {
+                        setHasMore(false);
+                    } else {
+                        setHasMore(true); 
+                    }
+                    return updatedList;
+                });
             }
         } catch (error) {
             setTickets([]);
@@ -39,6 +54,7 @@ const BookingListPage = () => {
         } finally {
             setListReload(false);
             setIsDataLoading(false);
+            setIsFetchingMore(false);
         }
     }
 
@@ -46,7 +62,13 @@ const BookingListPage = () => {
         if (currentType && userDetails && Object.keys(userDetails).length > 0) {
             fetchBookingList();
         }
-    }, [userDetails, currentType, listReload]);
+    }, [page, userDetails, currentType, listReload]);
+
+    const changeBookingTab = (type) => {
+        setCurrentType(type);
+        setPage(1);
+        setTickets([]);
+    }
 
     return (
         <>
@@ -58,13 +80,13 @@ const BookingListPage = () => {
                     <div className="page_tab_sec">
                         <div className="sec_inner">
                             <li>
-                                <a className={currentType === 'upcoming' ? 'active' : ''} onClick={() => setCurrentType('upcoming')}>Upcoming</a>
+                                <a className={currentType === 'upcoming' ? 'active' : ''} onClick={() => changeBookingTab('upcoming')}>Upcoming</a>
                             </li>
                             <li>
-                                <a className={currentType === 'previous' ? 'active' : ''} onClick={() => setCurrentType('previous')}>Previous</a>
+                                <a className={currentType === 'previous' ? 'active' : ''} onClick={() => changeBookingTab('previous')}>Previous</a>
                             </li>
                             <li>
-                                <a className={currentType === 'cancelled' ? 'active' : ''} onClick={() => setCurrentType('cancelled')}>Cancelled</a>
+                                <a className={currentType === 'cancelled' ? 'active' : ''} onClick={() => changeBookingTab('cancelled')}>Cancelled</a>
                             </li>
                         </div>
                     </div>
@@ -91,7 +113,19 @@ const BookingListPage = () => {
                                     </div>
                                 )
                             }
+                            {
+                                isFetchingMore &&
+                                Array.from({ length: 4 }).map((_, i) => (
+                                    <SkeletonLoader width="315px" height="93px" margin="10px" />
+                                ))
+                            }
                         </div>
+                        {
+                            hasMore &&
+                            <div className="load_more">
+                                <a onClick={() => setPage(page + 1)}>Load More<i className="fa-solid fa-angles-down"></i></a>
+                            </div>
+                        }
                     </div>
                 </div>
                 <BookingDetailsModal

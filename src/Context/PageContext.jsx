@@ -15,6 +15,8 @@ export const UserProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(() => {
         return localStorage.getItem("authToken") || '';
     });
+    const [isDetailsLoading, setIsDetailsLoading] = useState(false);
+    const [reloadDetails, setReloadDetails] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     const [isLocationButtonShow, setIsLocationButtonShow] = useState(false);
     const [isNavFooterShow, setIsNavFooterShow] = useState(true);
@@ -25,6 +27,7 @@ export const UserProvider = ({ children }) => {
     const isLocationAvailablePages = location.pathname.includes("/home") || location.pathname.includes("/recommended-movies") || location.pathname.includes("/upcoming-movies") || location.pathname.includes("/coming-soon-movies") || location.pathname.includes("/theaters");
 
     const checkAuth = async () => {
+        setIsDetailsLoading(true);
         try {
             const response = await axiosInstance.get(api.checkAuth);
             if (response?.data?.status === 200) {
@@ -35,6 +38,9 @@ export const UserProvider = ({ children }) => {
             }
         } catch (error) {
             throw new Error(error.response?.data.message || error.message);
+        } finally {
+            setReloadDetails(false);
+            setIsDetailsLoading(false);
         }
     }
 
@@ -42,7 +48,7 @@ export const UserProvider = ({ children }) => {
         if (authToken) {
             checkAuth();
         }
-    }, [authToken]);
+    }, [authToken, reloadDetails]);
 
     useEffect(() => {
         const redirectLink = localStorage.getItem("redirectURL");
@@ -72,7 +78,7 @@ export const UserProvider = ({ children }) => {
     }, [location.pathname]);
 
     return (
-        <UserContext.Provider value={{ isNavFooterShow, isLocationButtonShow, showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation, authToken, setAuthToken, userDetails, setUserDetails }}>
+        <UserContext.Provider value={{ isNavFooterShow, isLocationButtonShow, showLocaltionModal, setShowLocaltionModal, selectedLocation, setSelectedLocation, authToken, setAuthToken, userDetails, setUserDetails, isDetailsLoading, setReloadDetails }}>
             {children}
         </UserContext.Provider>
     );

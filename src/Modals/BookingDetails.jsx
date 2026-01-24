@@ -189,7 +189,12 @@ const BookingDetailsModal = ({ showBookingDetails, setShowBookingDetails, type, 
                             {
                                 type === 'cancelled' &&
                                 <>
-                                    <p>Refund Status : <span className="success">SUCCESS</span></p>
+                                    {
+                                        isDetailsLoading ?
+                                            <SkeletonLoader width="150px" height="18px" />
+                                            :
+                                            <p>Refund Status : <span className={bookingDetails?.refund_status?.toLowerCase()}>{bookingDetails.refund_status}</span></p>
+                                    }
                                 </>
                             }
                         </div>

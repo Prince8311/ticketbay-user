@@ -8,7 +8,7 @@ import { getApiEndpoints, profileImageURL } from "../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 
 const ProfilePage = () => {
-    const { userDetails } = UserData();
+    const { userDetails, isDetailsLoading } = UserData();
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
     useEffect(() => {
@@ -24,15 +24,33 @@ const ProfilePage = () => {
             <ProfilePageWrapper>
                 <div className="page_content">
                     <div className="user_details_sec">
-                        <div className="image_box">
-                            <div className="box_inner">
-                                <img src={userDetails.image ? `${profileImageURL}/${userDetails.image}` : '/images/profile-image.png'} alt="" />
-                            </div>
-                        </div>
+                        {
+                            isDetailsLoading ? (
+                                <SkeletonLoader width="100px" height="100px" />
+                            ) : (
+                                <div className="image_box">
+                                    <div className="box_inner">
+                                        <img src={userDetails.image ? `${profileImageURL}/${userDetails.image}` : '/images/profile-image.png'} alt="" />
+                                    </div>
+                                </div>
+                            )
+                        }
                         <div className="profile_content">
-                            <h6>{userDetails.name}</h6>
-                            <p>{userDetails.phone}</p>
-                            <span>{userDetails.email}</span>
+                            {
+                                isDetailsLoading ? (
+                                    <>
+                                        <SkeletonLoader width="300px" height="22px" />
+                                        <SkeletonLoader width="100px" height="16px" margin="7px 0 0 0" />
+                                        <SkeletonLoader width="200px" height="16px" margin="5px 0 0 0" />
+                                    </>
+                                ) : (
+                                    <>
+                                        <h6>{userDetails.name}</h6>
+                                        <p>{userDetails.phone}</p>
+                                        <span>{userDetails.email}</span>
+                                    </>
+                                )
+                            }
                         </div>
                         <div className="edit_btn_sec">
                             <a onClick={handleOpenEditProfileModal}><i className="fa-solid fa-pen-to-square"></i></a>

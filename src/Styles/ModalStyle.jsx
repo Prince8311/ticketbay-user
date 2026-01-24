@@ -149,6 +149,10 @@ export const EditProfileWrapper = styled('div')`
 
                     }
 
+                    input[type="file"] {
+                        display: none;
+                    }
+
                     a {
                         position: absolute;
                         bottom: 1px;
@@ -216,7 +220,7 @@ export const EditProfileWrapper = styled('div')`
  
                 .verify_sec {
                     position: relative;
-                    margin-top: 8px;
+                    margin-top: 5px;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
@@ -225,16 +229,65 @@ export const EditProfileWrapper = styled('div')`
                     a {
                         position: relative;
                         text-decoration: none;
-                        font-size: 11px;
+                        font-size: 10px;
                         font-weight: 500;
                         color: ${colors.customColors.blueColor};
                         cursor: pointer;
                     }
                 }
 
+                .otp_input_sec {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 10px;
+
+                    p {
+                        position: relative;
+                        font-size: 11px;
+                    }
+
+                    div {
+                        margin-top: 10px;
+                        input {
+                            position: relative;
+                            width: 27px !important;
+                            height: 27px;
+                            outline: none;
+                            font-size: 12px;
+                            border: 1px solid ${colors.customColors.borderColor};
+                            transition: all 0.5s ease;
+
+                            &:nth-of-type(1),
+                            &:nth-of-type(4) {
+                                border-top-left-radius: 5px;
+                                border-bottom-left-radius: 5px;
+                            }
+
+                            &:nth-of-type(3),
+                            &:nth-of-type(6) {
+                                border-top-right-radius: 5px;
+                                border-bottom-right-radius: 5px;
+                                margin-right: 20px;
+                                border-left: none;
+                            }
+
+                            &:nth-of-type(2),
+                            &:nth-of-type(5) {
+                                border-left: none;
+                            }
+
+                            &:focus,
+                            &:valid {
+                                border-color: ${colors.customColors.blueColor};
+                                transition: all 0.5s ease;
+                            }
+                        }
+                    }
+                }
+
                 .form_btn {
                     position: relative;
-                    margin-top: 20px;
+                    margin-top: 15px;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
@@ -257,6 +310,11 @@ export const EditProfileWrapper = styled('div')`
                             border-radius: 30px;
                             letter-spacing: 1px;
                             transition: all 0.5s ease;
+                        }
+
+                        &:disabled {
+                            opacity: 0.5;
+                            cursor: not-allowed;
                         }
                     }
                 }
@@ -2187,6 +2245,8 @@ export const BookingDetailsWrapper = styled('div')`
             width: 100%;
             border-top: 1px solid ${colors.customColors.borderColor};
             padding: 15px 20px;
+            display: flex;
+            justify-content: flex-end;
 
             button {
                 position: relative;
@@ -2218,7 +2278,7 @@ export const BookingDetailsWrapper = styled('div')`
                 display: flex;
                 justify-content: flex-end;
                 font-weight: 400;
-                font-size: 13px;
+                font-size: 12px;
                 font-style: italic;
                 color: ${colors.customColors.blackColor1};
 
@@ -2227,6 +2287,7 @@ export const BookingDetailsWrapper = styled('div')`
                     font-size: 12px;
                     font-weight: 500;
                     margin-left: 6px;
+                    font-style: normal;
 
                     &.success {
                         color: ${colors.customColors.greenColor};
