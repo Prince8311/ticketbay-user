@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getApiEndpoints, profileImageURL } from "../../Services/Api/ApiConfig";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
+import PasswordChangeModal from "../../Modals/ChangePassword";
 
 const ProfilePage = () => {
     const { userDetails, isDetailsLoading } = UserData();
@@ -175,6 +176,7 @@ const ProfilePage = () => {
                     showEditProfileModal={showEditProfileModal}
                     setShowEditProfileModal={setShowEditProfileModal}
                 />
+                <PasswordChangeModal />
             </ProfilePageWrapper>
         </>
     );
