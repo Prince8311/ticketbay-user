@@ -25,6 +25,11 @@ export const getApiEndpoints = () => {
         movieDetails: `${apiURL}/api/movies/movie-details.php`,
         movieDates: `${apiURL}/api/movies/movie-dates.php`,
         movieInfo: `${apiURL}/api/movies/movie-info.php`,
+        
+        // Filter 
+        movieLanuages: `${apiURL}/api/movies/filters/languages.php`,
+        movieFormats: `${apiURL}/api/movies/filters/formats.php`,
+        movieGenres: `${apiURL}/api/movies/filters/genres.php`,
 
         // Theaters 
         fetchTheaters: `${apiURL}/api/theaters/theaters.php`,
@@ -49,5 +54,7 @@ export const getApiEndpoints = () => {
         // Profile 
         emailOtpSend: `${apiURL}/api/account/email-otp-send.php`,
         emailOtpVerify: `${apiURL}/api/account/otp-verify.php`,
+        updateProfile: `${apiURL}/api/account/profile-update.php`,
+        changePassword: `${apiURL}/api/account/change-password.php`,
     };
 }

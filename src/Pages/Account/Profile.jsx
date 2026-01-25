@@ -11,6 +11,7 @@ import PasswordChangeModal from "../../Modals/ChangePassword";
 const ProfilePage = () => {
     const { userDetails, isDetailsLoading } = UserData();
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
     useEffect(() => {
         console.log(userDetails);
@@ -83,7 +84,7 @@ const ProfilePage = () => {
                                 <h4>My Profile</h4>
                             </div>
                             <div className="item_content_sec">
-                                <div className="content_box">
+                                <div className="content_box" onClick={() => setShowChangePasswordModal(true)}>
                                     <i className="fa-solid fa-lock"></i>
                                     <p>Change Password</p>
                                     <i className="fa-solid fa-angle-right"></i>
@@ -176,7 +177,10 @@ const ProfilePage = () => {
                     showEditProfileModal={showEditProfileModal}
                     setShowEditProfileModal={setShowEditProfileModal}
                 />
-                <PasswordChangeModal />
+                <PasswordChangeModal
+                    showChangePasswordModal={showChangePasswordModal}
+                    setShowChangePasswordModal={setShowChangePasswordModal}
+                />
             </ProfilePageWrapper>
         </>
     );

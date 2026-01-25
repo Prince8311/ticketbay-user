@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import { UserData } from "../Context/PageContext";
 import axiosInstance from "../Services/Middleware/AxiosInstance";
 import CircleLoader from "../Components/Loader/CircleLoader";
+import ButtonLoader from "../Components/Loader/ButtonLoader";
 
 const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => {
     const api = getApiEndpoints();
-    const { userDetails } = UserData();
+    const { userDetails, setReloadDetails } = UserData();
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [initialForm, setInitialForm] = useState(null);
@@ -27,6 +28,7 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
         return localStorage.getItem("emailVerified") || false
     });
     const isEmailChanged = initialForm && form.email !== initialForm.email;
+    const [isProfileUpdating, setIsProfileUpdating] = useState(false);
 
     const maskEmail = (email) => {
         const [user, domain] = email.split("@");
@@ -126,6 +128,37 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
         }
     }
 
+    const handleProfileUpdate = async (e) => {
+        e.preventDefault();
+        setIsProfileUpdating(true);
+        const formData = new FormData();
+        formData.append('id', userDetails.id);
+        formData.append('inputs', JSON.stringify(form));
+        if (selectedFile !== null) {
+            formData.append('image', selectedFile);
+        }
+        try {
+            const response = await axiosInstance.post(api.updateProfile, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            if (response?.data?.status === 200) {
+                toast.success(response?.data?.message);
+                setReloadDetails(true);
+                setShowOtpField(false);
+                setEmailVerified(false);
+                setOtp('');
+                setShowEditProfileModal(false);
+                localStorage.removeItem("emailVerified")
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsProfileUpdating(false);
+        }
+    }
+
     return (
         <>
             <EditProfileWrapper className={showEditProfileModal ? 'active' : ''}>
@@ -151,7 +184,7 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
                                 <input type="text" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
                                 <span>Phone No.</span>
                             </div>
-                            <div className="input_box">
+                            <div className={`input_box ${emailVerified ? 'active' : ''}`}>
                                 <input type="text" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
                                 <span>Email</span>
                             </div>
@@ -187,7 +220,15 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
                                 )
                             }
                             <div className="form_btn">
-                                <button disabled={!isDirty}>Update</button>
+                                <button onClick={handleProfileUpdate} disabled={!isDirty || isProfileUpdating}>
+                                    {
+                                        isProfileUpdating ? (
+                                            <ButtonLoader />
+                                        ) : (
+                                            <>Update</>
+                                        )
+                                    }
+                                </button>
                             </div>
                         </form>
                     </div>

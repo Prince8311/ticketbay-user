@@ -385,9 +385,9 @@ export const PasswordChangeWrapper = styled('div')`
     justify-content: center;
     padding: 40px 0;
     z-index: 1000;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: initial;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     transition: all 0.3s ease;
     
     &.active {
@@ -406,7 +406,7 @@ export const PasswordChangeWrapper = styled('div')`
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        transform: translateY(0);
+        transform: translateY(-100px);
         transition: transform 0.8s ease;
 
         &.active {
@@ -468,6 +468,10 @@ export const PasswordChangeWrapper = styled('div')`
                     width: 100%;
                     margin-top: 17px;
 
+                    &:first-of-type {
+                        margin-top: 0;
+                    }
+
                     input {
                         position: relative;
                         width: 100%;
@@ -508,11 +512,38 @@ export const PasswordChangeWrapper = styled('div')`
                         font-weight: 500;
                         transition: all 0.5s ease;
                     }
+
+                    a {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 50px;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor2};
+                    }
+                }
+
+                .error_message {
+                    position: relative;
+                    margin-top: 5px;
+                    padding-left: 5px;
+                    width: 100%;
+
+                    p {
+                        position: relative;
+                        font-size: 10px;
+                        color: ${colors.customColors.redColor};
+                    }
                 }
 
                 .form_btn {
                     position: relative;
-                    margin-top: 15px;
+                    margin-top: 10px;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
@@ -914,7 +945,7 @@ export const MovieFilterWrapper = styled('div')`
         position: relative;
         margin-top: 10px;
         width: 100%;
-        height: calc(100% - 40px);
+        height: calc(100% - 90px);
         display: flex;
         flex-direction: column;
         padding: 0 15px;
@@ -946,7 +977,6 @@ export const MovieFilterWrapper = styled('div')`
                 padding: 0 16px;
                 display: flex;
                 align-items: center;
-                border-bottom: 1px solid ${colors.customColors.borderColor};
 
                 p {
                     position: relative;
@@ -968,37 +998,81 @@ export const MovieFilterWrapper = styled('div')`
 
                 i {
                     position: relative;
-                    margin-left: 10px;
+                    margin-left: 15px;
                     font-size: 13px;
+                    cursor: pointer;
                     color: ${colors.customColors.blackColor2};
+                    transition: all 0.5s ease;
+                    
+                    &.rotate {
+                        transform: rotate(90deg);
+                        transition: all 0.5s ease;
+                    }
                 }
             }
 
             .box_content {
                 position: relative;
                 width: 100%;
-                padding: 11px;
-                display: flex;
-                flex-wrap: wrap;
+                border-top: 1px solid ${colors.customColors.whiteColor};
+                max-height: 0;
+                overflow: hidden;
+                transition: all 0.6s ease;
+                
+                &.active {
+                    border-top: 1px solid ${colors.customColors.borderColor};
+                    max-height: 1000px;
+                    transition: all 0.6s ease;
+                }
 
-                li {
+                .content_inner {
                     position: relative;
-                    list-style: none;
-                    padding: 3px;
+                    width: 100%;
+                    padding: 11px;
+                    display: flex;
+                    flex-wrap: wrap;
 
-                    input[type="checkbox"] {
-                        display: none;
-                    }
-
-                    label {
+                    li {
                         position: relative;
-                        padding: 5px 20px;
-                        cursor: pointer;
-                        font-size: 12px;
-                        display: flex;
-                        color: ${colors.customColors.blackColor2};
-                        border: 1px solid ${colors.customColors.borderColor};
-                        border-radius: 4px;
+                        list-style: none;
+                        padding: 3px;
+
+                        input[type="checkbox"] {
+                            display: none;
+                        }
+
+                        label {
+                            position: relative;
+                            padding: 5px 20px;
+                            cursor: pointer;
+                            font-size: 12px;
+                            display: flex;
+                            color: ${colors.customColors.blackColor2};
+                            border: 1px solid ${colors.customColors.borderColor};
+                            border-radius: 4px;
+                            transition: all 0.5s ease;
+                            
+                            &:hover {
+                                background: ${colors.customColors.borderColor};
+                                color: ${colors.customColors.blackColor1};
+                                transition: all 0.5s ease;
+                            }
+                        }
+                    }
+                }
+
+                .empty_box {
+                    position: relative;
+                    width: 100%;
+                    padding: 10px 0;
+                    display: flex;
+                    justify-content: center;
+                    pointer-events: none;
+
+                    p {
+                        position: relative;
+                        font-size: 13px;
+                        color: ${colors.customColors.blackColor3};
                     }
                 }
             }
