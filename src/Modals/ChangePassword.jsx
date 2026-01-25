@@ -6,7 +6,7 @@ const PasswordChangeModal = () => {
             <PasswordChangeWrapper>
                 <div className="modal_box">
                     <div className="modal_head">
-                        <h4>Password Change</h4>
+                        <h4>Change your Password</h4>
                         <a><i className="fa-solid fa-xmark"></i></a>
                     </div>
                     <div className="modal_form">

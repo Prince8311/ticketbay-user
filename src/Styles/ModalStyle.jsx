@@ -334,9 +334,9 @@ export const PasswordChangeWrapper = styled('div')`
     justify-content: center;
     padding: 40px 0;
     z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: initial;
     transition: all 0.3s ease;
     
     &.active {
@@ -355,7 +355,7 @@ export const PasswordChangeWrapper = styled('div')`
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        transform: translateY(-150px);
+        transform: translateY(0);
         transition: transform 0.8s ease;
 
         &.active {
