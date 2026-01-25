@@ -34,6 +34,20 @@ export const SkeletonBoxWrapper = styled('div')`
     }
 `;
 
+export const CircleLoaderWrapper = styled('div')`
+    position: relative;
+    border: 2px solid ${colors.customColors.greenColor};
+    border-right: none;
+    border-bottom: none;
+    border-radius: 50%;
+    animation: rotate 1s linear infinite;
+
+    @keyframes rotate {
+        from { transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+    }
+`;
+
 export const EditProfileWrapper = styled('div')`
     position: fixed;
     top: 0;
@@ -233,6 +247,13 @@ export const EditProfileWrapper = styled('div')`
                         font-weight: 500;
                         color: ${colors.customColors.blueColor};
                         cursor: pointer;
+                        transition: all 0.3s ease;
+
+                        &.disable {
+                            opacity: 0.4;
+                            pointer-events: none;
+                            transition: all 0.3s ease;
+                        }
                     }
                 }
 
@@ -244,42 +265,72 @@ export const EditProfileWrapper = styled('div')`
                     p {
                         position: relative;
                         font-size: 11px;
+
+                        span {
+                            font-weight: 500;
+                        }
                     }
 
-                    div {
+                    .otp_sec {
+                        position: relative;
+                        width: 100%;
                         margin-top: 10px;
-                        input {
-                            position: relative;
-                            width: 27px !important;
-                            height: 27px;
-                            outline: none;
-                            font-size: 12px;
-                            border: 1px solid ${colors.customColors.borderColor};
-                            transition: all 0.5s ease;
+                        display: flex;
+                        align-items: center;
 
-                            &:nth-of-type(1),
-                            &:nth-of-type(4) {
-                                border-top-left-radius: 5px;
-                                border-bottom-left-radius: 5px;
-                            }
-
-                            &:nth-of-type(3),
-                            &:nth-of-type(6) {
-                                border-top-right-radius: 5px;
-                                border-bottom-right-radius: 5px;
-                                margin-right: 20px;
-                                border-left: none;
-                            }
-
-                            &:nth-of-type(2),
-                            &:nth-of-type(5) {
-                                border-left: none;
-                            }
-
-                            &:focus,
-                            &:valid {
-                                border-color: ${colors.customColors.blueColor};
+                        div {
+                            input {
+                                position: relative;
+                                width: 27px !important;
+                                height: 27px;
+                                outline: none;
+                                font-size: 12px;
+                                border: 1px solid ${colors.customColors.borderColor};
                                 transition: all 0.5s ease;
+
+                                &:nth-of-type(1),
+                                &:nth-of-type(4) {
+                                    border-top-left-radius: 5px;
+                                    border-bottom-left-radius: 5px;
+                                }
+
+                                &:nth-of-type(3),
+                                &:nth-of-type(6) {
+                                    border-top-right-radius: 5px;
+                                    border-bottom-right-radius: 5px;
+                                    margin-right: 20px;
+                                    border-left: none;
+                                }
+
+                                &:nth-of-type(2),
+                                &:nth-of-type(5) {
+                                    border-left: none;
+                                }
+
+                                &:focus,
+                                &:valid {
+                                    border-color: ${colors.customColors.blueColor};
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+
+                        a {
+                            position: relative;
+                            font-size: 11px;
+                            color: ${colors.customColors.greenColor};
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+
+                            i {
+                                font-size: 10px;
+                                margin-left: 4px;
+                            }
+
+                            &.disable {
+                                opacity: 0.4;
+                                pointer-events: none;
                             }
                         }
                     }

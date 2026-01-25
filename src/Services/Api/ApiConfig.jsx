@@ -45,5 +45,9 @@ export const getApiEndpoints = () => {
         bookingDetails: `${apiURL}/api/booking/details.php`,
         bookingCancel: `${apiURL}/api/booking/payment/cancel-booking.php`,
         refundPayment: `${apiURL}/api/booking/payment/payment-refund.php`,
+
+        // Profile 
+        emailOtpSend: `${apiURL}/api/account/email-otp-send.php`,
+        emailOtpVerify: `${apiURL}/api/account/otp-verify.php`,
     };
 }

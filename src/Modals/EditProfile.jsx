@@ -3,10 +3,12 @@ import { EditProfileWrapper } from "../Styles/ModalStyle";
 import OTPInput from "react-otp-input";
 import { getApiEndpoints, profileImageURL } from "../Services/Api/ApiConfig";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { UserData } from "../Context/PageContext";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
+import CircleLoader from "../Components/Loader/CircleLoader";
 
 const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => {
+    const api = getApiEndpoints();
     const { userDetails } = UserData();
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -17,10 +19,20 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
         phone: '',
         email: ''
     });
+    const [isOTPSending, setIsOTPSending] = useState(false);
     const [showOtpField, setShowOtpField] = useState(false);
     const [otp, setOtp] = useState('');
-    const [emailVerified, setEmailVerified] = useState(false);
+    const [isOTPVerifying, setIsOTPVerifying] = useState(false);
+    const [emailVerified, setEmailVerified] = useState(() => {
+        return localStorage.getItem("emailVerified") || false
+    });
     const isEmailChanged = initialForm && form.email !== initialForm.email;
+
+    const maskEmail = (email) => {
+        const [user, domain] = email.split("@");
+        const maskedUser = `${user.slice(0, 3)}****`;
+        return `${maskedUser}@${domain}`;
+    };
 
     useEffect(() => {
         if (!showEditProfileModal || !userDetails) return;
@@ -57,6 +69,8 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
     function closeModal() {
         setShowEditProfileModal(false);
         setSelectedFile(null);
+        setShowOtpField(false);
+        setOtp('');
     }
 
     // --------------------------------------------
@@ -76,6 +90,41 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
         }
         reader.readAsDataURL(file);
     };
+
+    const handleOTPSend = async () => {
+        setIsOTPSending(true);
+        const payload = { email: userDetails.email };
+        try {
+            const response = await axiosInstance.post(api.emailOtpSend, payload);
+            if (response?.data?.status === 200) {
+                toast.success(response?.data?.message);
+                setShowOtpField(true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        } finally {
+            setIsOTPSending(false);
+        }
+    }
+
+    const handleOTPVerify = async () => {
+        setIsOTPVerifying(true);
+        const payload = { otp: otp };
+        try {
+            const response = await axiosInstance.post(api.emailOtpVerify, payload);
+            if (response?.data?.status === 200) {
+                toast.success(response?.data?.message);
+                setEmailVerified(true);
+                localStorage.setItem("emailVerified", true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+            setShowOtpField(false);
+            setOtp('');
+        } finally {
+            setIsOTPVerifying(false);
+        }
+    }
 
     return (
         <>
@@ -107,22 +156,33 @@ const EditProfileModal = ({ showEditProfileModal, setShowEditProfileModal }) => 
                                 <span>Email</span>
                             </div>
                             {
-                                isEmailChanged && (
+                                (isEmailChanged && !emailVerified) && (
                                     <div className="verify_sec">
-                                        <a>Verify Current Email</a>
+                                        <a className={isOTPSending ? 'disable' : ''} onClick={handleOTPSend}>Verify Current Email</a>
                                     </div>
                                 )
                             }
                             {
                                 showOtpField && (
                                     <div className="otp_input_sec">
-                                        <p>We have send a 6 digit otp to <span>sourishmondal.vizac@gmail.com</span></p>
-                                        <OTPInput
-                                            value={otp}
-                                            onChange={setOtp}
-                                            numInputs={6}
-                                            renderInput={(props) => <input {...props} inputMode="numeric" pattern="[0-9]*" required />}
-                                        />
+                                        <p>We have send a 6 digit otp to <span>{maskEmail(userDetails.email)}</span></p>
+                                        <div className="otp_sec">
+                                            <OTPInput
+                                                value={otp}
+                                                onChange={setOtp}
+                                                numInputs={6}
+                                                renderInput={(props) => <input {...props} inputMode="numeric" pattern="[0-9]*" required />}
+                                            />
+                                            {
+                                                emailVerified ? (
+                                                    <a>Verified<i className="fa-solid fa-circle-check"></i></a>
+                                                ) : isOTPVerifying ? (
+                                                    <a>Verifying <CircleLoader margin="0 0 0 5px" /></a>
+                                                ) : (
+                                                    <a className={otp.length < 6 ? 'disable' : ''} onClick={handleOTPVerify}>Verify OTP</a>
+                                                )
+                                            }
+                                        </div>
                                     </div>
                                 )
                             }
