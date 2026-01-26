@@ -14,6 +14,7 @@ export const getApiEndpoints = () => {
         resetPassword: `${apiURL}/auth/reset-password.php`,
         refreshToken: `${apiURL}/auth/refresh-token.php`,
         checkAuth: `${apiURL}/auth/check-auth.php`,
+        logout: `${apiURL}/auth/logout.php`,
 
         // State & City 
         fetchCities: `${apiURL}/api/states_cities/list.php`,

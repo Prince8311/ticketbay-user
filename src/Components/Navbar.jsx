@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { NavbarWrapper } from "../Styles/LayoutStyle";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserData } from "../Context/PageContext";
-import { profileImageURL } from "../Services/Api/ApiConfig";
+import { getApiEndpoints, profileImageURL } from "../Services/Api/ApiConfig";
 import SkeletonLoader from "./Loader/SkeletonLoader";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+    const api = getApiEndpoints();
     const navigate = useNavigate();
     const [isNavScrolled, setIsNavScrolled] = useState(false);
     const { isLocationButtonShow, setShowLocaltionModal, selectedLocation, authToken, setAuthToken, userDetails, setUserDetails, isDetailsLoading } = UserData();
@@ -59,6 +62,20 @@ const Navbar = () => {
 
     function openLocationModal() {
         setShowLocaltionModal(true);
+    }
+
+    const handleLogout = async () => {
+        try {
+            const response = await axiosInstance.post(api.logout);
+            if (response?.data?.status === 200) { 
+                toast.success(response?.data?.message);
+                localStorage.removeItem("authToken");
+                setAuthToken('');
+                setUserDetails({});
+            }
+        } catch (error) {
+            toast.error(error.response?.data.message || error.message);
+        }
     }
 
     return (
@@ -124,7 +141,7 @@ const Navbar = () => {
                                                     <i className="fa-solid fa-list-ol"></i>
                                                     <span>My Booking List</span>
                                                 </a>
-                                                <a>
+                                                <a onClick={handleLogout}>
                                                     <i className="fa-solid fa-right-from-bracket"></i>
                                                     <span>Sign Out</span>
                                                 </a>
