@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TheaterInfoPageWrapper } from "../../Styles/TheaterStyle";
 import { getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
 import { toast } from "react-toastify";
@@ -7,6 +8,7 @@ import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 
 const TheaterInfoPage = () => {
     const api = getApiEndpoints();
+    const navigate = useNavigate();
     const theaterName = localStorage.getItem("Current Theater") || '';
     const [location, setLocation] = useState('');
     const [dates, setDates] = useState([]);
@@ -120,6 +122,24 @@ const TheaterInfoPage = () => {
         fetchTheaterInfo();
     }, [theaterName, selectedDateIndex, dates]);
 
+    const handleSeatLayoutRedirection = (movie, screen, screenId, time, format, language) => {
+        const d = dates[selectedDateIndex];
+        const day = d.day;
+        const selectedDate = `${d.date} ${d.month}, ${d.iso.split("-")[0]}`;
+        const movieData = {
+            screen: screen,
+            screenId: screenId,
+            day: day,
+            time: time,
+            date: selectedDate,
+            format: format,
+            language: language
+        };
+        localStorage.setItem("Current Movie", movie);
+        localStorage.setItem("Movie Data", JSON.stringify(movieData));
+        navigate(`/seat-layout?theater=${encodeURIComponent(theaterName)}&&movie=${encodeURIComponent(movie)}`);
+    }
+
     return (
         <>
             <TheaterInfoPageWrapper>
@@ -200,7 +220,7 @@ const TheaterInfoPage = () => {
                                                         item.timings.length > 0 ? (
                                                             item.timings.map((slot, i) =>
                                                                 <div className="inner_box" key={i}>
-                                                                    <a>{slot.start_time}</a>
+                                                                    <a onClick={() => handleSeatLayoutRedirection(item.movie_name, slot.screen, slot.screen_id, slot.start_time, slot.format, slot.language)}>{slot.start_time}</a>
                                                                     <div className="info_desc">
                                                                         <ul>
                                                                             <li>

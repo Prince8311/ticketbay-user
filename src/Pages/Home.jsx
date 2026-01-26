@@ -5,8 +5,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import axios from "axios";
 import { getApiEndpoints, moviePosterURL } from "../Services/Api/ApiConfig";
+import { toast } from "react-toastify";
 import { UserData } from "../Context/PageContext";
 import SkeletonLoader from "../Components/Loader/SkeletonLoader";
+import axiosInstance from "../Services/Middleware/AxiosInstance";
 
 const banners = [
     { id: 1, image: "/images/add1.jpeg" },
@@ -17,9 +19,10 @@ const banners = [
 
 const HomePage = () => {
     const api = getApiEndpoints();
-    const { selectedLocation } = UserData();
+    const { selectedLocation, userDetails } = UserData();
     const [activeIndex, setActiveIndex] = useState(0);
     const [isRecommendedMoviesLoading, setIsRecommendedMoviesLoading] = useState(false);
+    const [upcomingBookings, setUpcomingBookings] = useState([]);
     const [recommendedMovies, setRecommendedMovies] = useState([]);
     const [isComingSoonMoviesLoading, setIsComingSoonMoviesLoading] = useState(false);
     const [comingSoonMovies, setComingSoonMovies] = useState([]);
@@ -84,6 +87,31 @@ const HomePage = () => {
         fetchComingSoonMovies();
     }, [selectedLocation]);
 
+    const upcomingBookingList = async () => {
+        try {
+            const response = await axiosInstance.get(api.bookingList, {
+                params: {
+                    name: userDetails.name,
+                    type: 'upcoming',
+                    page: 1,
+                    limit: 4
+                },
+            });
+            if (response?.data?.status === 200) {
+                setUpcomingBookings(response?.data?.list);
+            }
+        } catch (error) {
+            setUpcomingBookings([]);
+            toast.error(error.response?.data.message || error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (userDetails && Object.keys(userDetails).length > 0) {
+            upcomingBookingList();
+        }
+    }, [userDetails]);
+
     return (
         <HomePageWrapper className={!selectedLocation ? 'no_scroll' : ''}>
             <div className="banner_sec">
@@ -114,158 +142,162 @@ const HomePage = () => {
                     ))}
                 </div>
             </div>
-            <div className="booked_ticket_sec">
-                <div className="sec_content">
-                    <div className="sec_head">
-                        <h4>Upcoming <span><b>B</b>ookings</span></h4>
-                        <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
+            {
+                upcomingBookings.length > 0 && (
+                    <div className="booked_ticket_sec">
+                        <div className="sec_content">
+                            <div className="sec_head">
+                                <h4>Upcoming <span><b>B</b>ookings</span></h4>
+                                <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
+                            </div>
+                            <div className="sec_items">
+                                <Swiper
+                                    slidesPerView={'auto'}
+                                    spaceBetween={30}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        <div className="ticket_box">
+                                            <div className="box_inner">
+                                                <div className="poster_image">
+                                                    <img src="/images/Movie-1.jpg" alt="" />
+                                                </div>
+                                                <div className="details_sec">
+                                                    <div className="details_inner">
+                                                        <h5>Avatar: The Way of Water</h5>
+                                                        <ul>
+                                                            <p>25 Oct, 2025</p>
+                                                            <i className="fa-solid fa-circle"></i>
+                                                            <p>8:30 PM</p>
+                                                        </ul>
+                                                        <div className="section">
+                                                            <span>Class :</span>
+                                                            <p>Premium</p>
+                                                        </div>
+                                                        <div className="seats">
+                                                            <span>Seats :</span>
+                                                            <p>A-1, A-2, A-3</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="id_sec">
+                                                    <p>TKB894571</p>
+                                                </div>
+                                            </div>
+                                            <div className="circle_sec">
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="ticket_box">
+                                            <div className="box_inner">
+                                                <div className="poster_image">
+                                                    <img src="/images/Movie-1.jpg" alt="" />
+                                                </div>
+                                                <div className="details_sec">
+                                                    <div className="details_inner">
+                                                        <h5>Avatar: The Way of Water</h5>
+                                                        <ul>
+                                                            <p>25 Oct, 2025</p>
+                                                            <i className="fa-solid fa-circle"></i>
+                                                            <p>8:30 PM</p>
+                                                        </ul>
+                                                        <div className="section">
+                                                            <span>Class :</span>
+                                                            <p>Premium</p>
+                                                        </div>
+                                                        <div className="seats">
+                                                            <span>Seats :</span>
+                                                            <p>A-1, A-2, A-3</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="id_sec">
+                                                    <p>TKB894571</p>
+                                                </div>
+                                            </div>
+                                            <div className="circle_sec">
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="ticket_box">
+                                            <div className="box_inner">
+                                                <div className="poster_image">
+                                                    <img src="/images/Movie-1.jpg" alt="" />
+                                                </div>
+                                                <div className="details_sec">
+                                                    <div className="details_inner">
+                                                        <h5>Avatar: The Way of Water</h5>
+                                                        <ul>
+                                                            <p>25 Oct, 2025</p>
+                                                            <i className="fa-solid fa-circle"></i>
+                                                            <p>8:30 PM</p>
+                                                        </ul>
+                                                        <div className="section">
+                                                            <span>Class :</span>
+                                                            <p>Premium</p>
+                                                        </div>
+                                                        <div className="seats">
+                                                            <span>Seats :</span>
+                                                            <p>A-1, A-2, A-3, B-12, B-13</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="id_sec">
+                                                    <p>TKB894571</p>
+                                                </div>
+                                            </div>
+                                            <div className="circle_sec">
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <div className="ticket_box">
+                                            <div className="box_inner">
+                                                <div className="poster_image">
+                                                    <img src="/images/Movie-1.jpg" alt="" />
+                                                </div>
+                                                <div className="details_sec">
+                                                    <div className="details_inner">
+                                                        <h5>Avatar: The Way of Water</h5>
+                                                        <ul>
+                                                            <p>25 Oct, 2025</p>
+                                                            <i className="fa-solid fa-circle"></i>
+                                                            <p>8:30 PM</p>
+                                                        </ul>
+                                                        <div className="section">
+                                                            <span>Class :</span>
+                                                            <p>Premium</p>
+                                                        </div>
+                                                        <div className="seats">
+                                                            <span>Seats :</span>
+                                                            <p>A-1, A-2, A-3</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="id_sec">
+                                                    <p>TKB894571</p>
+                                                </div>
+                                            </div>
+                                            <div className="circle_sec">
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                </Swiper>
+                            </div>
+                        </div>
                     </div>
-                    <div className="sec_items">
-                        <Swiper
-                            slidesPerView={'auto'}
-                            spaceBetween={30}
-                            className="mySwiper"
-                        >
-                            <SwiperSlide>
-                                <div className="ticket_box">
-                                    <div className="box_inner">
-                                        <div className="poster_image">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="details_sec">
-                                            <div className="details_inner">
-                                                <h5>Avatar: The Way of Water</h5>
-                                                <ul>
-                                                    <p>25 Oct, 2025</p>
-                                                    <i className="fa-solid fa-circle"></i>
-                                                    <p>8:30 PM</p>
-                                                </ul>
-                                                <div className="section">
-                                                    <span>Class :</span>
-                                                    <p>Premium</p>
-                                                </div>
-                                                <div className="seats">
-                                                    <span>Seats :</span>
-                                                    <p>A-1, A-2, A-3</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="id_sec">
-                                            <p>TKB894571</p>
-                                        </div>
-                                    </div>
-                                    <div className="circle_sec">
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="ticket_box">
-                                    <div className="box_inner">
-                                        <div className="poster_image">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="details_sec">
-                                            <div className="details_inner">
-                                                <h5>Avatar: The Way of Water</h5>
-                                                <ul>
-                                                    <p>25 Oct, 2025</p>
-                                                    <i className="fa-solid fa-circle"></i>
-                                                    <p>8:30 PM</p>
-                                                </ul>
-                                                <div className="section">
-                                                    <span>Class :</span>
-                                                    <p>Premium</p>
-                                                </div>
-                                                <div className="seats">
-                                                    <span>Seats :</span>
-                                                    <p>A-1, A-2, A-3</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="id_sec">
-                                            <p>TKB894571</p>
-                                        </div>
-                                    </div>
-                                    <div className="circle_sec">
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="ticket_box">
-                                    <div className="box_inner">
-                                        <div className="poster_image">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="details_sec">
-                                            <div className="details_inner">
-                                                <h5>Avatar: The Way of Water</h5>
-                                                <ul>
-                                                    <p>25 Oct, 2025</p>
-                                                    <i className="fa-solid fa-circle"></i>
-                                                    <p>8:30 PM</p>
-                                                </ul>
-                                                <div className="section">
-                                                    <span>Class :</span>
-                                                    <p>Premium</p>
-                                                </div>
-                                                <div className="seats">
-                                                    <span>Seats :</span>
-                                                    <p>A-1, A-2, A-3, B-12, B-13</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="id_sec">
-                                            <p>TKB894571</p>
-                                        </div>
-                                    </div>
-                                    <div className="circle_sec">
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="ticket_box">
-                                    <div className="box_inner">
-                                        <div className="poster_image">
-                                            <img src="/images/Movie-1.jpg" alt="" />
-                                        </div>
-                                        <div className="details_sec">
-                                            <div className="details_inner">
-                                                <h5>Avatar: The Way of Water</h5>
-                                                <ul>
-                                                    <p>25 Oct, 2025</p>
-                                                    <i className="fa-solid fa-circle"></i>
-                                                    <p>8:30 PM</p>
-                                                </ul>
-                                                <div className="section">
-                                                    <span>Class :</span>
-                                                    <p>Premium</p>
-                                                </div>
-                                                <div className="seats">
-                                                    <span>Seats :</span>
-                                                    <p>A-1, A-2, A-3</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="id_sec">
-                                            <p>TKB894571</p>
-                                        </div>
-                                    </div>
-                                    <div className="circle_sec">
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                        </Swiper>
-                    </div>
-                </div>
-            </div>
+                )
+            }
             <div className="movie_sec">
                 <div className="sec_content">
                     <div className="sec_head">
@@ -336,76 +368,80 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
-            <div className="movie_sec upcoming_movies">
-                <div className="sec_content">
-                    <div className="sec_head">
-                        <h4>Coming <span><b>S</b>oon</span></h4>
-                        {
-                            isComingSoonMoviesLoading ? (
-                                <SkeletonLoader width="150px" height="35px" />
-                            ) : comingSoonMovies.length > 0 && (
-                                <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
-                            )
-                        }
-                    </div>
-                    <div className="sec_items">
-                        <Swiper
-                            slidesPerView={'auto'}
-                            spaceBetween={30}
-                            className="mySwiper"
-                        >
-                            {
-                                isComingSoonMoviesLoading ? (
-                                    Array.from({ length: 7 }).map((_, i) => (
-                                        <SwiperSlide key={i}>
-                                            <div className="movie_box">
-                                                <div className="image_box">
-                                                    <SkeletonLoader width="100%" height="100%" />
-                                                </div>
-                                                <div className="movie_brief">
-                                                    <li>
-                                                        <div style={{ display: "flex" }}>
-                                                            <SkeletonLoader width="14px" height="14px" margin="0 5px 0 0" />
-                                                            <SkeletonLoader width="30px" height="14px" />
-                                                        </div>
-                                                        <div style={{ display: "flex" }}>
-                                                            <SkeletonLoader width="60px" height="14px" margin="5px 8px 0 0" />
-                                                            <SkeletonLoader width="60px" height="14px" margin="5px 0 0 0" />
-                                                        </div>
-                                                    </li>
-                                                    <SkeletonLoader width="100%" height="14px" margin="8px 0 0 0" />
-                                                    <SkeletonLoader width="100%" height="14px" margin="5px 0 0 0" />
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    ))
-                                ) : comingSoonMovies.length > 0 ? (
-                                    comingSoonMovies.slice(0, 8).map((movie, i) =>
-                                        <SwiperSlide key={i}>
-                                            <div className="movie_box">
-                                                <div className="image_box">
-                                                    <img src="/images/Movie-1.jpg" alt="" />
-                                                </div>
-                                                <div className="movie_brief">
-                                                    <li>
-                                                        <span><i className="fa-solid fa-star"></i>4.2</span>
-                                                        <p>[ 5k ratings | 1.5k reviews ]</p>
-                                                    </li>
-                                                    <h5>Avatar: The Way of Water</h5>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
+            {
+                comingSoonMovies.length > 0 && (
+                    <div className="movie_sec upcoming_movies">
+                        <div className="sec_content">
+                            <div className="sec_head">
+                                <h4>Coming <span><b>S</b>oon</span></h4>
+                                {
+                                    isComingSoonMoviesLoading ? (
+                                        <SkeletonLoader width="150px" height="35px" />
+                                    ) : comingSoonMovies.length > 0 && (
+                                        <a><span>View All <i className="fa-solid fa-angles-right"></i></span></a>
                                     )
-                                ) : (
-                                    <div className="empty_box">
-                                        <p>No shows available</p>
-                                    </div>
-                                )
-                            }
-                        </Swiper>
+                                }
+                            </div>
+                            <div className="sec_items">
+                                <Swiper
+                                    slidesPerView={'auto'}
+                                    spaceBetween={30}
+                                    className="mySwiper"
+                                >
+                                    {
+                                        isComingSoonMoviesLoading ? (
+                                            Array.from({ length: 7 }).map((_, i) => (
+                                                <SwiperSlide key={i}>
+                                                    <div className="movie_box">
+                                                        <div className="image_box">
+                                                            <SkeletonLoader width="100%" height="100%" />
+                                                        </div>
+                                                        <div className="movie_brief">
+                                                            <li>
+                                                                <div style={{ display: "flex" }}>
+                                                                    <SkeletonLoader width="14px" height="14px" margin="0 5px 0 0" />
+                                                                    <SkeletonLoader width="30px" height="14px" />
+                                                                </div>
+                                                                <div style={{ display: "flex" }}>
+                                                                    <SkeletonLoader width="60px" height="14px" margin="5px 8px 0 0" />
+                                                                    <SkeletonLoader width="60px" height="14px" margin="5px 0 0 0" />
+                                                                </div>
+                                                            </li>
+                                                            <SkeletonLoader width="100%" height="14px" margin="8px 0 0 0" />
+                                                            <SkeletonLoader width="100%" height="14px" margin="5px 0 0 0" />
+                                                        </div>
+                                                    </div>
+                                                </SwiperSlide>
+                                            ))
+                                        ) : comingSoonMovies.length > 0 ? (
+                                            comingSoonMovies.slice(0, 8).map((movie, i) =>
+                                                <SwiperSlide key={i}>
+                                                    <div className="movie_box">
+                                                        <div className="image_box">
+                                                            <img src="/images/Movie-1.jpg" alt="" />
+                                                        </div>
+                                                        <div className="movie_brief">
+                                                            <li>
+                                                                <span><i className="fa-solid fa-star"></i>4.2</span>
+                                                                <p>[ 5k ratings | 1.5k reviews ]</p>
+                                                            </li>
+                                                            <h5>Avatar: The Way of Water</h5>
+                                                        </div>
+                                                    </div>
+                                                </SwiperSlide>
+                                            )
+                                        ) : (
+                                            <div className="empty_box">
+                                                <p>No shows available</p>
+                                            </div>
+                                        )
+                                    }
+                                </Swiper>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                )
+            }
         </HomePageWrapper>
     );
 };

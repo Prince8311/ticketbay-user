@@ -7,6 +7,7 @@ export const HomePageWrapper = styled('div')`
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding-bottom: 15px;
 
     .banner_sec {
         position: relative;
