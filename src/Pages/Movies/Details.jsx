@@ -8,6 +8,7 @@ import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import { UserData } from "../../Context/PageContext";
 import { castCrewImageURL, getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
 import MovieTrailerPage from "../../Modals/MovieTrailer";
+import { toast } from "react-toastify";
 
 const MovieDetailsPage = () => {
     const api = getApiEndpoints();
@@ -17,6 +18,7 @@ const MovieDetailsPage = () => {
     const [movieDetails, setMovieDetails] = useState({});
     const [showMovieTrailer, setShowMovieTrailer] = useState(false);
     const [trailer, setTrailer] = useState('');
+    const [displayShareOptions, setDisplayShareOptions] = useState(false);
 
     const fetchMovieDetails = async () => {
         setIsDetailsLoading(true);
@@ -56,6 +58,31 @@ const MovieDetailsPage = () => {
     const handleMovieInfoRedirection = (movie) => {
         navigate(`/movie-info?${encodeURIComponent(movie)}`);
     }
+
+    function toggleShareOptions() {
+        setDisplayShareOptions(!displayShareOptions);
+    }
+
+    const copyPageURL = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            toast.success("URL copied to clipboard");
+        } catch (error) {
+            toast.error("Failed to copy URL:", error);
+        }
+    };
+
+    const shareOnFacebook = () => {
+        const url = encodeURIComponent(window.location.href);
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        window.open(facebookShareUrl, '_blank');
+    };
+
+    const shareOnWhatsapp = () => {
+        const url = encodeURIComponent(window.location.href);
+        const whatsappShareUrl = `https://wa.me/?text=${url}`;
+        window.open(whatsappShareUrl, '_blank');
+    };
 
     return (
         <>
@@ -192,8 +219,22 @@ const MovieDetailsPage = () => {
                         </div>
                         <div className="share_sec">
                             <div className="share_inner">
-                                <div className="share_btn">
+                                <div className={`share_btn ${displayShareOptions ? 'active' : ''}`} onClick={toggleShareOptions}>
                                     <img src="/images/share.png" alt="" />
+                                </div>
+                                <div className={`share_options ${displayShareOptions ? 'active' : ''}`}>
+                                    <li style={{ "--i": 1 }}>
+                                        <a onClick={copyPageURL}><img src="/images/copy-icon.png" alt="copy" /></a>
+                                        <span>Copy Link</span>
+                                    </li>
+                                    <li style={{ "--i": 2 }}>
+                                        <a onClick={shareOnFacebook}><img src="/images/facebook-icon.png" alt="copy" /></a>
+                                        <span>Facebook</span>
+                                    </li>
+                                    <li style={{ "--i": 3 }}>
+                                        <a onClick={shareOnWhatsapp}><img src="/images/whatsapp-icon.png" alt="copy" /></a>
+                                        <span>Whatsapp</span>
+                                    </li>
                                 </div>
                             </div>
                         </div>

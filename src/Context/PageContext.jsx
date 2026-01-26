@@ -34,6 +34,7 @@ export const UserProvider = ({ children }) => {
                 console.log(response);
                 setUserDetails(response?.data.user);
             } else {
+                setUserDetails({});
                 throw new Error("Invalid auth");
             }
         } catch (error) {

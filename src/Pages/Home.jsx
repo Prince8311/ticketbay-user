@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import { UserData } from "../Context/PageContext";
 import SkeletonLoader from "../Components/Loader/SkeletonLoader";
 import axiosInstance from "../Services/Middleware/AxiosInstance";
+import TicketBox from "../Components/TicketBox";
+import BookingDetailsModal from "../Modals/BookingDetails";
 
 const banners = [
     { id: 1, image: "/images/add1.jpeg" },
@@ -26,6 +28,8 @@ const HomePage = () => {
     const [recommendedMovies, setRecommendedMovies] = useState([]);
     const [isComingSoonMoviesLoading, setIsComingSoonMoviesLoading] = useState(false);
     const [comingSoonMovies, setComingSoonMovies] = useState([]);
+    const [selectedBookingId, setSelectedBookingId] = useState('');
+    const [showBookingDetails, setShowBookingDetails] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -107,8 +111,11 @@ const HomePage = () => {
     }
 
     useEffect(() => {
+        console.log("uegbhkuyfkjbiusrrihiuhl", userDetails);
         if (userDetails && Object.keys(userDetails).length > 0) {
             upcomingBookingList();
+        } else {
+            setUpcomingBookings([]);
         }
     }, [userDetails]);
 
@@ -153,145 +160,20 @@ const HomePage = () => {
                             <div className="sec_items">
                                 <Swiper
                                     slidesPerView={'auto'}
-                                    spaceBetween={30}
+                                    spaceBetween={15}
                                     className="mySwiper"
                                 >
-                                    <SwiperSlide>
-                                        <div className="ticket_box">
-                                            <div className="box_inner">
-                                                <div className="poster_image">
-                                                    <img src="/images/Movie-1.jpg" alt="" />
-                                                </div>
-                                                <div className="details_sec">
-                                                    <div className="details_inner">
-                                                        <h5>Avatar: The Way of Water</h5>
-                                                        <ul>
-                                                            <p>25 Oct, 2025</p>
-                                                            <i className="fa-solid fa-circle"></i>
-                                                            <p>8:30 PM</p>
-                                                        </ul>
-                                                        <div className="section">
-                                                            <span>Class :</span>
-                                                            <p>Premium</p>
-                                                        </div>
-                                                        <div className="seats">
-                                                            <span>Seats :</span>
-                                                            <p>A-1, A-2, A-3</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="id_sec">
-                                                    <p>TKB894571</p>
-                                                </div>
-                                            </div>
-                                            <div className="circle_sec">
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <div className="ticket_box">
-                                            <div className="box_inner">
-                                                <div className="poster_image">
-                                                    <img src="/images/Movie-1.jpg" alt="" />
-                                                </div>
-                                                <div className="details_sec">
-                                                    <div className="details_inner">
-                                                        <h5>Avatar: The Way of Water</h5>
-                                                        <ul>
-                                                            <p>25 Oct, 2025</p>
-                                                            <i className="fa-solid fa-circle"></i>
-                                                            <p>8:30 PM</p>
-                                                        </ul>
-                                                        <div className="section">
-                                                            <span>Class :</span>
-                                                            <p>Premium</p>
-                                                        </div>
-                                                        <div className="seats">
-                                                            <span>Seats :</span>
-                                                            <p>A-1, A-2, A-3</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="id_sec">
-                                                    <p>TKB894571</p>
-                                                </div>
-                                            </div>
-                                            <div className="circle_sec">
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <div className="ticket_box">
-                                            <div className="box_inner">
-                                                <div className="poster_image">
-                                                    <img src="/images/Movie-1.jpg" alt="" />
-                                                </div>
-                                                <div className="details_sec">
-                                                    <div className="details_inner">
-                                                        <h5>Avatar: The Way of Water</h5>
-                                                        <ul>
-                                                            <p>25 Oct, 2025</p>
-                                                            <i className="fa-solid fa-circle"></i>
-                                                            <p>8:30 PM</p>
-                                                        </ul>
-                                                        <div className="section">
-                                                            <span>Class :</span>
-                                                            <p>Premium</p>
-                                                        </div>
-                                                        <div className="seats">
-                                                            <span>Seats :</span>
-                                                            <p>A-1, A-2, A-3, B-12, B-13</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="id_sec">
-                                                    <p>TKB894571</p>
-                                                </div>
-                                            </div>
-                                            <div className="circle_sec">
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <div className="ticket_box">
-                                            <div className="box_inner">
-                                                <div className="poster_image">
-                                                    <img src="/images/Movie-1.jpg" alt="" />
-                                                </div>
-                                                <div className="details_sec">
-                                                    <div className="details_inner">
-                                                        <h5>Avatar: The Way of Water</h5>
-                                                        <ul>
-                                                            <p>25 Oct, 2025</p>
-                                                            <i className="fa-solid fa-circle"></i>
-                                                            <p>8:30 PM</p>
-                                                        </ul>
-                                                        <div className="section">
-                                                            <span>Class :</span>
-                                                            <p>Premium</p>
-                                                        </div>
-                                                        <div className="seats">
-                                                            <span>Seats :</span>
-                                                            <p>A-1, A-2, A-3</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="id_sec">
-                                                    <p>TKB894571</p>
-                                                </div>
-                                            </div>
-                                            <div className="circle_sec">
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </SwiperSlide>
+                                    {
+                                        upcomingBookings.map((booking, i) =>
+                                            <SwiperSlide>
+                                                <TicketBox
+                                                    key={i}
+                                                    type="upcoming"
+                                                    ticket={booking}
+                                                />
+                                            </SwiperSlide>
+                                        )
+                                    }
                                 </Swiper>
                             </div>
                         </div>

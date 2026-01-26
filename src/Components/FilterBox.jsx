@@ -6,7 +6,7 @@ import { getApiEndpoints } from "../Services/Api/ApiConfig";
 
 const MovieFilters = () => {
     const api = getApiEndpoints();
-    const [showLanuageDropdown, setShowLanuageDropdown] = useState(false);
+    const [showLanuageDropdown, setShowLanuageDropdown] = useState(true);
     const [showGenresDropdown, setShowGenresDropdown] = useState(false);
     const [showFormatDropdown, setShowFormatDropdown] = useState(false);
     const [lanuages, setLanuages] = useState([]);

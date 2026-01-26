@@ -591,7 +591,7 @@ export const MovieDetailsPageWrapper = styled('div')`
                             transition: all 0.5s ease;
 
                             &.trailer_btn {
-                                margin-right: 20px;
+                                margin-right: 15px;
                                 background: ${colors.customColors.orangeColor};
                             }
 
@@ -634,7 +634,12 @@ export const MovieDetailsPageWrapper = styled('div')`
                         height: 45px;
                         cursor: pointer;
                         z-index: 10;
-                        transition: 0.9s;
+                        transition: all 0.9s ease;
+                        
+                        &.active {
+                            transform: rotate(360deg);
+                            transition: all 1.5s ease;
+                        }
 
                         img {
                             position: relative;
@@ -642,7 +647,98 @@ export const MovieDetailsPageWrapper = styled('div')`
                             height: 100%;
                             border-radius: 50%;
                             display: flex;
-                            box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 15px, rgba(25, 25, 25, 0.2) -4px -4px 10px;
+                            box-shadow: 4px 4px 12px ${colors.boxShadowColors.shadowColor3}, -3px -3px 8px ${colors.boxShadowColors.shadowColor2};
+                        }
+                    }
+
+                    .share_options {
+                        position: relative;
+                        margin-top: 10px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+
+                        li {
+                            position: relative;
+                            width: 100%;
+                            list-style: none;
+                            margin-top: 15px;
+                            transform: translateY(calc(var(--i) * -35px));
+                            opacity: 0;
+                            z-index: calc(10 - var(--i));
+                            pointer-events: none;
+                            transition: all 0.5s ease;
+                            transition-delay: calc(var(--i) * 0.15s);
+
+                            a {
+                                position: relative;
+                                width: 100%;
+                                height: 45px;
+                                text-decoration: none;
+                                cursor: pointer;
+                                display: flex;
+
+                                img {
+                                    position: relative;
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    box-shadow: 4px 4px 12px ${colors.boxShadowColors.shadowColor3}, -3px -3px 8px ${colors.boxShadowColors.shadowColor2};
+                                }
+                            }
+
+                            span {
+                                position: absolute;
+                                top: 50%;
+                                left: 0;
+                                white-space: nowrap;
+                                transform: translate(-150%,-50%);
+                                padding: 8px 15px;
+                                background: ${colors.customColors.whiteColor};
+                                line-height: 1;
+                                box-shadow: 0 4px 8px ${colors.boxShadowColors.shadowColor1},
+                                            -3px -3px 5px ${colors.boxShadowColors.shadowColor2};
+                                border-right: none;
+                                border-radius: 5px;
+                                font-size: 12px;
+                                color: ${colors.customColors.blackColor1};
+                                font-weight: 500;
+                                opacity: 0;
+                                visibility: hidden;
+                                pointer-events: none;
+                                transition: all 0.5s ease;
+
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    top: 4px;
+                                    right: -7px;
+                                    width: 20px;
+                                    height: 20px;
+                                    background: ${colors.customColors.whiteColor};
+                                    z-index: -1;
+                                    transform: rotate(135deg);
+                                    box-shadow: -4px -3px 5px ${colors.boxShadowColors.shadowColor2};
+                                }
+                            }
+
+                            &:hover {
+                                span {
+                                    transform: translate(-120%,-50%);
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+
+                        &.active li {
+                            transform: translateY(0);
+                            opacity: 1;
+                            pointer-events: initial;
+                            transition: transform 0.5s ease, opacity 0.3s ease;
+                            transition-delay: calc(var(--i) * 0.25s);
                         }
                     }
                 }

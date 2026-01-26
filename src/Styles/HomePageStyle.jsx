@@ -172,13 +172,12 @@ export const HomePageWrapper = styled('div')`
         width: 100%;
         background: ${colors.customColors.lightBackground};
         padding: 25px 0;
-        padding-bottom: 35px;
         display: flex;
         justify-content: center;
 
         .sec_content {
             position: relative;
-            width: 1320px;
+            width: 1340px;
             display: flex;
             flex-direction: column;
 
@@ -187,6 +186,7 @@ export const HomePageWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 align-items: center;
+                padding: 0 10px;
 
                 h4 {
                     position: relative;
@@ -277,7 +277,7 @@ export const HomePageWrapper = styled('div')`
 
             .sec_items {
                 position: relative;
-                margin-top: 35px;
+                margin-top: 25px;
                 width: 100%;
 
                 .swiper {
@@ -286,190 +286,11 @@ export const HomePageWrapper = styled('div')`
 
                     .swiper-slide {
                         position: relative;
-                        width: 350px;
-                        height: 100px;
+                        width: max-content;
 
-                        .ticket_box {
-                            position: relative;
-                            width: 100%;
-                            height: 100%;
-                            border-radius: 10px;
-                            padding: 8px;
-                            background: ${colors.customColors.yellowColor};
-
-                            .circle_sec {
-                                position: absolute;
-                                top: 0;
-                                right: 46px;
-                                width: 30px;
-                                height: 100%;
-
-                                &::before {
-                                    content: '';
-                                    position: absolute;
-                                    top: 0;
-                                    left: 50%;
-                                    width: 2px;
-                                    height: 100%;
-                                    background-image: linear-gradient(${colors.customColors.lightBackground} 45%, rgba(255, 255, 255, 0) 0%);
-                                    background-position: left;
-                                    background-size: 2px 13px;
-                                    background-repeat: repeat-y;
-                                    transform: translateX(-50%);
-                                }
-
-                                span {
-                                    position: absolute;
-                                    width: 30px;
-                                    height: 30px;
-                                    background: ${colors.customColors.lightBackground};
-                                    border-radius: 50%;
-                                    
-                                    &:first-of-type {
-                                        top: 0;
-                                        transform: translateY(-50%);
-                                    }
-                                    
-                                    &:last-of-type {
-                                        bottom: 0;
-                                        transform: translateY(50%);
-                                    }
-                                }
-                            }
-
-                            .box_inner {
-                                position: relative;
-                                width: 100%;
-                                height: 100%;
-                                display: flex;
-
-                                .poster_image {
-                                    position: relative;
-                                    width: 60px;
-                                    height: 100%;
-                                    display: flex;
-                                    border-radius: 6px;
-                                    overflow: hidden;
-
-                                    img {
-                                        position: relative;
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                    }
-                                }
-
-                                .details_sec {
-                                    position: relative;
-                                    width: calc(100% - 130px);
-                                    padding-left: 7px;
-                                    padding-right: 5px;
-
-                                    .details_inner {
-                                        position: relative;
-                                        width: 100%;
-                                        height: 100%;
-                                        border-radius: 3px;
-                                        padding: 5px 8px;
-                                        display: flex;
-                                        flex-direction: column;
-                                        color: ${colors.customColors.blackColor};
-                                        border: 1px solid ${colors.customColors.blackColor2};
-
-                                        h5 {
-                                            position: relative;
-                                            width: 100%;
-                                            font-size: 12px;
-                                            font-weight: 600;
-                                            overflow: hidden;
-                                            white-space: nowrap;
-                                            text-overflow: ellipsis;
-                                        }
-
-                                        ul {
-                                            position: relative;
-                                            margin-top: 4px;
-                                            width: 100%;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: space-between;
-
-                                            p {
-                                                position: relative;
-                                                font-size: 11px;
-                                            }
-                                            
-                                            i {
-                                                font-size: 5px;
-                                            }
-                                        }
-
-                                        .section {
-                                            position: relative;
-                                            margin-top: 2px;
-                                            width: 100%;
-                                            display: flex;
-                                            align-items: center;
-                                            
-                                            span {
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                            }
-
-                                            p {
-                                                position: relative;
-                                                width: 134px;
-                                                padding-left: 6px;
-                                                font-size: 12px;
-                                                white-space: nowrap;
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;
-                                            }
-                                        }
-
-                                        .seats {
-                                            position: relative;
-                                            margin-top: 2px;
-                                            width: 100%;
-                                            display: flex;
-                                            align-items: center;
-
-                                            span {
-                                                font-size: 12px;
-                                                font-weight: 500;
-                                            }
-
-                                            p {
-                                                width: 134px;
-                                                padding-left: 6px;
-                                                font-size: 12px;
-                                                white-space: nowrap;
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .id_sec {
-                                    position: relative;
-                                    margin-left: auto;
-                                    width: 32px;
-                                    height: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    color: ${colors.customColors.blackColor};
-
-                                    p {
-                                        position: relative;
-                                        font-family: 'Oswald', sans-serif; 
-                                        font-size: 16px;
-                                        font-weight: 500;
-                                        transform: rotate(-90deg);
-                                        letter-spacing: 1.2px;
-                                    }
-                                }
+                        .ticket_box .circle_sec{
+                            span {
+                                background: ${colors.customColors.lightBackground};
                             }
                         }
                     }
