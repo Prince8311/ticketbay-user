@@ -2741,3 +2741,163 @@ export const BookingCancelConfirmWrapper = styled('div')`
         }
     }
 `;
+
+export const LanguageFormateSelectionWrapper = styled('div')`
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: initial;
+    transition: all 0.3s ease;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: initial;
+        transition: all 0.3s ease;
+    }
+
+    .modal_box {
+        position: relative;
+        width: 425px;
+        max-height: 100%;
+        background: ${colors.customColors.whiteColor};
+        box-shadow: 10px 15px 20px ${colors.boxShadowColors.shadowColor1}, -5px -5px 10px ${colors.boxShadowColors.shadowColor2};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(0);
+        transition: transform 0.8s ease;
+
+        &.active {
+            transform: translateY(0);
+            transition: transform 0.8s ease;
+        }
+
+        .modal_head {
+            position: relative;
+            width: 100%;
+            padding: 13px 20px;
+            border-bottom: 1px solid ${colors.customColors.borderColor};
+            display: flex;
+            align-items: center;
+
+            h4 {
+                position: relative;
+                max-width: calc(100% - 40px);
+                font-size: 14px;
+                line-height: 1;
+                font-weight: 600;
+                font-style: italic;
+                color: ${colors.customColors.blackColor1};
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .close_sec {
+                position: relative;
+                margin-left: auto;
+                width: 40px;
+                display: flex;
+                justify-content: flex-end;
+
+                a {
+                    position: relative;
+                    margin-left: auto;
+                    font-size: 15px;
+                    color: ${colors.customColors.blackColor1};
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .modal_content {
+            position: relative;
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+
+            .modal_inner {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                max-height: 200px;
+                overflow: hidden;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .content_box {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .language_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        padding: 10px 25px;
+                        background: ${colors.customColors.lightBackground2};
+
+                        p {
+                            position: relative;
+                            font-size: 13px;
+                            color: ${colors.customColors.blackColor};
+                            font-weight: 500;
+                        }
+                    }
+
+                    .formats_sec {
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding: 10px 15px;
+
+                        .format_box {
+                            position: relative;
+                            padding: 5px;
+                            display: flex;
+
+                            a {
+                                position: relative;
+                                padding: 5px 20px;
+                                border-radius: 25px;
+                                border: 1px solid ${colors.customColors.orangeColor};
+                                font-size: 11px;
+                                font-weight: 400;
+                                color: ${colors.customColors.blackColor};
+                                cursor: pointer;
+                                text-decoration: none;
+                                transition: all 0.5s ease;
+                                
+                                &:hover {
+                                    background: ${colors.customColors.orangeColor};
+                                    color: ${colors.customColors.whiteColor};
+                                    transition: all 0.5s ease;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+`;

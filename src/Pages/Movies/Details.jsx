@@ -9,6 +9,7 @@ import { UserData } from "../../Context/PageContext";
 import { castCrewImageURL, getApiEndpoints, moviePosterURL } from "../../Services/Api/ApiConfig";
 import MovieTrailerPage from "../../Modals/MovieTrailer";
 import { toast } from "react-toastify";
+import LanguageFormateSelectionPage from "../../Modals/LanguageFormateSelection";
 
 const MovieDetailsPage = () => {
     const api = getApiEndpoints();
@@ -511,6 +512,7 @@ const MovieDetailsPage = () => {
                     trailer={trailer}
                     setTrailer={setTrailer}
                 />
+                <LanguageFormateSelectionPage />
             </MovieDetailsPageWrapper>
         </>
     );
