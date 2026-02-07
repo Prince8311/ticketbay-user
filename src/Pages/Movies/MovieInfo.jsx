@@ -152,11 +152,15 @@ const MovieInfoPage = () => {
                                     <SkeletonLoader width="190px" height="18px" margin="5px 0 0 0" />
                                 ) : (
                                     <li>
-                                        <b>Release Date:</b>
+                                        <b>Show RunTime:</b>
                                         <p>{releaseDate}</p>
                                     </li>
                                 )
                             }
+                            <div className="movie_format_sec">
+                                <a>Hindi</a>
+                                <a>2D</a>
+                            </div>
                         </div>
                         <div className="date_sec">
                             {

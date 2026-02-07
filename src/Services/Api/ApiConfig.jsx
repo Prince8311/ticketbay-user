@@ -26,6 +26,7 @@ export const getApiEndpoints = () => {
         movieDetails: `${apiURL}/api/movies/movie-details.php`,
         movieDates: `${apiURL}/api/movies/movie-dates.php`,
         movieInfo: `${apiURL}/api/movies/movie-info.php`,
+        movieLanguageFormats: `${apiURL}/api/movies/language-formats.php`,
         
         // Filter 
         movieLanuages: `${apiURL}/api/movies/filters/languages.php`,

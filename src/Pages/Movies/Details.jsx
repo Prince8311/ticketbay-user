@@ -15,15 +15,16 @@ const MovieDetailsPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
     const { selectedLocation } = UserData();
+    const movieName = localStorage.getItem("Current Movie");
     const [isDetailsLoading, setIsDetailsLoading] = useState(false);
     const [movieDetails, setMovieDetails] = useState({});
     const [showMovieTrailer, setShowMovieTrailer] = useState(false);
     const [trailer, setTrailer] = useState('');
     const [displayShareOptions, setDisplayShareOptions] = useState(false);
+    const [showLanguageFormateModal, setShowLanguageFormateModal] = useState(false);
 
     const fetchMovieDetails = async () => {
         setIsDetailsLoading(true);
-        const movieName = localStorage.getItem("Current Movie");
         try {
             const response = await axios.get(api.movieDetails, {
                 params: {
@@ -56,8 +57,9 @@ const MovieDetailsPage = () => {
         setShowMovieTrailer(true);
     }
 
-    const handleMovieInfoRedirection = (movie) => {
-        navigate(`/movie-info?${encodeURIComponent(movie)}`);
+    const openMovieLanguageFormatsMondal = () => {
+        // navigate(`/movie-info?${encodeURIComponent(movie)}`);
+        setShowLanguageFormateModal(true);
     }
 
     function toggleShareOptions() {
@@ -212,7 +214,7 @@ const MovieDetailsPage = () => {
                                         }
                                         <ul>
                                             <button className="trailer_btn" onClick={() => handleOpenMovieTrailerModal(movieDetails.trailer)}><i className="fa-regular fa-circle-play"></i> See Trailer</button>
-                                            <button className="booking_btn" onClick={() => handleMovieInfoRedirection(movieDetails.name)}><i className="fa-solid fa-ticket"></i> Book Ticket</button>
+                                            <button className="booking_btn" onClick={openMovieLanguageFormatsMondal}><i className="fa-solid fa-ticket"></i> Book Ticket</button>
                                         </ul>
                                     </div>
                                 )
@@ -512,7 +514,12 @@ const MovieDetailsPage = () => {
                     trailer={trailer}
                     setTrailer={setTrailer}
                 />
-                <LanguageFormateSelectionPage />
+                <LanguageFormateSelectionPage
+                    showLanguageFormateModal={showLanguageFormateModal}
+                    setShowLanguageFormateModal={setShowLanguageFormateModal}
+                    movieName={movieName}
+                    selectedLocation={selectedLocation}
+                />
             </MovieDetailsPageWrapper>
         </>
     );

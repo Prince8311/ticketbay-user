@@ -1194,6 +1194,30 @@ export const MovieInfoPageWrapper = styled('div')`
                         }
                     }
                 }
+
+                .movie_format_sec {
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+
+                    a {
+                        position: relative;
+                        padding: 5px 15px;
+                        border-radius: 25px;
+                        background: ${colors.customColors.orangeColor};
+                        color: ${colors.customColors.whiteColor};
+                        text-decoration: none;
+                        margin-right: 10px;
+                        font-size: 12px;
+                        font-weight: 400;
+
+                        &:last-of-type {
+                            margin-right: 0;
+                        }
+                    }
+                }
             }
 
             .date_sec {

@@ -2753,9 +2753,9 @@ export const LanguageFormateSelectionWrapper = styled('div')`
     justify-content: center;
     padding: 40px 0;
     z-index: 1000;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: initial;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     transition: all 0.3s ease;
     
     &.active {
@@ -2774,7 +2774,7 @@ export const LanguageFormateSelectionWrapper = styled('div')`
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        transform: translateY(0);
+        transform: translateY(-150px);
         transition: transform 0.8s ease;
 
         &.active {
