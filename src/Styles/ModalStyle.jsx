@@ -1465,7 +1465,6 @@ export const TermsConditionWrapper = styled('div')`
                     p {
                         position: relative;
                         width: calc(100% - 20px);
-                        display: flex;
                         font-size: 12px;
                         color: ${colors.customColors.blackColor2};
                         line-height: 1.5;
@@ -2794,7 +2793,6 @@ export const LanguageFormateSelectionWrapper = styled('div')`
                 position: relative;
                 max-width: calc(100% - 40px);
                 font-size: 14px;
-                line-height: 1;
                 font-weight: 600;
                 font-style: italic;
                 color: ${colors.customColors.blackColor1};

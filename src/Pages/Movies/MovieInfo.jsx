@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MovieInfoPageWrapper } from "../../Styles/MovieStyle";
 import { getApiEndpoints } from "../../Services/Api/ApiConfig";
+import { UserData } from "../../Context/PageContext";
 import axios from "axios";
 import SkeletonLoader from "../../Components/Loader/SkeletonLoader";
 import { toast } from "react-toastify";
@@ -9,8 +10,10 @@ import { toast } from "react-toastify";
 const MovieInfoPage = () => {
     const api = getApiEndpoints();
     const navigate = useNavigate();
+    const { selectedLocation } = UserData();
     const movieName = localStorage.getItem("Current Movie") || '';
-    const [releaseDate, setReleaseDate] = useState('');
+    const movieData = JSON.parse(localStorage.getItem("Movie Data"));
+    const [totalTime, setTotalTime] = useState('');
     const [dates, setDates] = useState([]);
     const [availableDates, setAvailableDates] = useState([]);
     const [isDatesLoading, setIsDatesLoading] = useState(false);
@@ -43,7 +46,10 @@ const MovieInfoPage = () => {
         try {
             const response = await axios.get(api.movieDates, {
                 params: {
-                    name: movieName
+                    name: movieName,
+                    location: selectedLocation,
+                    language: movieData.language,
+                    format: movieData.format
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,7 +102,10 @@ const MovieInfoPage = () => {
             const response = await axios.get(api.movieInfo, {
                 params: {
                     name: movieName,
-                    date: selectedDate
+                    location: selectedLocation,
+                    date: selectedDate,
+                    language: movieData.language,
+                    format: movieData.format
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +114,7 @@ const MovieInfoPage = () => {
                 withCredentials: true
             });
             if (response) {
-                setReleaseDate(response?.data.releaseDate);
+                setTotalTime(response?.data.totalTime);
                 setMovieInfo(response?.data.theaters || []);
             }
         } catch (error) {
@@ -153,13 +162,13 @@ const MovieInfoPage = () => {
                                 ) : (
                                     <li>
                                         <b>Show RunTime:</b>
-                                        <p>{releaseDate}</p>
+                                        <p>{totalTime}</p>
                                     </li>
                                 )
                             }
                             <div className="movie_format_sec">
-                                <a>Hindi</a>
-                                <a>2D</a>
+                                <a>{movieData.language}</a>
+                                <a>{movieData.format}</a>
                             </div>
                         </div>
                         <div className="date_sec">

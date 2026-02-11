@@ -1,6 +1,5 @@
 import { MovieDetailsPageWrapper } from "../../Styles/MovieStyle";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import axios from "axios";
@@ -13,7 +12,6 @@ import LanguageFormateSelectionPage from "../../Modals/LanguageFormateSelection"
 
 const MovieDetailsPage = () => {
     const api = getApiEndpoints();
-    const navigate = useNavigate();
     const { selectedLocation } = UserData();
     const movieName = localStorage.getItem("Current Movie");
     const [isDetailsLoading, setIsDetailsLoading] = useState(false);
@@ -58,7 +56,6 @@ const MovieDetailsPage = () => {
     }
 
     const openMovieLanguageFormatsMondal = () => {
-        // navigate(`/movie-info?${encodeURIComponent(movie)}`);
         setShowLanguageFormateModal(true);
     }
 

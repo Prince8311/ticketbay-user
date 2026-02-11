@@ -47,7 +47,12 @@ const LanguageFormateSelectionPage = ({ showLanguageFormateModal, setShowLanguag
         setShowLanguageFormateModal(false);
     }
 
-    const handleMovieInfoRedirection = () => {
+    const handleMovieInfoRedirection = (language, format) => {
+        const movieData = {
+            language: language,
+            format: format
+        };
+        localStorage.setItem("Movie Data", JSON.stringify(movieData));
         navigate(`/movie-info?${encodeURIComponent(movieName)}`);
     }
 
@@ -76,7 +81,7 @@ const LanguageFormateSelectionPage = ({ showLanguageFormateModal, setShowLanguag
                                                 {
                                                     language.formats.map((format, i) =>
                                                         <div className="format_box" key={i}>
-                                                            <a onClick={handleMovieInfoRedirection}>{format}</a>
+                                                            <a onClick={() => handleMovieInfoRedirection(language.language, format)}>{format}</a>
                                                         </div>
                                                     )
                                                 }

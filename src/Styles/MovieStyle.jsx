@@ -1225,7 +1225,7 @@ export const MovieInfoPageWrapper = styled('div')`
                 width: 100%;
                 display: flex;
                 padding: 10px 0;
-                margin-top: 20px;
+                margin-top: 15px;
 
                 &::before {
                     content: '';

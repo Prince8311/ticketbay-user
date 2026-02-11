@@ -23,6 +23,7 @@ export const UserProvider = ({ children }) => {
     const navFooterHiddenScreen = location.pathname.includes("/seat-layout") || location.pathname.includes("/booking-success") || location.pathname.includes("/booking-fail");
     const isSeatLayoutPage = location.pathname.includes("/seat-layout");
     const isMoviePage = location.pathname.includes("/movie-details") || location.pathname.includes("/movie-info") || location.pathname.includes("/seat-layout");
+    const isMovieInfoPage = location.pathname.includes("/movie-info");
     const isTheaterInfoPage = location.pathname.includes("/theater-info") || location.pathname.includes("/seat-layout");
     const isLocationAvailablePages = location.pathname.includes("/home") || location.pathname.includes("/recommended-movies") || location.pathname.includes("/upcoming-movies") || location.pathname.includes("/coming-soon-movies") || location.pathname.includes("/theaters");
 
@@ -70,9 +71,11 @@ export const UserProvider = ({ children }) => {
         } else {
             setIsNavFooterShow(true);
         }
-        if (!isSeatLayoutPage && (!redirectLink || redirectLink !== '/seat-layout')) { 
+        if (!isSeatLayoutPage && (!redirectLink || redirectLink !== '/seat-layout')) {
             localStorage.removeItem("Selected Section");
-            localStorage.removeItem("Movie Data");
+            if (!isMovieInfoPage) {
+                localStorage.removeItem("Movie Data");
+            }
             localStorage.removeItem("Booking Data");
             localStorage.removeItem("IsAccepted");
         }
